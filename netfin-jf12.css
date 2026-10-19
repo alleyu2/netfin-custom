@@ -9,8 +9,9 @@
    companion sheet (v26.10.13, mihaif7/elegantfin-jf12, GPL-2.0),
    re-tokenised to NetFin's palette. Structure:
      PART A  NetFin (original rules + tokens the Modern layer needs)
+     PART A2 Media Bar plugin support (ElegantFin add-on v26.09.05, verbatim)
      PART B  Jellyfin 12 Modern layer (verbatim v26.10.13)
-     PART C  NetFin × Jellyfin 12 reconciliation
+     PART C  NetFin × Jellyfin 12 / Media Bar reconciliation
    Optional add-on: netfin-classic-navbar.css (load after this file)
    ============================================================ */
 
@@ -3623,6 +3624,20 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 
 /* ════════════════════════════════════════════════════════════════════════════
+   PART A2 — MEDIA BAR PLUGIN SUPPORT
+   ElegantFin add-on "Media Bar Plugin Support" v26.09.05 by lscambo13, verbatim.
+   Sits where elegantfin-jf12's install order puts it: after the base theme,
+   before the Jellyfin 12 layer (whose §12 is tuned against this add-on: the
+   inset 62% / 57% bar and the 96.7vw container-query split). It overrides
+   NetFin's old `#slides-container { top }` and `.backdrop-overlay` on purpose.
+   Colours come from NetFin tokens (--defaultBorder, --textColor, --dimTextColor);
+   the few hard-coded non-NetFin values are re-set in PART C, C7.
+   To update: replace the single line below with the new release.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/*! Add-on: Media Bar Plugin Support v26.09.05 for the ElegantFin Theme for Jellyfin by lscambo13 */.detail-button:before,.favorite-button.favorited:before,.favorite-button:before,.play-button:before{font-weight:400}.play-button{font-family:Inter;font-size:1em;font-weight:500;order:1}.detail-button,.favorite-button{order:2}.backdrop-container,.backdrop-overlay,.backdrop:not(.tmla-mask){background-color:transparent;mask-image:linear-gradient(180deg,rgba(0,0,0,.85),70%,transparent);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.85),70%,transparent)}.backdrop:not(.tmla-mask){transform-origin:center left}.rating-value{flex-wrap:wrap;justify-content:center}.age-rating{color:unset;font-family:Archivo Narrow,sans-serif;font-size:.8em}#slides-container{height:62%;left:var(--sidePadding);overflow:visible;position:absolute;top:calc(var(--appBarHeight)*2 + 1.25em);user-select:none;width:calc(100vw - var(--sidePadding)*2)}.slide{border:var(--defaultBorder);border-radius:var(--largerRadius);overflow:hidden;transition:border 0s}.logo-container{top:10vh}.backdrop-container,.backdrop-overlay,.backdrop:not(.tmla-mask){mask-image:none;-webkit-mask-image:none}.backdrop-overlay{background:linear-gradient(0deg,rgba(0,0,0,.85),40%,transparent)}.pause-button,.volume-toggle{top:1em!important}.separator-icon{color:var(--dimTextColor);font-size:5px}.dot{background-color:var(--textColor)!important;border-radius:.25em;height:.375em;opacity:.5;transition:width .5s;width:.375em}.dot.active{transform:none;width:2em}@media only screen and (orientation:landscape){.button-container,.dots-container,.genre,.info-container,.plot-container{top:unset}.button-container{bottom:3em}.dots-container{bottom:4.5em}.plot-container{bottom:7em;height:4em}.genre{bottom:12em}.info-container{bottom:14em}.logo-container{align-items:flex-end;max-width:35vw;top:3%}.gradient-overlay{background:linear-gradient(37deg,rgba(0,0,0,.2) 32%,rgb(29 29 29/7%) 47%,rgba(29,29,29,0));mask:none;-webkit-mask:none}}@media only screen and (max-width:767px) and (orientation:portrait){.button-container{bottom:3em}.genre,.tomato-rating{display:none}.dots-container{bottom:6em}.info-container{bottom:5em}.logo-container{top:calc(100% - 15em)}.backdrop:not(.tmla-mask){transform-origin:center}.left-arrow,.right-arrow{display:none!important}.play-button{order:2}}@media (min-width:75em){#slides-container{top:calc(var(--appBarHeight) + 1.25em)}.layout-tv #slides-container{top:calc(var(--appBarHeight)*2 + 1.25em)}}@media (min-width:100em){.layout-tv #slides-container{top:calc(var(--appBarHeight) + 1.25em)}}@media only screen and (max-height:767px) and (orientation:landscape){#slides-container{height:57%}.logo-container{top:3%}}
+
+/* ════════════════════════════════════════════════════════════════════════════
    PART B — JELLYFIN 12 "MODERN" LAYOUT
    ElegantFin for Jellyfin 12 v26.10.13 by mihaif7, GPL-2.0, verbatim.
    https://github.com/mihaif7/elegantfin-jf12
@@ -5937,8 +5952,48 @@ body #jf-hover-tooltip {
   }
 }
 
+/* C6. Base font on <body>. NetFin sets Rajdhani on <html> only. In the Modern
+   layout MUI's baseline styles set a font on <body> (Jellyfin's default), and
+   everything inherits from <body>, so Rajdhani never reached the page.
+   Setting it on body too fixes that for both layouts. */
+html body {
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+}
+
 /* C5. Home section titles: the layer's §15 spacing (padding-bottom under
    .sectionTitle-cards) is intentionally outranked by NetFin's
    `padding-bottom: 7px !important`. That 7px sets the gap above NetFin's red
    underline and is already the same on both heading types, which is the
    mismatch §15 was written to fix. No override needed. */
+
+/* C7. Media Bar — NetFin type and accent over the add-on's ElegantFin values.
+   - Play button: the add-on asks for Inter, which NetFin never loads.
+   - Age rating: Archivo Narrow → Share Tech Mono, as NetFin's rating badge.
+   - Active slide dot: white at 50% → NetFin red, full opacity. */
+#slides-container .play-button {
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+}
+#slides-container .age-rating {
+  font-family: "Share Tech Mono", monospace;
+}
+#slides-container .dot.active {
+  background-color: var(--activeColor) !important;
+  opacity: 1;
+}
+
+/* C8. Media Bar play button size. NetFin's `.btnPlay.detailButton` /
+   `.detailButton` rules (built for item pages) also hit the Media Bar's
+   button; this restores the plugin's own sizing. Moved here from the user
+   Custom CSS ("11) MEDIA BAR"). The Jellyfin 12 layer's narrower portrait
+   padding still wins on phones (higher specificity). */
+#slides-container .play-button {
+  min-width: 0 !important;
+  height: auto !important;
+  margin-right: 0 !important;
+  padding: 8px 16px !important;
+}
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+  #slides-container .play-button {
+    padding: 8px 14px !important;
+  }
+}
