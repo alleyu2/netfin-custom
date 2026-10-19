@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/33686489/README.md)
 # netfin-custom# NetFin Custom: NetFin for Jellyfin 12
 
 A customised build of [NetFin](https://github.com/ya0903/NetFin), the red-and-black Netflix-style Jellyfin theme, updated to work with **Jellyfin 12's Modern layout**.
