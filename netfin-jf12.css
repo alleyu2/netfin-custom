@@ -5998,11 +5998,27 @@ html body {
   }
 }
 
-/* C9. Media Bar button order. The add-on gives Play order 1 and info/favourite
-   order 2, but sets nothing on Trailer, so Trailer (order 0) jumped ahead of
-   Play on desktop. Uses the Jellyfin 12 layer's phone order on every screen:
-   Play, info, favourite, Trailer. */
-#slides-container .play-button     { order: 1; }
-#slides-container .detail-button   { order: 2; }
-#slides-container .favorite-button { order: 3; }
-#slides-container .trailer-button  { order: 4; }
+/* C9. Media Bar button order: Play, info, favourite, Trailer.
+   Targets the row the Play button sits in, whatever its class, and orders
+   every direct child of it. Everything defaults to last; Play, info and
+   favourite are then pulled forward. This works even if Trailer is wrapped
+   in another element or uses a different class, which is why an order set
+   on .trailer-button alone had no effect.
+   Specificity: default (1,1,0); named buttons (1,2,0) and up. */
+#slides-container :has(> .play-button) > * {
+  order: 4 !important;
+}
+#slides-container :has(> .play-button) > .play-button {
+  order: 1 !important;
+}
+#slides-container :has(> .play-button) > :is(.detail-button, :has(.detail-button)) {
+  order: 2 !important;
+}
+#slides-container :has(> .play-button) > :is(.favorite-button, :has(.favorite-button)) {
+  order: 3 !important;
+}
+
+/* C10. Build marker. In the browser console run
+   getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
+   to see which copy of this file the browser is actually using. */
+:root { --netfin-build: "2026-10-19 r4"; }
