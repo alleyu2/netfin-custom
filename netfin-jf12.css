@@ -6021,4 +6021,24 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-19 r4"; }
+:root { --netfin-build: "2026-10-19 r5"; }
+
+/* C11. Episode / backdrop-card item pages: bigger thumbnail.
+   NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
+   40vh wide, which reads as a small stray card next to the movie layout.
+   Albums keep their square 20vh card. */
+:root.layout-desktop #itemDetailPage .detailImageContainer .card.backdropCard:not(:has(.cardImageIcon.album)) {
+  width: min(64vh, 42vw) !important;
+  max-width: none;
+}
+
+/* C12. Item pages: centre the tagline and overview under the centred
+   logo / title, info row and buttons. NetFin left-aligns them
+   (.detail-clamp-text { text-align: start }), which made the bottom half of
+   the page look out of line with the top half. Width is capped so long
+   overviews stay readable. Desktop only; mobile and TV unchanged. */
+:root.layout-desktop #itemDetailPage .detailSectionContent :is(.tagline, .overview) {
+  text-align: center;
+  max-width: 60em;
+  margin-inline: auto;
+}
