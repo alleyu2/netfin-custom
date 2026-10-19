@@ -53,3 +53,12 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiButt
 .layout-desktop .MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):has(.MuiButton-startIcon > img):hover {
     color: #ff4444;
 }
+
+/* NetFin fix: remove the divider line after the brand pill.
+   The base sheet draws it with a selector that also has :has(+ .MuiButton-text),
+   which outranks this add-on's `::after { content: none }`, so a thin line
+   showed between the brand pill and the first library pill. Matching that
+   selector here lets the add-on win. */
+.MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):has(.MuiButton-startIcon > img):has(+ .MuiButton-text)::after {
+    content: none;
+}
