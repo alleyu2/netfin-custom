@@ -6194,7 +6194,7 @@ html body {
   white-space: nowrap;
   font-size: 168cqw;
   letter-spacing: -.12em;
-  transform: translateY(1.5cqw) scaleX(.85);
+  transform: translateY(1.5cqw) scaleX(.95);
   transform-origin: left bottom;
 }
 
