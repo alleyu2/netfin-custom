@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r11"; }
+:root { --netfin-build: "2026-10-20 r12"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6117,8 +6117,9 @@ html body {
   overflow: visible;
   font-family: "Arial Black", "Arial Bold", Gadget, "Helvetica Neue", Arial, sans-serif;
   font-weight: 900;
-  font-size: 75cqw;                /* digit ~54cqw tall = image height */
+  font-size: 70cqw;                /* r12: digit ~54cqw tall = image height (measured ~.776em) */
   line-height: .79;
+  transform: translateY(1.5cqw);   /* r12: r11 digits sat ~1cqw high; baseline now on the image's bottom edge */
   letter-spacing: -.04em;
   color: #0a0a0a;
   -webkit-text-stroke: 3px #595959;
@@ -6126,7 +6127,7 @@ html body {
   transition: -webkit-text-stroke-color .2s ease, text-shadow .2s ease;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(10)::before {
-  font-size: 48cqw;
+  font-size: 45cqw;
   letter-spacing: -.1em;
 }
 /* C15b. Poster (2:3) cards: wider gap (0.85 x cardWidth, ~90cqw) and a
