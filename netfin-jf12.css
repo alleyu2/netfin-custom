@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r13"; }
+:root { --netfin-build: "2026-10-21 r14"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6092,7 +6092,11 @@ html body {
   counter-reset: netfin-rank;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card {
-  --netfin-rankW: calc(var(--cardWidth) * .42);
+  /* r14: was .42. Right-aligned digits left ~50px (~18cqw) of empty space at
+     the card's left edge, so the numbers started well right of the other
+     rows' first card. .26 removes that space; numbers keep their size and
+     their overlap with the image. Raise for more space, lower for less. */
+  --netfin-rankW: calc(var(--cardWidth) * .26);
   counter-increment: netfin-rank;
   container-type: inline-size;
   position: relative;
@@ -6136,14 +6140,6 @@ html body {
    it follows whatever card shape KefinTweaks renders. */
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
   --netfin-rankW: calc(var(--cardWidth) * .85);
-  /* r13: smaller posters, closer to Netflix's Top 10. NetFin sizes every
-     card from --cardCount (cards per screen width); KefinTweaks has no size
-     setting of its own that we know of. --netfin-top10PosterScale shrinks
-     only these two rows' posters (1 = normal NetFin size, .75 = 25% smaller).
-     --cardWidth is re-declared from its inputs (a var can't reference
-     itself). The rank numbers are in cqw, so they scale with the poster. */
-  --netfin-top10PosterScale: .75;
-  --cardWidth: calc((var(--effectiveWidth) / var(--cardCount) - var(--itemColumnGap)) * var(--netfin-top10PosterScale));
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
   right: 78cqw;
