@@ -6184,7 +6184,7 @@ html body {
    Left anchoring prevents the digits extending backwards toward rank 9.
    Keep the tested height, horizontal compression and slight poster overlap. */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rankW: calc(var(--cardWidth) * 1.55);
+  --netfin-rankW: calc(var(--cardWidth) * 1.15);
 }
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
   left: .375rem;
