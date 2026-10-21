@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r10"; }
+:root { --netfin-build: "2026-10-20 r11"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6072,17 +6072,20 @@ html body {
    (Top 10 Movies Today / Top 10 Shows Today). Each card is widened by
    --netfin-rankW and padded on the left by the same amount, so the image
    keeps its normal size and a large outlined number (1-10, a CSS counter,
-   so it always follows the row's order) sits in the gap, its right side
+   so it always follows the row's order) sits in the gap with its right side
    tucked behind the image. Number turns NetFin red on hover.
-   Sizing uses container units (cqw) of the card: em inside ::before would
-   resolve against the number's own huge font (the r7 bug).
-   Card width = cardWidth x 1.42, so cardWidth = 70.4cqw; image starts at
-   ~29.6cqw. r9: heavy face (Arial Black, system font, nothing to download)
-   instead of thin Rajdhani; digits now as tall as the image, overlap the
-   image by ~14cqw, thicker grey stroke on a near-black fill; "10" set
-   tighter so it doesn't run under the previous card.
+   Sizing (r11, measured): the card is `container-type: inline-size`, and
+   cqw units resolve against the card's CONTENT box, i.e. the image width,
+   not the whole card (r8-r10 assumed the whole card, so the numbers came
+   out ~40% too small). So 100cqw = image width; image height = 150cqw on
+   posters, 56.25cqw on 16:9 thumbs. The number box runs from the card's
+   left edge (left: 0) to a set distance inside the image (right: ...), so
+   it always meets the image whatever the gap is. Never size this ::before
+   with em: em there means the number's own huge font (the r7 bug).
+   line-height .79 puts Arial Black's baseline on the box's bottom edge, so
+   digits sit on the image's bottom edge.
    Targets the rows by KefinTweaks' data-section-id: if a section is
-   recreated it gets a new ID and the selectors must be updated.
+   recreated it gets a new ID and every selector here must be updated.
    No :has(). TV layout excluded. Width needs !important to beat NetFin's
    `.card { width: ... !important }`; wins on specificity. */
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer {
@@ -6105,17 +6108,17 @@ html body {
   position: absolute;
   z-index: 0;
   left: 0;
+  right: 86cqw;                    /* reaches ~14cqw under the 16:9 image */
   top: .375rem;
-  width: 44cqw;                                   /* gap ~30cqw + ~14cqw under the image */
-  height: calc((70.4cqw - .75rem) * .5625);       /* = image height (16:9 thumb) */
-  overflow: visible;
+  height: 56.25cqw;                /* = 16:9 image height */
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  overflow: visible;
   font-family: "Arial Black", "Arial Bold", Gadget, "Helvetica Neue", Arial, sans-serif;
   font-weight: 900;
-  font-size: 54cqw;                               /* cap height ~ image height */
-  line-height: .72;
+  font-size: 75cqw;                /* digit ~54cqw tall = image height */
+  line-height: .79;
   letter-spacing: -.04em;
   color: #0a0a0a;
   -webkit-text-stroke: 3px #595959;
@@ -6123,29 +6126,36 @@ html body {
   transition: -webkit-text-stroke-color .2s ease, text-shadow .2s ease;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(10)::before {
-  width: 46cqw;
-  font-size: 42cqw;
-  letter-spacing: -.12em;
+  font-size: 48cqw;
+  letter-spacing: -.1em;
 }
-/* C15b (r10). Poster (portrait 2:3) cards in either Top 10 row. The r9
-   number box is sized for a 16:9 image, so on posters the digits sat at the
-   top. For poster cards the gap is wider (0.55 x cardWidth, so
-   cardWidth = 64.5cqw and the poster starts at ~35.5cqw), the box is as tall
-   as the poster, and the digits are larger. Matched by Jellyfin's portrait
-   card classes, so it follows whatever card shape KefinTweaks renders. */
+/* C15b. Poster (2:3) cards: wider gap (0.85 x cardWidth, ~90cqw) and a
+   number ~80% of the poster's height, its right side ~22cqw under the
+   poster, as Netflix does. Matched by Jellyfin's portrait card classes, so
+   it follows whatever card shape KefinTweaks renders. */
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
-  --netfin-rankW: calc(var(--cardWidth) * .55);
+  --netfin-rankW: calc(var(--cardWidth) * .85);
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
-  width: 50cqw;
-  height: calc((64.5cqw - .75rem) * 1.5);
-  font-size: 74cqw;
+  right: 78cqw;
+  height: 150cqw;                  /* = poster height */
+  font-size: 168cqw;               /* digit ~120cqw tall */
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
-  width: 54cqw;
-  font-size: 56cqw;
+  font-size: 98cqw;
+  letter-spacing: -.1em;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:hover::before {
   -webkit-text-stroke-color: #ff4444;
   text-shadow: 0 0 18px rgba(255,0,0,.35);
+}
+/* C15c. Titles in these two rows wrap to two lines instead of being cut
+   off with an ellipsis (the posters are narrow). */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card .cardText {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: clip;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
