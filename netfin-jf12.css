@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r8"; }
+:root { --netfin-build: "2026-10-20 r9"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6072,16 +6072,17 @@ html body {
    (Top 10 Movies Today / Top 10 Shows Today). Each card is widened by
    --netfin-rankW and padded on the left by the same amount, so the image
    keeps its normal size and a large outlined number (1-10, a CSS counter,
-   so it always follows the row's order) sits in the gap, partly tucked
-   behind the image. Number turns NetFin red on hover.
-   r8 fix: r7 sized the number box with em / --cardWidth (which contains
-   "- .5em"). Inside ::before those em resolve against the number's own
-   ~160px font, so the box collapsed to ~36px tall and the digits spilled
-   upward behind the row title. The number is now sized with container
-   units (cqw) of the card itself, which have no em in them.
-   Card width = cardWidth x 1.42, so cardWidth = 70.4cqw.
+   so it always follows the row's order) sits in the gap, its right side
+   tucked behind the image. Number turns NetFin red on hover.
+   Sizing uses container units (cqw) of the card: em inside ::before would
+   resolve against the number's own huge font (the r7 bug).
+   Card width = cardWidth x 1.42, so cardWidth = 70.4cqw; image starts at
+   ~29.6cqw. r9: heavy face (Arial Black, system font, nothing to download)
+   instead of thin Rajdhani; digits now as tall as the image, overlap the
+   image by ~14cqw, thicker grey stroke on a near-black fill; "10" set
+   tighter so it doesn't run under the previous card.
    Targets the rows by KefinTweaks' data-section-id: if a section is
-   recreated it gets a new ID and both selectors must be updated.
+   recreated it gets a new ID and the selectors must be updated.
    No :has(). TV layout excluded. Width needs !important to beat NetFin's
    `.card { width: ... !important }`; wins on specificity. */
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer {
@@ -6105,21 +6106,26 @@ html body {
   z-index: 0;
   left: 0;
   top: .375rem;
-  width: 40cqw;                                   /* gap is ~30cqw; ~10cqw tucks under the image */
+  width: 44cqw;                                   /* gap ~30cqw + ~14cqw under the image */
   height: calc((70.4cqw - .75rem) * .5625);       /* = image height (16:9 thumb) */
   overflow: visible;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  font-family: "Rajdhani", "Segoe UI", sans-serif;
-  font-weight: 700;
-  font-size: 43cqw;
-  line-height: .8;
-  letter-spacing: -.06em;
-  color: #000;
-  -webkit-text-stroke: 2px #6b6b6b;
+  font-family: "Arial Black", "Arial Bold", Gadget, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 54cqw;                               /* cap height ~ image height */
+  line-height: .72;
+  letter-spacing: -.04em;
+  color: #0a0a0a;
+  -webkit-text-stroke: 3px #595959;
   pointer-events: none;
   transition: -webkit-text-stroke-color .2s ease, text-shadow .2s ease;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(10)::before {
+  width: 46cqw;
+  font-size: 42cqw;
+  letter-spacing: -.12em;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:hover::before {
   -webkit-text-stroke-color: #ff4444;
