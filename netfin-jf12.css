@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r9"; }
+:root { --netfin-build: "2026-10-20 r10"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6126,6 +6126,24 @@ html body {
   width: 46cqw;
   font-size: 42cqw;
   letter-spacing: -.12em;
+}
+/* C15b (r10). Poster (portrait 2:3) cards in either Top 10 row. The r9
+   number box is sized for a 16:9 image, so on posters the digits sat at the
+   top. For poster cards the gap is wider (0.55 x cardWidth, so
+   cardWidth = 64.5cqw and the poster starts at ~35.5cqw), the box is as tall
+   as the poster, and the digits are larger. Matched by Jellyfin's portrait
+   card classes, so it follows whatever card shape KefinTweaks renders. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  --netfin-rankW: calc(var(--cardWidth) * .55);
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+  width: 50cqw;
+  height: calc((64.5cqw - .75rem) * 1.5);
+  font-size: 74cqw;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  width: 54cqw;
+  font-size: 56cqw;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:hover::before {
   -webkit-text-stroke-color: #ff4444;
