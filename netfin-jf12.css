@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-19 r5"; }
+:root { --netfin-build: "2026-10-20 r6"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6041,4 +6041,29 @@ html body {
   text-align: center;
   max-width: 60em;
   margin-inline: auto;
+}
+/* C13. MUI tooltips (e.g. "User Menu" under the avatar). MUI's default is
+   ~11px (0.6875rem), and Rajdhani is a narrow face, so it reads closer to
+   9-10px. Two classes outrank MUI's single generated class whatever the
+   stylesheet order, so no !important. Applies to every app-bar tooltip so
+   they stay consistent. */
+.MuiTooltip-popper .MuiTooltip-tooltip {
+  font-size: .875rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  padding: .35em .75em;
+}
+/* C14. User (avatar) menu text on desktop. The menu is a dense MUI list, so
+   items render at body2 size (0.875rem = 14px), which looks small in
+   Rajdhani. The Jellyfin 12 layer (section 9) already enlarges it, but only
+   below 600px wide; this brings desktop up to a similar size.
+   MenuItem, Typography and the plugin-page buttons each set their own
+   font-size via one generated class, so the item gets the size and the
+   inner text elements inherit it. Specificity (1,2,0)+ beats MUI's (0,1,0).
+   Icons keep their current size. Desktop only. */
+:root.layout-desktop #app-user-menu .MuiMenuItem-root {
+  font-size: 1.1rem;
+}
+:root.layout-desktop #app-user-menu .MuiMenuItem-root :is(.MuiTypography-root, .MuiButton-root) {
+  font-size: inherit;
 }
