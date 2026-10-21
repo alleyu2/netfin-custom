@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r7"; }
+:root { --netfin-build: "2026-10-20 r8"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6070,21 +6070,27 @@ html body {
 
 /* C15. Netflix-style "Top 10" rank numbers on the two KefinTweaks home rows
    (Top 10 Movies Today / Top 10 Shows Today). Each card is widened by
-   --netfin-rankW and padded on the left by the same amount, so the poster
-   keeps its normal size and a large outlined number (1-10, from a CSS
-   counter, so it always follows the row's order) sits in the gap, tucked
-   slightly behind the image. Number turns NetFin red on hover.
-   Targets the rows by KefinTweaks' data-section-id: if a section is deleted
-   and recreated it gets a new ID and these two selectors must be updated.
-   No :has(), so it also works in Jellyfin Media Player. TV layout excluded.
-   Width override needs !important to beat NetFin's `.card { width: ... !important }`;
-   it wins on specificity (attribute + classes > one class). */
+   --netfin-rankW and padded on the left by the same amount, so the image
+   keeps its normal size and a large outlined number (1-10, a CSS counter,
+   so it always follows the row's order) sits in the gap, partly tucked
+   behind the image. Number turns NetFin red on hover.
+   r8 fix: r7 sized the number box with em / --cardWidth (which contains
+   "- .5em"). Inside ::before those em resolve against the number's own
+   ~160px font, so the box collapsed to ~36px tall and the digits spilled
+   upward behind the row title. The number is now sized with container
+   units (cqw) of the card itself, which have no em in them.
+   Card width = cardWidth x 1.42, so cardWidth = 70.4cqw.
+   Targets the rows by KefinTweaks' data-section-id: if a section is
+   recreated it gets a new ID and both selectors must be updated.
+   No :has(). TV layout excluded. Width needs !important to beat NetFin's
+   `.card { width: ... !important }`; wins on specificity. */
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer {
   counter-reset: netfin-rank;
 }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card {
   --netfin-rankW: calc(var(--cardWidth) * .42);
   counter-increment: netfin-rank;
+  container-type: inline-size;
   position: relative;
   width: calc(var(--cardWidth) + var(--netfin-rankW)) !important;
   padding-left: calc(var(--netfin-rankW) + .375em);
@@ -6098,19 +6104,20 @@ html body {
   position: absolute;
   z-index: 0;
   left: 0;
-  top: .375em;
-  width: calc(var(--netfin-rankW) + 1.25em);
-  height: calc((var(--cardWidth) - .75em) * .5625);
+  top: .375rem;
+  width: 40cqw;                                   /* gap is ~30cqw; ~10cqw tucks under the image */
+  height: calc((70.4cqw - .75rem) * .5625);       /* = image height (16:9 thumb) */
+  overflow: visible;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   font-family: "Rajdhani", "Segoe UI", sans-serif;
   font-weight: 700;
-  font-size: calc(var(--cardWidth) * .62);
-  line-height: .78;
+  font-size: 43cqw;
+  line-height: .8;
   letter-spacing: -.06em;
   color: #000;
-  -webkit-text-stroke: .035em #6b6b6b;
+  -webkit-text-stroke: 2px #6b6b6b;
   pointer-events: none;
   transition: -webkit-text-stroke-color .2s ease, text-shadow .2s ease;
 }
