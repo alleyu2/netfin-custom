@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-20 r6"; }
+:root { --netfin-build: "2026-10-20 r7"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6066,4 +6066,55 @@ html body {
 }
 :root.layout-desktop #app-user-menu .MuiMenuItem-root :is(.MuiTypography-root, .MuiButton-root) {
   font-size: inherit;
+}
+
+/* C15. Netflix-style "Top 10" rank numbers on the two KefinTweaks home rows
+   (Top 10 Movies Today / Top 10 Shows Today). Each card is widened by
+   --netfin-rankW and padded on the left by the same amount, so the poster
+   keeps its normal size and a large outlined number (1-10, from a CSS
+   counter, so it always follows the row's order) sits in the gap, tucked
+   slightly behind the image. Number turns NetFin red on hover.
+   Targets the rows by KefinTweaks' data-section-id: if a section is deleted
+   and recreated it gets a new ID and these two selectors must be updated.
+   No :has(), so it also works in Jellyfin Media Player. TV layout excluded.
+   Width override needs !important to beat NetFin's `.card { width: ... !important }`;
+   it wins on specificity (attribute + classes > one class). */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer {
+  counter-reset: netfin-rank;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card {
+  --netfin-rankW: calc(var(--cardWidth) * .42);
+  counter-increment: netfin-rank;
+  position: relative;
+  width: calc(var(--cardWidth) + var(--netfin-rankW)) !important;
+  padding-left: calc(var(--netfin-rankW) + .375em);
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card > .cardBox {
+  position: relative;
+  z-index: 1;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
+  content: counter(netfin-rank);
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: .375em;
+  width: calc(var(--netfin-rankW) + 1.25em);
+  height: calc((var(--cardWidth) - .75em) * .5625);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: calc(var(--cardWidth) * .62);
+  line-height: .78;
+  letter-spacing: -.06em;
+  color: #000;
+  -webkit-text-stroke: .035em #6b6b6b;
+  pointer-events: none;
+  transition: -webkit-text-stroke-color .2s ease, text-shadow .2s ease;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:hover::before {
+  -webkit-text-stroke-color: #ff4444;
+  text-shadow: 0 0 18px rgba(255,0,0,.35);
 }
