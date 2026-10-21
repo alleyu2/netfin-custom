@@ -6096,7 +6096,7 @@ html body {
      the card's left edge, so the numbers started well right of the other
      rows' first card. .26 removes that space; numbers keep their size and
      their overlap with the image. Raise for more space, lower for less. */
-  --netfin-rankW: calc(var(--cardWidth) * .24);
+  --netfin-rankW: calc(var(--cardWidth) * .26);
   counter-increment: netfin-rank;
   container-type: inline-size;
   position: relative;
