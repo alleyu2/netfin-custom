@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-21 r14"; }
+:root { --netfin-build: "2026-10-21 r16"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6163,4 +6163,45 @@ html body {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+
+/* C16. Consolidated, browser-confirmed desktop Top 10 adjustments.
+   Retain C15 for shared rank styling and existing mobile behavior.
+   These desktop selectors override C15 without changing other rows or TV.
+   If either custom section is recreated, update its ID in C15 and C16.
+   Carousel return-to-start behavior remains in the separate JS Injector
+   script "Top 10 Carousel Fix"; do not place JavaScript in this file. */
+
+/* C16a. Poster size: 55% of the existing responsive base card width.
+   Recompute the formula to avoid a self-referencing --cardWidth cycle. */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  --netfin-top10PosterScale: .55;
+  --cardWidth: calc((var(--effectiveWidth) / var(--cardCount) - var(--itemColumnGap)) * var(--netfin-top10PosterScale));
+}
+
+/* C16b. Rank 10: reserve a wider gutter without changing poster width.
+   Left anchoring prevents the digits extending backwards toward rank 9.
+   Keep the tested height, horizontal compression and slight poster overlap. */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rankW: calc(var(--cardWidth) * 1.55);
+}
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  left: .375rem;
+  right: auto;
+  width: max-content;
+  justify-content: flex-start;
+  white-space: nowrap;
+  font-size: 168cqw;
+  letter-spacing: -.12em;
+  transform: translateY(1.5cqw) scaleX(.85);
+  transform-origin: left bottom;
+}
+
+/* C16c. Align rank-and-poster groups with surrounding rows.
+   Shift the frame, not the slider transform controlled by the carousel.
+   Headings stay in their existing positions. */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .emby-scroller {
+  position: relative;
+  left: -35px;
 }
