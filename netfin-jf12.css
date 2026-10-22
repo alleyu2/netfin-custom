@@ -6176,7 +6176,7 @@ html body {
 /* C16a. Poster size: 55% of the existing responsive base card width.
    Recompute the formula to avoid a self-referencing --cardWidth cycle. */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
-  --netfin-top10PosterScale: .75;
+  --netfin-top10PosterScale: .55;
   --cardWidth: calc((var(--effectiveWidth) / var(--cardCount) - var(--itemColumnGap)) * var(--netfin-top10PosterScale));
 }
 
