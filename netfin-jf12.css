@@ -6205,3 +6205,29 @@ html body {
   position: relative;
   left: -35px;
 }
+
+/* ============================================================
+   C17. MOBILE TOP 10 FIXES
+   ============================================================ */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  /* Reduce rank gutter so cards don't dominate the screen */
+  --netfin-rankW: calc(var(--cardWidth) * .45);
+}
+
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
+  /* Scale stroke down so digits remain readable on small screens */
+  -webkit-text-stroke: 1.5px #595959;
+  right: 70cqw;
+}
+
+/* Mobile Rank 10 adjustment */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rankW: calc(var(--cardWidth) * .75);
+}
+
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  left: .25rem;
+  right: auto;
+  font-size: 130cqw;
+  letter-spacing: -.12em;
+}
