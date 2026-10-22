@@ -6209,25 +6209,30 @@ html body {
 /* ============================================================
    C17. MOBILE TOP 10 FIXES
    ============================================================ */
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
-  /* Reduce rank gutter so cards don't dominate the screen */
-  --netfin-rankW: calc(var(--cardWidth) * .45);
-}
+@media (max-width: 50em) {
+  /* 1. Reduce the oversized gap so posters aren't pushed to the middle */
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+    --netfin-rankW: calc(var(--cardWidth) * .42);
+  }
 
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
-  /* Scale stroke down so digits remain readable on small screens */
-  -webkit-text-stroke: 1.5px #595959;
-  right: 70cqw;
-}
+  /* 2. Scale the digits to match mobile poster height & stop text bleed */
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+    height: 125cqw;
+    font-size: 132cqw;
+    right: 68cqw;
+    top: 0.375rem;
+    transform: translateY(0);
+    -webkit-text-stroke: 1.5px #737373; /* Thinner stroke so mobile numbers stay crisp */
+  }
 
-/* Mobile Rank 10 adjustment */
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rankW: calc(var(--cardWidth) * .75);
-}
-
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
-  left: .25rem;
-  right: auto;
-  font-size: 130cqw;
-  letter-spacing: -.12em;
+  /* 3. Mobile Rank 10 double-digit fix */
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+    --netfin-rankW: calc(var(--cardWidth) * .65);
+  }
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+    left: 0.25rem;
+    right: auto;
+    font-size: 105cqw;
+    letter-spacing: -.12em;
+  }
 }
