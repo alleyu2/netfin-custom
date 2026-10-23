@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-23 r17"; }
+:root { --netfin-build: "2026-10-23 r18"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6242,3 +6242,18 @@ html body {
   transform: translateY(1.5cqw) scaleX(.95);
   transform-origin: left bottom;
 }
+
+/* C18. iOS/Safari fix: Top 10 rank numbers all showed "0".
+   C15's counter is scoped away by the card's style containment
+   (container-type: inline-size) in WebKit. Write the digit as plain text
+   per position instead. Specificity (0,6,1) beats C15's (0,5,1). */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(1)::before { content: "1"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(2)::before { content: "2"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(3)::before { content: "3"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(4)::before { content: "4"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(5)::before { content: "5"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(6)::before { content: "6"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(7)::before { content: "7"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(8)::before { content: "8"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(9)::before { content: "9"; }
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(10)::before { content: "10"; }
