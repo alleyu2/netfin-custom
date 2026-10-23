@@ -6207,44 +6207,61 @@ html body {
 }
 
 /* ============================================================
-   C17. MOBILE TOP 10 FIXES (BULLETPROOF)
+   C17. MOBILE TOP 10 FIXES
    ============================================================ */
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard),
-@media (max-width: 50em) {
-  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
-    /* 1. Cut the giant blank gap from 85% down to 32% */
-    --netfin-rankW: calc(var(--cardWidth) * .32) !important;
-  }
+
+/* 1. Shrink the massive blank gap on mobile from 85% down to 35% */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  --netfin-rankW: calc(var(--cardWidth) * .35) !important;
 }
 
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before,
+/* 2. Scale digits down so they align with the poster and don't bleed into titles */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+  top: 0.375em !important;
+  height: 125cqw !important;
+  font-size: 130cqw !important;
+  line-height: .8 !important;
+  right: 70cqw !important;
+  transform: translateY(0) !important;
+  -webkit-text-stroke: 1.5px #888888 !important;
+}
+
+/* 3. Mobile Rank 10 double-digit fix */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rankW: calc(var(--cardWidth) * .60) !important;
+}
+
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  left: 0.2rem !important;
+  right: auto !important;
+  font-size: 95cqw !important;
+  letter-spacing: -.12em !important;
+}
+
+/* 4. Fallback for mobile screen sizes if layout-mobile isn't detected */
 @media (max-width: 50em) {
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+    --netfin-rankW: calc(var(--cardWidth) * .35) !important;
+  }
+
   :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
-    /* 2. Lock height and font size so it matches poster top & bottom */
     top: 0.375em !important;
-    height: 115cqw !important;
-    font-size: 118cqw !important;
-    line-height: .75 !important;
-    right: 68cqw !important;
+    height: 125cqw !important;
+    font-size: 130cqw !important;
+    line-height: .8 !important;
+    right: 70cqw !important;
     transform: translateY(0) !important;
     -webkit-text-stroke: 1.5px #888888 !important;
   }
-}
 
-/* 3. Mobile Rank 10 Fix */
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10),
-@media (max-width: 50em) {
   :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-    --netfin-rankW: calc(var(--cardWidth) * .55) !important;
+    --netfin-rankW: calc(var(--cardWidth) * .60) !important;
   }
-}
 
-:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
-@media (max-width: 50em) {
   :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
     left: 0.2rem !important;
     right: auto !important;
-    font-size: 92cqw !important;
+    font-size: 95cqw !important;
     letter-spacing: -.12em !important;
   }
 }
