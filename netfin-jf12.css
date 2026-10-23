@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-21 r16"; }
+:root { --netfin-build: "2026-10-23 r17"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6204,4 +6204,41 @@ html body {
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .emby-scroller {
   position: relative;
   left: -35px;
+}
+
+/* C17. Mobile Top 10 rows (poster cards). C16 fixed the poster rows on
+   desktop only (:root.layout-desktop), so phones still got C15b's raw
+   sizing: a full-size poster PLUS a 0.85 x cardWidth number gutter, so
+   every ranked item was ~1.85 cards wide (only ~1.8 items on screen, big
+   gaps). Smaller poster and narrower gutter on mobile only; number shrunk
+   to fit. Desktop (C16) and TV untouched. Same specificity as C15/C15b and
+   later in the file, so it wins. No :has(). Section IDs as in C15. */
+/* C17a. Poster scale and gutter. Mobile's base card formula has no gap
+   term, so it is recomputed without one (never reference --cardWidth in
+   its own definition). Tune: scale = poster size, .70 = number space. */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  --netfin-top10PosterScaleMobile: .75;
+  --cardWidth: calc(var(--effectiveWidth) / var(--cardCount) * var(--netfin-top10PosterScaleMobile));
+  --netfin-rankW: calc(var(--cardWidth) * .70);
+}
+/* C17b. Number size for the narrower gutter. */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+  font-size: 150cqw;
+  -webkit-text-stroke-width: 2px;
+}
+/* C17c. Rank 10: wider gutter, digits anchored left, slightly condensed,
+   so "10" doesn't run over poster 9 (same approach as desktop C16b). */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rankW: calc(var(--cardWidth) * 1.25);
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  left: .375rem;
+  right: auto;
+  width: max-content;
+  justify-content: flex-start;
+  white-space: nowrap;
+  font-size: 150cqw;
+  letter-spacing: -.12em;
+  transform: translateY(1.5cqw) scaleX(.95);
+  transform-origin: left bottom;
 }
