@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-29 r20"; }
+:root { --netfin-build: "2026-10-29 r21"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6340,10 +6340,18 @@ html body {
 .layout-mobile .cardScalable > .netfin-newBadge > span {
   padding: .18rem .45rem .12rem;
 }
-/* Narrow cards (Top 10 posters, phones): drop "Watch Now" if the pair would
-   not fit. Card is a size container only in the Top 10 rows (C15), so this
-   query also uses the nearest container there; elsewhere it is ignored. */
-@container (max-width: 9rem) {
-  .cardScalable > .netfin-newBadge > .netfin-newBadge-cta { display: none; }
-  .cardScalable > .netfin-newBadge > .netfin-newBadge-main { border-radius: 3px 3px 0 0; }
+/* (r21: a container query that hid "Watch Now" on narrow cards was removed
+   here; it never matched in the browser. Replaced by C21.) */
+/* C21. Poster (2:3) cards: "New Episode" only, no white "Watch Now" half.
+   Posters (Top 10 rows at 60%/75% scale, library grids) are too narrow for
+   both halves, so the pair overflowed and C19's centring cut off
+   "Watch N…". Netflix also uses the single red tab on posters. Targets
+   Jellyfin's portrait card classes directly, no container query. Wide
+   (thumb / episode) cards keep the split badge. Specificity (0,6,0) beats
+   C20's (0,3,0). No :has(). */
+.card:is(.overflowPortraitCard, .portraitCard) .cardScalable > .netfin-newBadge > .netfin-newBadge-cta {
+  display: none;
+}
+.card:is(.overflowPortraitCard, .portraitCard) .cardScalable > .netfin-newBadge > .netfin-newBadge-main {
+  border-radius: 3px 3px 0 0;
 }
