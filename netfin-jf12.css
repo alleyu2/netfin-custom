@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-28 r19"; }
+:root { --netfin-build: "2026-10-29 r20"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6300,4 +6300,50 @@ html body {
 }
 .layout-desktop .card-hoverable:hover .cardScalable > .netfin-newBadge {
   opacity: 0;
+}
+/* C20. "New Episode | Watch Now" split badge, as on Netflix (r20).
+   The badge script (r20+) now puts the text in child spans:
+   .netfin-newBadge-main (every badge) and .netfin-newBadge-cta (only on
+   New Episode). The badge becomes a flex row with no padding of its own;
+   each half gets the padding, the main half keeps C19's red, the CTA half
+   is white with near-black text. Single badges look exactly as in C19.
+   Same/higher specificity than C19 and later, so these win. No :has(). */
+.cardScalable > .netfin-newBadge {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+.cardScalable > .netfin-newBadge > span {
+  padding: .22rem .6rem .16rem;
+  white-space: nowrap;
+  box-shadow: 0 0 6px rgba(0,0,0,.55);
+}
+.cardScalable > .netfin-newBadge > .netfin-newBadge-main {
+  background: var(--activeColor);
+  color: #fff;
+  border-radius: 3px 0 0 0;
+}
+.cardScalable > .netfin-newBadge > .netfin-newBadge-main:only-child {
+  border-radius: 3px 3px 0 0;
+}
+.cardScalable > .netfin-newBadge > .netfin-newBadge-cta {
+  background: #fff;
+  color: #141414;
+  border-radius: 0 3px 0 0;
+}
+.layout-mobile .cardScalable > .netfin-newBadge {
+  padding: 0;
+}
+.layout-mobile .cardScalable > .netfin-newBadge > span {
+  padding: .18rem .45rem .12rem;
+}
+/* Narrow cards (Top 10 posters, phones): drop "Watch Now" if the pair would
+   not fit. Card is a size container only in the Top 10 rows (C15), so this
+   query also uses the nearest container there; elsewhere it is ignored. */
+@container (max-width: 9rem) {
+  .cardScalable > .netfin-newBadge > .netfin-newBadge-cta { display: none; }
+  .cardScalable > .netfin-newBadge > .netfin-newBadge-main { border-radius: 3px 3px 0 0; }
 }
