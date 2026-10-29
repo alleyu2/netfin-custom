@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-29 r22"; }
+:root { --netfin-build: "2026-10-29 r23"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6370,9 +6370,164 @@ html body {
    beats A2's (1,0,0) and §12's (0,1,0) including their media-query
    versions. Mobile and TV unchanged. No :has(). */
 :root.layout-desktop {
-  --netfin-mediaBarHeight: 85vh;
+  --netfin-mediaBarHeight: 85vh;   /* owner's choice (r22 live) */
   --ef12-mediaBarHeight: var(--netfin-mediaBarHeight);
 }
 :root.layout-desktop #slides-container {
   height: var(--netfin-mediaBarHeight);
+}
+/* C23. Netflix-style Media Bar content (Media Bar Enhanced, classic layout),
+   desktop only. Built from the owner's live slide structure:
+     .slide > .logo-container > img.logo
+             .backdrop-container, .gradient-overlay, .featured-content
+             .plot-container > .plot
+             .info-container > .misc-info (rating, date, .age-rating, runTime)
+             .genre
+             .button-container > .detail-button, .play-button,
+                                 .trailer-button, .favorite-button
+   Every selector uses ".slide > child", so Media Bar Enhanced's newer
+   .slide-content layout (PART B §12 v3 path) is not affected.
+   These parts are absolutely positioned by the plugin and PART A2 (A2:
+   buttons 3em, plot 7em, genre 12em, info 14em from the bottom, logo at the
+   top). C23 re-stacks them bottom-up in rem so font changes don't move
+   them: buttons → description → info line → genres → logo.
+   Specificity (1,5,0)+ beats A2 (0,1,0), C7/C8 (1,1,0) and §12's (1,2,1)
+   button rules; !important only where those use it. Left edges are left
+   to the plugin. Mobile, TV and the v3 layout keep their current look. */
+
+/* C23a. Left + bottom fade so text sits on dark, as on Netflix. Replaces
+   A2's light 37deg gradient. */
+:root.layout-desktop #slides-container .slide > .gradient-overlay {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.6) 28%, rgba(0,0,0,.15) 55%, transparent 70%),
+    linear-gradient(0deg, rgba(0,0,0,.55) 0%, transparent 30%);
+}
+
+/* C23b. Vertical stack, bottom-up. Tune the --netfin-mb* values. */
+:root.layout-desktop #slides-container .slide {
+  --netfin-mbButtons: 3rem;
+  --netfin-mbPlot: 6.6rem;     /* above the buttons */
+  --netfin-mbInfo: 12.2rem;    /* above a 3-line description */
+  --netfin-mbGenre: 14rem;
+  --netfin-mbLogo: 16.2rem;
+}
+:root.layout-desktop #slides-container .slide > .button-container {
+  bottom: var(--netfin-mbButtons);
+  gap: .75rem;
+  align-items: center;
+}
+/* Description: larger, wraps at ~40% of the banner, max 3 lines, sits on
+   the buttons (short text leaves the gap above it, not below). */
+:root.layout-desktop #slides-container .slide > .plot-container {
+  bottom: var(--netfin-mbPlot);
+  width: min(40%, 38rem);
+  height: 5.1rem;
+  max-height: none;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+:root.layout-desktop #slides-container .slide > .plot-container > .plot {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* Info line and genres: larger, white. */
+:root.layout-desktop #slides-container .slide > .info-container {
+  bottom: var(--netfin-mbInfo);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+:root.layout-desktop #slides-container .slide > .genre {
+  bottom: var(--netfin-mbGenre);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+/* Age rating: Netflix-style outlined text instead of a red box. */
+:root.layout-desktop #slides-container .slide > .info-container .age-rating {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.5) !important;
+  color: #fff !important;
+  padding: 0 .4em;
+  border-radius: 3px;
+  transform: none;
+}
+
+/* C23c. Title logo: bottom-left, just above the genres, as on Netflix
+   (A2 put it at the top: top 3%). */
+:root.layout-desktop #slides-container .slide > .logo-container {
+  top: auto;
+  bottom: var(--netfin-mbLogo);
+  height: min(24vh, 13rem);
+  max-width: 34vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+:root.layout-desktop #slides-container .slide > .logo-container > .logo {
+  position: static;
+  transform: none;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: left bottom;
+}
+
+/* C23d. Buttons. Play: white, black text. Info: grey pill labelled
+   "More Info". Trailer: grey pill. Favourite: grey circle.
+   Order (Play, info, favourite, Trailer) still comes from C9. */
+:root.layout-desktop #slides-container .slide > .button-container > .play-button {
+  background: #fff !important;
+  color: #000 !important;
+  border: 0 !important;
+  border-radius: .35rem !important;
+  height: 2.8rem !important;
+  padding: 0 1.8rem 0 1.4rem !important;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: none;
+}
+:root.layout-desktop #slides-container .slide > .button-container > .play-button:hover {
+  background: rgba(255,255,255,.75) !important;
+}
+:root.layout-desktop #slides-container .slide > .button-container > :is(.detail-button, .trailer-button, .favorite-button) {
+  background: rgba(109,109,110,.7) !important;
+  color: #fff !important;
+  border: 0 !important;
+  height: 2.8rem !important;
+  font-size: 1.2rem;
+  font-weight: 700;
+  backdrop-filter: none;
+}
+:root.layout-desktop #slides-container .slide > .button-container > :is(.detail-button, .trailer-button) {
+  width: auto !important;
+  border-radius: .35rem !important;
+  padding: 0 1.4rem 0 1.1rem !important;
+}
+:root.layout-desktop #slides-container .slide > .button-container > .favorite-button {
+  width: 2.8rem !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+}
+:root.layout-desktop #slides-container .slide > .button-container > :is(.detail-button, .trailer-button, .favorite-button):hover {
+  background: rgba(109,109,110,.45) !important;
+  color: #fff !important;
+}
+:root.layout-desktop #slides-container .slide > .button-container > .detail-button::after {
+  content: "More Info";
+  margin-left: .5rem;
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: normal;
 }
