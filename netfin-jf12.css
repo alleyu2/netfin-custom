@@ -6376,3 +6376,23 @@ html body {
 :root.layout-desktop #slides-container {
   height: var(--netfin-mediaBarHeight);
 }
+/* C23. Mobile Top 10 rows: line the row up with the rows above and below.
+   Desktop got this in C16c, but that rule is :root.layout-desktop only, so on
+   phones the rank-1 number started ~30px right of the other rows' first card.
+   Cause: the number box runs from the card's left edge (C15 left: 0) and the
+   digits are right-aligned in it (C15 justify-content: flex-end), so the empty
+   space left of the "1" (the box is wider than the digit, plus Arial Black's
+   side bearing) pushes the visible start to the right.
+   Fix: pull the FIRST card left by a fraction of its own --cardWidth, which
+   moves the whole row with it. A fraction (not px like C16c) keeps it right on
+   any phone width, because the number and gutter are also sized from
+   --cardWidth. Only the blank space left of the "1" goes under the screen
+   edge; the digit itself stays visible.
+   Tune --netfin-top10ShiftMobile: more negative = further left. -.34 was
+   measured from the owner's screenshot (r22), not getBoundingClientRect.
+   Specificity (0,6,0)+ beats nothing else setting margin on these cards.
+   Mobile only; desktop (C16c) and TV untouched. No :has(). */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:first-child {
+  --netfin-top10ShiftMobile: -.34;
+  margin-left: calc(var(--cardWidth) * var(--netfin-top10ShiftMobile));
+}
