@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-23 r18"; }
+:root { --netfin-build: "2026-10-28 r19"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6173,7 +6173,7 @@ html body {
    Carousel return-to-start behavior remains in the separate JS Injector
    script "Top 10 Carousel Fix"; do not place JavaScript in this file. */
 
-/* C16a. Poster size: 55% of the existing responsive base card width.
+/* C16a. Poster size: 60% of the existing responsive base card width.
    Recompute the formula to avoid a self-referencing --cardWidth cycle. */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
   --netfin-top10PosterScale: .60;
@@ -6257,3 +6257,47 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(8)::before { content: "8"; }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(9)::before { content: "9"; }
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:nth-child(10)::before { content: "10"; }
+/* C19. Netflix-style "Recently added" / "New Season" badges.
+   CSS cannot know when an item was added, so the JS Injector script
+   "NetFin New Badges" (netfin-new-badges.js) asks the Jellyfin API for
+   recently added movies, shows and seasons and puts a
+   <div class="netfin-newBadge"> inside each matching card's .cardScalable.
+   This rule only styles that element; without the script it does nothing.
+   Red tab centred on the image's bottom edge, as on Netflix. .cardScalable
+   is already position: relative + overflow: hidden (NetFin), so the badge
+   is clipped to the image and its rounded corners. Hidden on hover (desktop)
+   so it never covers the red play button / hover wave. z-index 3 sits above
+   the overlay (1) and play button (2). No :has(), no !important needed:
+   nothing else styles this class. All layouts. */
+.cardScalable > .netfin-newBadge {
+  --netfin-newBadgeBottom: 0px;    /* raise if it collides with other tags */
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: var(--netfin-newBadgeBottom);
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  max-width: calc(100% - .75rem);
+  padding: .22rem .6rem .16rem;
+  background: var(--activeColor);
+  color: #fff;
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 6px rgba(0,0,0,.55);
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+.layout-mobile .cardScalable > .netfin-newBadge {
+  font-size: .68rem;
+  padding: .18rem .45rem .12rem;
+}
+.layout-desktop .card-hoverable:hover .cardScalable > .netfin-newBadge {
+  opacity: 0;
+}
