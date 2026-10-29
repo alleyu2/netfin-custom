@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-29 r21"; }
+:root { --netfin-build: "2026-10-29 r22"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6354,4 +6354,25 @@ html body {
 }
 .card:is(.overflowPortraitCard, .portraitCard) .cardScalable > .netfin-newBadge > .netfin-newBadge-main {
   border-radius: 3px 3px 0 0;
+}
+/* C22. Taller Media Bar (Media Bar Enhanced), Netflix-style, desktop only.
+   The inset banner's height comes from two places that must agree:
+   - PART A2 sets #slides-container { height: 62% } (57% on screens under
+     768px tall), which is the banner itself;
+   - PART B §12 reads --ef12-mediaBarHeight (62vh / 57vh) to place the home
+     rows below it (v2 path) and to derive --ef12-mediaBarV3Height /
+     --ef12-mediaBarV3SectionsTop (v3 .slide-content path).
+   Both are set from one knob here so the rows move down with the banner.
+   The plugin pins logo to the top and info/buttons to the bottom, so the
+   extra height opens up the picture between them, as on Netflix.
+   Tune --netfin-mediaBarHeight (vh only: it is also used on other elements,
+   so em/% would resolve differently there). Specificity (0,2,0) / (1,2,0)
+   beats A2's (1,0,0) and §12's (0,1,0) including their media-query
+   versions. Mobile and TV unchanged. No :has(). */
+:root.layout-desktop {
+  --netfin-mediaBarHeight: 80vh;
+  --ef12-mediaBarHeight: var(--netfin-mediaBarHeight);
+}
+:root.layout-desktop #slides-container {
+  height: var(--netfin-mediaBarHeight);
 }
