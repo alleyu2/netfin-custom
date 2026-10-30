@@ -20,11 +20,11 @@ deploys by pasting files into GitHub. Follow these rules on every change:
    the CSS. If you cannot tell the cause (for example, you don't know the plugin's HTML), say so and ask the
    owner to right-click → Inspect and send a screenshot of the Elements/Styles panel. Do not guess at
    selectors and present them as certain.
-3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C22**), each with a
+3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C24**), each with a
    comment explaining *why* it exists. Do not edit PART A2 or PART B (they are verbatim upstream copies).
    Edit PART A only to fix a genuine NetFin bug, and note it.
 4. **Bump the build tag** in C10 on every change to `netfin-jf12.css`:
-   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-10-29 r21"`, so next is `r22`).
+   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-10-29 r22"`, so next is `r23`).
 5. **Deliver the complete file**, not a fragment, unless the owner asks for a snippet. The owner replaces the
    whole file on GitHub. Partial pastes caused version confusion before.
 6. **Check syntax.** Braces must balance; no rule may be left open. A single stray `}` or `{` silently breaks
@@ -63,11 +63,12 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 
 | File | Status | Purpose |
 |---|---|---|
-| `netfin-jf12.css` | **Live**, build `2026-10-29 r21`, ~6,300 lines | The full theme |
+| `netfin-jf12.css` | **Live**, build `2026-10-29 r22`, ~6,300 lines | The full theme |
 | `netfin-classic-navbar.css` | **Live** | Optional: server name as a pill like the library links |
 | `README.md` | Live | Public documentation of all changes |
 | `LICENSE` | GPL-3.0 | See open issue #1 in section 7 |
 | `netfin-new-badges.js` | **Reference copy** (runs from JS Injector, not jsDelivr) | Creates the C19 badges |
+| `Top_10_Carousel_Fix.js` | **Reference copy** (runs from JS Injector as "Top 10 Carousel Fix") | Desktop Top 10 rows: Previous button returns cleanly to card 1 via `cardBuilder.setScrollerPosition(scroller, 0, true)`; section IDs hard-coded (update with C15) |
 | `netfin-netflix.css` | **Created, NOT yet deployed** | Optional Netflix-look add-on (section 6) |
 
 ### Structure of `netfin-jf12.css`
@@ -78,7 +79,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 | **PART A** | Stock NetFin (header replaced; stray `}` at end removed) + a second `:root` block of 20 tokens the jf12 layer needs, inserted right after NetFin's `:root` | Bug fixes only |
 | **PART A2** | ElegantFin Media Bar add-on v26.09.05, single minified line, verbatim | No (replace whole line on upgrade) |
 | **PART B** | elegantfin-jf12 v26.10.13, verbatim, sections §1–§20 | No (replace whole part on upgrade) |
-| **PART C** | Reconciliation rules C1–C21 (in file order C1–C4, C6, C5, C7–C21) | **Yes — all new work goes here** |
+| **PART C** | Reconciliation rules C1–C23 (in file order C1–C4, C6, C5, C7–C23) | **Yes — all new work goes here** |
 
 ### Tokens added in PART A (NetFin never defined these)
 
@@ -122,6 +123,8 @@ Hover red used in rules: `#ff4444` / `#ff3333`. Fonts: Rajdhani (body), Orbitron
 | C19 | Netflix "Recently added" / "New Season" badges: styles `.cardScalable > .netfin-newBadge` (red tab, bottom-centre, hidden on desktop hover, `--netfin-newBadgeBottom` to lift it). Badge elements are created by JS Injector script **"NetFin New Badges"** (`netfin-new-badges.js`, kept in the repo for reference): script r22 rules: Added = DateCreated, Aired = PremiereDate (missing = counts as aired). Priority on show cards: **New Season** (season ≥2 added ≤14d AND season premiered ≤60d, or has an episode aired ≤14d; overrides Recently added so a just-downloaded currently-airing show reads "New Season") > **Recently added** (movie/series added ≤14d) > **New Episode** (unwatched non-special episode added ≤7d and aired ≤14d; also on episode cards with "Watch Now"). Air-date checks stop backfilled old seasons/episodes being called new. Cache resets on user switch; refresh every 15 min. Episodes/seasons: `IsMissing=false` + `LocationType !== "Virtual"` and air date must not be in the future (+1 day grace), so Coming Soon placeholders get no badge. Script ends with an `END OF NetFin New Badges` comment: JS Injector paste got truncated once and broke all injected scripts (KefinTweaks rows vanished) — check the last line after every paste, or load via Script URL from jsDelivr; matches `.card[data-id]` with `data-type` Movie/Series/Episode. Owner moved Jellyfin Enhanced rating tags to top-left so they don't collide with the badge |
 | C20 | Split "New Episode \| Watch Now" badge (Netflix style): script writes `.netfin-newBadge-main` (+ `.netfin-newBadge-cta` for New Episode, text set by `LABEL_WATCH`); badge is a flex row, red main half, white CTA half with #141414 text; Needs script r20+. (r21 removed C20's `@container (max-width: 9rem)` hide rule: it never matched, cause unknown) |
 | C21 | Poster cards (`.overflowPortraitCard`, `.portraitCard`): hide `.netfin-newBadge-cta`, red half gets full rounded top. Fixes "Watch N…" clipped on Top 10 posters |
+| C22 | Taller Media Bar, desktop only: one knob `--netfin-mediaBarHeight: 85vh` (vh only) sets both `#slides-container { height }` (overrides A2's 62%/57%) and `--ef12-mediaBarHeight` (§12 uses it to place home rows, v2 and v3 paths), so rows move down with the banner. Mobile/TV unchanged |
+| C23 | Mobile Top 10 rows: first card pulled left by `margin-left: calc(var(--cardWidth) * var(--netfin-top10ShiftMobile))`, `-.34`, so the "1" lines up with other rows (desktop equivalent is C16c). Value measured from a screenshot, not getBoundingClientRect: retune if it looks off. Mobile only |
 
 ### `netfin-classic-navbar.css`
 
@@ -181,6 +184,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | r8–r10 numbers too small with a gap before the poster | cqw resolves against the container's content box (image width), not the padded card | Measure with getBoundingClientRect before resizing; anchor the number to the image with `right:` in cqw |
 | Top 10 rows showed A–Z instead of Trakt order | KefinTweaks **Items** endpoint re-sorts by name | Use the **Custom** endpoint (see 5b) |
 | Custom path `/Items?ParentId=…` gave HTTP 400 | KefinTweaks appends its own `?…` query string | Never put `?` in the Custom path; use the parent chip for the ID |
+| Handoff said r21 / next C22, but the file already had r22 with C22–C23 | Brief not updated after r22 | Same lesson: check C10 and the highest C-number first; update this brief in the same change |
 
 ---
 
@@ -192,7 +196,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Top 10 Shows Today (thumb cards) | **Collection** (SmartLists playlists only offer Episode, not Series), Series, External List = `https://trakt.tv/shows/trending`, same sort/limit | Endpoint **Custom**, path `/Items`, Sort By Default, Limit 10, Series, Collection parent chip |
 
 - Versions at setup: Jellyfin 12.2, SmartLists 12.0.3.0. Trakt API key set in SmartLists Settings → External Lists.
-- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update C15).
+- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update C15–C18, C23 and the Top 10 Carousel Fix script).
 
 ---
 
@@ -225,18 +229,4 @@ geometry (§12) and should be done in `netfin-jf12.css` PART C, not this add-on.
    Need class names from Inspect before styling.
 3. **Media Bar top gap:** add-on positions the banner using NetFin's `--appBarHeight` (5em); adjust if the gap
    under the app bar looks off.
-4. **Netflix add-on** untested on the owner's server; README has no section for it yet.
-5. **Known harmless NetFin bug left as-is:** `.MuiListItem-root > a { margin: .25 .5em }` (unitless `.25`,
-   ignored by browsers). Fixing it would change current spacing.
-
----
-
-## 8. Upgrading upstream parts
-
-- **New elegantfin-jf12 release:** replace everything between the `PART B` banner and the `PART C` banner with
-  the new sheet. Search it for `var(--…)` names not defined in PART A (or NetFin's `:root`) and add them in NetFin
-  red. Re-check C-rules that reference jf12 selectors (C2, C3, C9). Check whether the classic-navbar add-on changed.
-- **New Media Bar add-on release:** replace the single line in PART A2; re-check C7–C9.
-- **New NetFin release:** re-apply to PART A, keeping the stray-brace fix and the added token block.
-- Bump the build tag and update README.md.
-- **Cache pinning:** in r20 the owner may have pinned the `netfin-jf12.css` import to a commit SHA. If so, every update needs the SHA changed in Custom CSS (or switch back to `@main`). Check this first when a new build "doesn't apply".
+4. **Netfl
