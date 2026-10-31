@@ -6370,7 +6370,7 @@ html body {
    beats A2's (1,0,0) and Â§12's (0,1,0) including their media-query
    versions. Mobile and TV unchanged. No :has(). */
 :root.layout-desktop {
-  --netfin-mediaBarHeight: 85vh;
+  --netfin-mediaBarHeight: 75vh;
   --ef12-mediaBarHeight: var(--netfin-mediaBarHeight);
 }
 :root.layout-desktop #slides-container {
