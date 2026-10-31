@@ -1,7 +1,7 @@
 /* ============================================================
-   NETFIN â€” Jellyfin Theme
+   NETFIN — Jellyfin Theme
     Red & Black Edition
-   Compatible: Desktop Â· Web Â· TV Â· Mobile
+   Compatible: Desktop · Web · TV · Mobile
    Plugins: Should work with all plugins
 
    Jellyfin 12 edition
@@ -11,13 +11,13 @@
      PART A  NetFin (original rules + tokens the Modern layer needs)
      PART A2 Media Bar plugin support (ElegantFin add-on v26.09.05, verbatim)
      PART B  Jellyfin 12 Modern layer (verbatim v26.10.13)
-     PART C  NetFin Ã— Jellyfin 12 / Media Bar reconciliation
+     PART C  NetFin × Jellyfin 12 / Media Bar reconciliation
    Optional add-on: netfin-classic-navbar.css (load after this file)
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap");
 
-/* â”€â”€ MATERIAL ICONS â”€â”€ */
+/* ── MATERIAL ICONS ── */
 @font-face {
   font-family: "Material Icons Round";
   font-style: normal;
@@ -26,49 +26,49 @@
   src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v267/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190Fjzag.woff2) format("woff2");
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    ROOT TOKENS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 :root {
   --elegantFinFooterText: "Matrix Red";
   color-scheme: dark;
 
-  /* â”€â”€ Backgrounds â”€â”€ */
+  /* ── Backgrounds ── */
   --darkerGradientPoint:       #000000;
   --darkerGradientPointAlpha:  rgba(0,0,0,.88);
   --lighterGradientPoint:      #0d0d0d;
   --lighterGradientPointAlpha: rgba(13,13,13,.88);
   --gradientPointAlpha:        rgba(13,13,13,.35);
 
-  /* â”€â”€ Surface colours â”€â”€ */
+  /* ── Surface colours ── */
   --headerColor:               rgba(0,0,0,.88);
   --drawerColor:               rgba(0,0,0,.94);
 
-  /* â”€â”€ Borders â”€â”€ */
+  /* ── Borders ── */
   --borderColor:               hsl(0,100%,12%);      /* #3d0000 */
   --darkerBorderColor:         hsl(0,100%,8%);       /* #290000 */
   --lighterBorderColor:        rgba(204,0,0,.28);
 
-  /* â”€â”€ Selectors â”€â”€ */
+  /* ── Selectors ── */
   --selectorBackgroundColor:      rgb(30,0,0);
   --selectorBackgroundColorAlpha: rgba(30,0,0,.55);
 
-  /* â”€â”€ Accent / Active â”€â”€ */
+  /* ── Accent / Active ── */
   --activeColorAlpha:  rgba(204,0,0,.88);
   --activeColor:       rgb(204,0,0);
 
-  /* â”€â”€ OSD â”€â”€ */
+  /* ── OSD ── */
   --osdSeekBarPlayedColor:         var(--activeColor);
   --osdSeekBarBufferedColorAlpha:  rgba(180,0,0,.25);
   --osdSeekBarThumbColor:          #cc0000;
 
-  /* â”€â”€ Table â”€â”€ */
+  /* ── Table ── */
   --tableBodyColor: rgb(10,0,0);
 
-  /* â”€â”€ UI Accent â”€â”€ */
+  /* ── UI Accent ── */
   --uiAccentColor: rgb(204,0,0);
 
-  /* â”€â”€ Action buttons â”€â”€ */
+  /* ── Action buttons ── */
   --btnMiniPlayColor:       rgb(180,0,0);            /* RED play button */
   --btnMiniPlayBorderColor: rgba(255,70,70,.65);
   --btnDeleteColor:         rgb(169,29,29);
@@ -76,19 +76,19 @@
   --btnSubmitColor:         rgb(180,0,0);
   --btnSubmitBorderColor:   rgb(255,26,26);
 
-  /* â”€â”€ Form / checkbox â”€â”€ */
+  /* ── Form / checkbox ── */
   --checkboxCheckedBgColor: rgb(204,0,0);
   --highlightOutlineColor:  rgb(204,0,0);
 
-  /* â”€â”€ Defaults assembled â”€â”€ */
+  /* ── Defaults assembled ── */
   --defaultBorder:        var(--borderWidth) solid var(--borderColor);
   --defaultLighterBorder: var(--borderWidth) solid var(--lighterBorderColor);
 
-  /* â”€â”€ Text â”€â”€ */
+  /* ── Text ── */
   --textColor:    rgb(255,255,255);
   --dimTextColor: rgb(160,160,160);
 
-  /* â”€â”€ Gradients â”€â”€ */
+  /* ── Gradients ── */
   --backgroundGradient:     linear-gradient(0deg, var(--darkerGradientPoint) 35%, var(--lighterGradientPoint));
   --cardBackgroundGradient: linear-gradient(0deg, var(--darkerGradientPoint), 25%, var(--lighterGradientPoint));
 
@@ -102,47 +102,47 @@
   --topOSDGradient:     linear-gradient(180deg, hsla(0,0%,0%,.85), 45%, hsla(0,0%,0%,0));
   --bottomOSDGradient:  linear-gradient(0deg,  hsla(0,0%,0%,.85), 45%, hsla(0,0%,0%,0));
 
-  /* Hover shimmer â€” red tint instead of white */
+  /* Hover shimmer — red tint instead of white */
   --hoverGradientV: linear-gradient(0deg,   transparent, rgba(204,0,0,.18) 45%, rgba(204,0,0,.18) 55%, transparent);
   --hoverGradientH: linear-gradient(90deg,  transparent, rgba(204,0,0,.18) 45%, rgba(204,0,0,.18) 55%, transparent);
 
   --itemBackdropMask: linear-gradient(180deg, rgba(0,0,0,.8), 75%, transparent);
 
-  /* â”€â”€ Radii (ElegantFin original) â”€â”€ */
+  /* ── Radii (ElegantFin original) ── */
   --largerRadius:  1.25em;
   --largeRadius:   1em;
   --smallRadius:   .5em;
   --smallerRadius: .375em;
 
-  /* â”€â”€ Borders widths â”€â”€ */
+  /* ── Borders widths ── */
   --borderWidth:       .06em;
   --borderWidthDouble: .12em;
 
-  /* â”€â”€ Layout (ElegantFin original) â”€â”€ */
+  /* ── Layout (ElegantFin original) ── */
   --sidePadding:         3.3%;
   --itemColumnGap:       1em;
   --minEpisodeCardWidth: 26em;
 
-  /* â”€â”€ Blur â”€â”€ */
+  /* ── Blur ── */
   --blurSmallest: blur(2px);
   --blurDefault:  blur(5px);
   --blurLarge:    blur(10px);
   --blurLargest:  blur(20px);
 
-  /* â”€â”€ Shadow â”€â”€ */
+  /* ── Shadow ── */
   --shadow: .1em .1em .15em hsla(0,0%,0%,.5);
 
-  /* â”€â”€ Header / cards â”€â”€ */
+  /* ── Header / cards ── */
   --headerBlurLayerVisibility:  "";
   --headerBackground:           var(--headerColorGradient);
   --loginPageBgUrl:             url("");
   --loginPageText:              "Sign in to continue";
   --overlayPlayButtonPosition:  2.8em;
 
-  /* â”€â”€ Icon pack â”€â”€ */
+  /* ── Icon pack ── */
   --iconPack: "Material Icons Round", Material Icons;
 
-  /* â”€â”€ Visibility toggles (ElegantFin original) â”€â”€ */
+  /* ── Visibility toggles (ElegantFin original) ── */
   --extraCardButtonsVisibility:  none;
   --itemOriginalTitleVisibility: block;
   --libraryLabelVisibility:      none;
@@ -151,23 +151,23 @@
   --miniOverlayButtonVisibility: block;
   --cardHoverEffect:             "";
 
-  /* â”€â”€ App bar â”€â”€ */
+  /* ── App bar ── */
   --appBarHeight:       5em;
   --backdropTrimFromTop: 10%;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   JELLYFIN 12 "MODERN" LAYOUT â€” TOKENS
+/* ────────────────────────────────────────────────────────────
+   JELLYFIN 12 "MODERN" LAYOUT — TOKENS
    The Jellyfin 12 layer at the bottom of this file reads these
    ElegantFin token names. NetFin never defined them, so every
    one is declared here in the NetFin red & black palette.
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 :root {
   /* Contrast */
   --fullContrastColor:          #fff;
   --zeroContrastColor:          #fff;               /* text on red / red-tinted surfaces */
 
-  /* Accent (ElegantFin indigo â†’ NetFin red) */
+  /* Accent (ElegantFin indigo → NetFin red) */
   --accentColor:                var(--activeColor);
   --accentHoverColor:           rgb(255,26,26);
   --semiTransparentAccentColor: rgba(204,0,0,.18);
@@ -197,9 +197,9 @@
   --opsz: 48;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    BASE HTML / BODY (Rajdhani as primary font)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 html {
   font-family: "Rajdhani", "Segoe UI", sans-serif;
   font-optical-sizing: auto;
@@ -230,7 +230,7 @@ body {
   --secondaryItemPageNegativeSpace: 45vh;
 }
 
-/* â”€â”€ Material Icons â”€â”€ */
+/* ── Material Icons ── */
 .material-icons {
   font-family: var(--iconPack) !important;
   font-weight: normal;
@@ -255,9 +255,9 @@ body {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    FOOTER / BRANDING
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .dashboardFooter {
   font-family: "Share Tech Mono", monospace;
   transition: transform 50ms;
@@ -445,16 +445,16 @@ h2.sectionTitle::after,
 .formDialogContent,.formDialogContent * { font-size:1.08rem !important; }
 .paperList { font-size:1.08rem !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SELECTION HIGHLIGHT
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 ::selection {
   background: var(--activeColorAlpha);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    CARD IMAGE ICONS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .cardImageIcon {
   color: var(--borderColor);
 }
@@ -463,9 +463,9 @@ h2.sectionTitle::after,
   color: var(--selectorBackgroundColorAlpha);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    FOCUS STATES
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .card:focus .cardBox.visualCardBox,
 .card:focus .cardBox:not(.visualCardBox) .cardScalable {
   border-color: var(--activeColor) !important;
@@ -489,9 +489,9 @@ h2.sectionTitle::after,
   outline: none !important;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    CARD GRID LAYOUT
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 [dir="ltr"] .itemsContainer > .card > .cardBox {
   margin-left: auto;
   margin-right: auto;
@@ -511,7 +511,7 @@ h2.sectionTitle::after,
   justify-content: flex-start !important;
 }
 
-/* â”€â”€ Count / sync / source indicators â”€â”€ */
+/* ── Count / sync / source indicators ── */
 .countIndicator,
 .fullSyncIndicator,
 .mediaSourceIndicator {
@@ -519,7 +519,7 @@ h2.sectionTitle::after,
   border: var(--defaultLighterBorder);
 }
 
-/* â”€â”€ Card scalable shell â”€â”€ */
+/* ── Card scalable shell ── */
 .cardScalable {
   border-radius: var(--largeRadius);
   border: var(--darkerBorderColor) solid var(--borderWidthDouble) !important;
@@ -545,7 +545,7 @@ h2.sectionTitle::after,
   border: var(--defaultBorder) !important;
 }
 
-/* â”€â”€ Visual card box / paper list â”€â”€ */
+/* ── Visual card box / paper list ── */
 .visualCardBox,
 .paperList {
   background-color: var(--headerColor) !important;
@@ -565,7 +565,7 @@ h2.sectionTitle::after,
   border-color: var(--darkerBorderColor) !important;
 }
 
-/* â”€â”€ Card image container â”€â”€ */
+/* ── Card image container ── */
 .cardImageContainer {
   transition: transform .375s;
 }
@@ -586,7 +586,7 @@ h2.sectionTitle::after,
   color: var(--borderColor);
 }
 
-/* â”€â”€ Hover effects â”€â”€ */
+/* ── Hover effects ── */
 .card-hoverable:hover .cardScalable,
 .card-hoverable:hover .visualCardBox {
   border-color: var(--activeColor) !important;
@@ -618,7 +618,7 @@ h2.sectionTitle::after,
   transform: scale(1);
 }
 
-/* â”€â”€ Overlay shimmer (red tint) â”€â”€ */
+/* ── Overlay shimmer (red tint) ── */
 .cardOverlayContainer {
   transition: .5s;
   background: rgba(204,0,0,.04);
@@ -650,12 +650,12 @@ h2.sectionTitle::after,
   opacity: 0;
 }
 
-/* â”€â”€ Card box background â”€â”€ */
+/* ── Card box background ── */
 .cardBox:not(.visualCardBox) .cardPadder {
   background-color: var(--lighterGradientPoint);
 }
 
-/* â”€â”€ Play FAB / mini play (RED) â”€â”€ */
+/* ── Play FAB / mini play (RED) ── */
 .cardOverlayContainer > .cardOverlayFab-primary {
   left: unset;
   margin-left: unset;
@@ -752,7 +752,7 @@ h2.sectionTitle::after,
   backdrop-filter: var(--blurDefault);
 }
 
-/* â”€â”€ List view user data buttons â”€â”€ */
+/* ── List view user data buttons ── */
 .listViewUserDataButtons {
   font-size: small;
 }
@@ -762,7 +762,7 @@ h2.sectionTitle::after,
   font-size: x-small;
 }
 
-/* â”€â”€ Episode list grid â”€â”€ */
+/* ── Episode list grid ── */
 @supports (display: revert) {
   .layout-desktop .vertical-list:has(.listItem-largeImage) {
     display: grid;
@@ -812,9 +812,9 @@ h2.sectionTitle::after,
   }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    CARD COUNT BREAKPOINTS 
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .portraitCard { min-width: 5em; }
 .bannerCard   { --cardCount: 2; }
 
@@ -913,7 +913,7 @@ h2.sectionTitle::after,
   .backdropCard, .overflowBackdropCard                                      { --cardCount: 2; }
 }
 
-/* â”€â”€ Card sizing formula â”€â”€ */
+/* ── Card sizing formula ── */
 .layout-mobile .card {
   --sidePadding: 5%;
 }
@@ -941,9 +941,9 @@ h2.sectionTitle::after,
   }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    DETAIL PAGE (colours updated)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .detailPageWrapperContainer {
   padding-top: unset;
   margin-top: unset;
@@ -1079,7 +1079,7 @@ h2.sectionTitle::after,
   color: var(--textColor);
 }
 
-/* Star rating â†’ red gradient */
+/* Star rating → red gradient */
 .starIcon {
   background: linear-gradient(to right, #cc0000, #ff4444);
   -webkit-background-clip: text;
@@ -1106,9 +1106,9 @@ h2.sectionTitle::after,
   margin-top: unset;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    ANIMATIONS 
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 @keyframes animMoveDown {
   from { transform: translateY(-2em); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
@@ -1124,9 +1124,9 @@ h2.sectionTitle::after,
   to   { transform: translateY(-100%);  opacity: 1; }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    ITEM BACKDROP 
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .itemBackdrop { display: block !important; }
 
 .layout-desktop .itemBackdrop {
@@ -1159,7 +1159,7 @@ h2.sectionTitle::after,
   height: calc(100vh - 20vh - var(--secondaryItemPageNegativeSpace));
 }
 
-/* â”€â”€ Clear logo â”€â”€ */
+/* ── Clear logo ── */
 .detailLogo {
   display: var(--clearLogoVisibility);
   top: calc(100vh - var(--clearLogoBottomSpace) - var(--primaryItemPageNegativeSpace));
@@ -1200,7 +1200,7 @@ h2.sectionTitle::after,
   top: calc(100vh - 11em - var(--secondaryItemPageNegativeSpace));
 }
 
-/* â”€â”€ Detail image container â”€â”€ */
+/* ── Detail image container ── */
 .layout-desktop .detailImageContainer .card {
   position: relative !important;
   width: 22vh !important;
@@ -1338,9 +1338,9 @@ h2.sectionTitle::after,
   }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    TYPOGRAPHY (Rajdhani for most text)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 h2 { font-size: 1.25em; }
 
 h1, h2 {
@@ -1371,9 +1371,9 @@ h1, h2, h3 {
   font-family: "Rajdhani", "Segoe UI", sans-serif !important;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    BACKGROUNDS (all blues replaced with blacks)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 html,
 .nowPlayingPlaylist,
 .nowPlayingContextMenu,
@@ -1441,17 +1441,17 @@ html,
   animation: animScaleUp .5s ease-out forwards;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    APP FOOTER
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .appfooter {
   background-color: var(--headerColor) !important;
   backdrop-filter: var(--blurLargest) !important;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    LYRICS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .lyricPage { padding: 0 var(--sidePadding); }
 
 .lyricsLine {
@@ -1471,16 +1471,16 @@ html,
 
 .pastLyric { opacity: .45; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    MISC BUTTONS / ACTIVE STATES
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .buttonActive { color: var(--uiAccentColor) !important; }
 
 #divRunningTasks progress { width: calc(100% - 7em); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    PROGRESS BARS  (red replaces white / blue / dim)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .listItemImage .itemProgressBar {
   position: absolute;
   margin: 8%;
@@ -1537,18 +1537,18 @@ progress, ::-webkit-progress-bar {
 
 progress + span { color: var(--uiAccentColor) !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SPINNER  (red strokes)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .mdl-spinner__circle {
   border-color: var(--activeColor);
   border-style: inset;
   border-width: .25em;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    MDL SLIDER  (red lower track / thumb)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .mdl-slider-container          { height: 1em; }
 .mdl-slider                    { height: unset; }
 .mdl-slider-background-flex-container { padding: 0; }
@@ -1599,16 +1599,16 @@ progress + span { color: var(--uiAccentColor) !important; }
 .iconOsdProgressInner  { background: var(--osdSeekBarPlayedColor); }
 .selectLabel           { max-height: 2em; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    BUTTONS (button-link, flat, action)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .button-link         { color: var(--dimTextColor); }
 .button-link:hover   { color: unset !important; text-decoration: none; }
 .button-link:active  { color: rgb(243,243,243) !important; text-decoration: none; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    DRAWER / MAIN NAV (Sidebar styling with Rajdhani font)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .mainDrawer,
 .drawer-open {
   background-color: var(--drawerColor);
@@ -1663,7 +1663,7 @@ progress + span { color: var(--uiAccentColor) !important; }
   color: #ff4444 !important;
 }
 
-/* â”€â”€ Header save button â”€â”€ */
+/* ── Header save button ── */
 .btnHeaderSave.button-flat {
   color: var(--uiAccentColor) !important;
   gap: .3em;
@@ -1673,9 +1673,9 @@ progress + span { color: var(--uiAccentColor) !important; }
 .button-flat:hover  { color: unset; }
 .button-flat:active { color: unset; background-color: rgba(255,255,255,.15); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    PLAY STATE / AUDIO ICONS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .playstatebutton-icon-played { color: rgb(34,197,94); }
 
 /* OSD play/pause sizing (ElegantFin original) */
@@ -1685,9 +1685,9 @@ progress + span { color: var(--uiAccentColor) !important; }
 
 .osdControls { display: flex; flex-direction: column-reverse; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    EXTERNAL LINKS  (coloured by service)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .itemExternalLinks { color: var(--textColor); }
 
 .itemExternalLinks.focuscontainer-x { color: transparent; }
@@ -1740,9 +1740,9 @@ progress + span { color: var(--uiAccentColor) !important; }
   background-color: rgb(186,71,143) !important; color: var(--textColor) !important;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    TAGS / OVERVIEW
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .itemTags, .itemTags > a {
   display: none;
   font-size: unset !important;
@@ -1815,9 +1815,9 @@ progress + span { color: var(--uiAccentColor) !important; }
 
 .centerMessage { width: unset; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    DIALOGS / MODALS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .dialog {
   backdrop-filter: var(--blurDefault);
   background-color: var(--drawerColor);
@@ -1859,9 +1859,9 @@ progress + span { color: var(--uiAccentColor) !important; }
 
 .collapseContent { background-color: unset !important; backdrop-filter: unset !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SELECTION PANEL
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .selectionCommandsPanel {
   background: var(--lighterGradientPoint);
   border-bottom: var(--defaultBorder);
@@ -1970,9 +1970,9 @@ progress + span { color: var(--uiAccentColor) !important; }
   }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    CARD INDICATORS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .cardIndicators {
   -webkit-align-items: center;
   align-items: center;
@@ -2006,14 +2006,14 @@ progress + span { color: var(--uiAccentColor) !important; }
 .defaultCardBackground,
 .cardScalable { background: var(--cardBackgroundGradient); }
 
-/* â”€â”€ Book/Photo type icon overrides â”€â”€ */
+/* ── Book/Photo type icon overrides ── */
 div[data-type="Book"]      .play_arrow:before { content: "\f1c6"; font-size: 85%; }
 div[data-type="Photo"]     .play_arrow:before { content: "\e5d0"; }
 div[data-type="PhotoAlbum"].play_arrow:before { content: "\e8eb"; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    GENERIC BUTTONS (emby-button, raised, block, fab)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .emby-button.block,
 .button-alt,
 .raised,
@@ -2044,7 +2044,7 @@ div[data-type="PhotoAlbum"].play_arrow:before { content: "\e8eb"; }
 .raised:focus{ background: inherit; filter: brightness(1.2); }
 .raised:active, .fab:active, .emby-button:active { filter: brightness(1.2) !important; transform: scale(.98); }
 
-/* â”€â”€ Detail / play buttons â”€â”€ */
+/* ── Detail / play buttons ── */
 .detailButton {
   border: var(--defaultLighterBorder);
   padding: .5em .5em !important;
@@ -2083,7 +2083,7 @@ div[data-type="PhotoAlbum"].play_arrow:before { content: "\e8eb"; }
   background: rgba(204,0,0,.18);
 }
 
-/* Play button â€” red background, white text */
+/* Play button — red background, white text */
 .btnPlay.detailButton {
   background-color: var(--activeColor);
   color: white;
@@ -2134,9 +2134,9 @@ div[data-type="PhotoAlbum"].play_arrow:before { content: "\e8eb"; }
   .mainDetailButtons { font-size: unset; margin: 0; }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    LOCAL NAV / TAB BUTTONS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .localnav > .emby-button {
   background: var(--lighterGradientPoint) !important;
   color: #fff;
@@ -2151,7 +2151,7 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .guide-date-tab-button.emby-tab-button-active,
 .guide-date-tab-button:focus { color: white; }
 
-/* â”€â”€ Delete / submit buttons â”€â”€ */
+/* ── Delete / submit buttons ── */
 #btnDeleteImage, .button-delete, .btnRevoke, #btnShutdown {
   background: var(--btnDeleteColor);
   border: solid var(--btnDeleteBorderColor) var(--borderWidth);
@@ -2162,9 +2162,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
   border: solid var(--btnSubmitBorderColor) var(--borderWidth) !important;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    COLLAPSIBLE / FORM HEADERS & FOOTERS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .collapseContent,
 .formDialogFooter:not(.formDialogFooter-clear),
 .formDialogHeader:not(.formDialogHeader-clear) {
@@ -2178,9 +2178,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .serverInfo > :nth-child(1n) { -webkit-flex: 1 0 30%; flex: 1 0 30%; }
 .serverInfo > :nth-child(2n) { -webkit-flex: 1 0 50%; flex: 1 0 50%; text-align: end; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    LIST ITEMS / NAV MENU OPTIONS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .listItemIcon:not(.listItemIcon-transparent) {
   background-color: var(--lighterGradientPoint) !important;
 }
@@ -2297,9 +2297,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 
 .Mui-selected { background-color: var(--activeColor) !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    ACTION SHEET / CONTEXT MENU
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .actionsheetDivider      { height: 2px; background: rgba(204,0,0,.08); }
 .actionsheet-xlargeFont  { line-height: normal; }
 .actionSheetContent      { padding: .4em !important; }
@@ -2317,7 +2317,7 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .actionSheetMenuItem:has(.listItemIcon.check[style*="hidden"]) { background-color: transparent; }
 .actionSheetMenuItem:has(.listItemIcon.check[style*="hidden"]):active { background-color: rgba(204,0,0,.12); }
 
-/* â”€â”€ Nav menu options â”€â”€ */
+/* ── Nav menu options ── */
 .navMenuOption {
   border-radius: var(--smallRadius) !important;
   margin: 0 1em !important;
@@ -2329,9 +2329,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 
 .navMenuOption-selected { background-color: var(--activeColor) !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    ITEM DETAIL SECTION GRID
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 #itemDetailPage .detailSection {
   display: grid;
   row-gap: 1em;
@@ -2374,7 +2374,7 @@ div[data-role="controlgroup"] a.ui-btn-active {
   transform: scale(.9);
 }
 
-/* Track label icons (SVG data URIs â€” ElegantFin original) */
+/* Track label icons (SVG data URIs — ElegantFin original) */
 .selectVideoContainer.trackSelectionFieldContainer > label {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23d1d5db" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M2 12c0-4.7 0-7 1.5-8.5C4.9 2 7.3 2 12 2s7 0 8.5 1.5C22 4.9 22 7.3 22 12s0 7-1.5 8.5C19.1 22 16.7 22 12 22s-7 0-8.5-1.5C2 19.1 2 16.7 2 12Z"/><path stroke-linecap="round" d="M17 2.5v19M7 2.5v19M2.5 7H7m14.5 0H17M2.5 17H7m14.5 0H17M2 12h20"/></g></svg>');
 }
@@ -2391,9 +2391,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="%23d1d5db" d="m15.4 4.05-.5.56.5-.56Zm3.95 3.57-.5.55.5-.55Zm2.3 2.53-.68.3.68-.3ZM3.17 20.83l.53-.53-.53.53Zm17.66 0-.53-.53.53.53Zm-6.83.42h-4v1.5h4v-1.5ZM2.75 14v-4h-1.5v4h1.5Zm18.5-.44V14h1.5v-.44h-1.5Zm-6.36-8.95 3.96 3.56 1-1.11L15.9 3.5l-1 1.11Zm7.86 8.95c0-1.69.02-2.75-.41-3.71l-1.37.6c.26.6.28 1.3.28 3.11h1.5Zm-3.9-5.39c1.35 1.22 1.85 1.7 2.12 2.29l1.37-.61c-.43-.96-1.23-1.66-2.49-2.8l-1 1.12Zm-8.82-5.42c1.58 0 2.18.01 2.71.22l.54-1.4c-.85-.33-1.78-.32-3.25-.32v1.5Zm5.86.75c-1.08-.98-1.76-1.6-2.61-1.93l-.54 1.4c.53.2.98.59 2.15 1.64l1-1.11ZM10 21.25c-1.9 0-3.26 0-4.29-.14-1-.13-1.58-.39-2-.81l-1.07 1.06c.75.75 1.7 1.08 2.87 1.24 1.15.15 2.63.15 4.49.15v-1.5ZM1.25 14c0 1.86 0 3.34.15 4.49a4.71 4.71 0 0 0 1.24 2.87L3.7 20.3c-.42-.43-.67-1-.81-2.01A36 36 0 0 1 2.75 14h-1.5ZM14 22.75c1.86 0 3.34 0 4.49-.15a4.71 4.71 0 0 0 2.87-1.24L20.3 20.3c-.43.42-1 .68-2.01.81-1.03.14-2.38.14-4.29.14v1.5ZM21.25 14c0 1.9 0 3.26-.14 4.29-.13 1-.39 1.58-.81 2l1.06 1.07a4.71 4.71 0 0 0 1.24-2.87c.15-1.15.15-2.63.15-4.49h-1.5Zm-18.5-4c0-1.9 0-3.26.14-4.29.14-1 .39-1.58.81-2L2.64 2.63A4.71 4.71 0 0 0 1.4 5.51c-.15 1.15-.15 2.63-.15 4.49h1.5Zm7.28-8.75c-1.87 0-3.36 0-4.51.15a4.72 4.72 0 0 0-2.88 1.24L3.7 3.7c.42-.42 1-.67 2.02-.81 1.03-.14 2.4-.14 4.31-.14v-1.5Z"/><path stroke="%23d1d5db" stroke-width="1.5" d="M13 2.5V5c0 2.36 0 3.54.73 4.27.73.73 1.91.73 4.27.73h4"/></svg>');
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    DETAIL SECTION CONTENT
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .detailSectionContent a:not(.overview-expand) { text-align: start; }
 
 .layout-desktop .detailSectionContent {
@@ -2461,9 +2461,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .collectionItemsContainer.padded-left { padding-left: 0; }
 .collectionItems .sectionTitleContainer.padded-left { padding-left: .375em; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SLIDER BUBBLE / ALPHA PICKER
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .sliderBubble {
   border-radius: var(--largeRadius);
   border: var(--defaultBorder);
@@ -2487,9 +2487,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
   transform: scale(1.75);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    PADDING HELPERS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .padded-right { padding-right: var(--sidePadding) !important; }
 
 .layout-mobile .padded-right-withalphapicker {
@@ -2514,7 +2514,7 @@ div[data-role="controlgroup"] a.ui-btn-active {
 
 .layout-mobile #myPreferencesMenuPage { padding-top: 3.75em !important; }
 
-/* â”€â”€ User avatar â”€â”€ */
+/* ── User avatar ── */
 .headerUserButton {
   width: 2em; height: 2em;
   margin-inline-end: 1em;
@@ -2526,18 +2526,18 @@ div[data-role="controlgroup"] a.ui-btn-active {
   border: var(--defaultBorder);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    DASHBOARD / ADMIN
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .dashboardDocument .content-primary { padding-top: 4.25rem; }
 .editorNode       { display: flex; align-items: center; }
 .metadataSidebarIcon { color: #6c0000; }
 
 .jstree-default .jstree-wholerow-clicked { background: var(--selectorBackgroundColor) !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SECTION TITLE BUTTONS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .sectionTitleTextButton { padding: 0 .5em; }
 .sectionTitleTextButton:hover  { background: transparent !important; }
 .sectionTitleTextButton:active { color: white !important; }
@@ -2568,9 +2568,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
   background-size: contain;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    TOASTS / UP-NEXT
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .toast { border-radius: var(--smallRadius); }
 
 .upNextContainer {
@@ -2593,9 +2593,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .upNextDialog-buttons  { width: unset; flex-wrap: wrap; }
 .upNextContainer .upNextDialog-countdownText { color: white; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SKIP / INTRO SKIPPER BUTTON  
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .skip-button-container { bottom: 25%; }
 
 .skip-button,
@@ -2645,9 +2645,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 
 .activeSession { width: 98% !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    HOVER STATES (hover:hover pointer:fine)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 @media (hover: hover) and (pointer: fine) {
   .paper-icon-button-light:hover:not(:disabled) {
     color: #fff;
@@ -2695,9 +2695,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
   background-color: rgba(204,0,0,.08);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    FORM INPUTS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .emby-textarea {
   font-family: "Share Tech Mono", monospace;
 }
@@ -2764,9 +2764,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 
 .searchFields > .searchFieldsInner { flex-direction: row-reverse; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    NAME CONTAINER / TITLE
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .nameContainer > h3,
 .nameContainer > h1 { word-break: break-word; overflow: hidden; }
 
@@ -2820,9 +2820,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
   display: var(--itemOriginalTitleVisibility);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    TV GUIDE
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .channelPrograms,
 .programCell {
   border-color: transparent;
@@ -2867,9 +2867,9 @@ div[data-role="controlgroup"] a.ui-btn-active {
 .programCell:focus { background-color: transparent !important; }
 .programCell:focus > .guideProgramName { background-color: var(--highlightOutlineColor); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SELECT / MISC FORM
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .emby-select-iconbutton {
   background-color: var(--selectorBackgroundColor);
   border: var(--defaultLighterBorder);
@@ -2894,9 +2894,9 @@ fieldset {
   border: var(--defaultBorder);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    TABLES
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 table:not(.MuiTable-root.MuiTable-stickyHeader) {
   border-color: var(--borderColor) !important;
   border-radius: var(--smallRadius);
@@ -2933,9 +2933,9 @@ table:not(.MuiTable-root.MuiTable-stickyHeader) {
 .MuiList-root.MuiMenu-list        { background-color: var(--drawerColor); }
 ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    PLAYER STATS / ICON OSD
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .playerStats,
 .iconOsd {
   border-radius: var(--largeRadius);
@@ -2954,9 +2954,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 .progressring-spiner { border-color: var(--uiAccentColor); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    LOGIN PAGE
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent.noHomeButtonHeader {
   display: none;
 }
@@ -3023,9 +3023,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 #txtLoginDisclaimer { resize: none; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    OSD TIME DISPLAY
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .startTimeText, .endTimeText,
 .positionTime,  .runtime {
   width: 4.5em;
@@ -3045,23 +3045,23 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 .startTimeText, .positionTime { text-align: start; justify-content: left; }
 .endTimeText,   .runtime      { text-align: end;   justify-content: right; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    FILTER INDICATOR
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .filterIndicator { background: var(--activeColor); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   LIBRARY CARD â€” LABEL VISIBILITY
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ────────────────────────────────────────────────────────────
+   LIBRARY CARD — LABEL VISIBILITY
+   ──────────────────────────────────────────────────────────── */
 .overflowBackdropCard[data-type="CollectionFolder"] .cardPadder-overflowBackdrop,
 .overflowBackdropCard[data-type="UserView"] .cardPadder-overflowBackdrop { padding-bottom: 50%; }
 
 .overflowBackdropCard[data-type="CollectionFolder"] .cardText-first,
 .overflowBackdropCard[data-type="UserView"] .cardText-first { display: var(--libraryLabelVisibility); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    NOW PLAYING / MUSIC
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .nowPlayingButtonsContainer { margin-top: 1em; }
 
 .nowPlayingPageImageContainerNoAlbum {
@@ -3149,9 +3149,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 .playlistIndexIndicatorImage.defaultCardBackground .audiotrack { display: none; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    BOOK TOC
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 #dialogToc {
   background-color: rgba(0,0,0,.6);
   max-height: unset;
@@ -3166,9 +3166,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   font-family: "Share Tech Mono", monospace;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    MUI TABS
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .MuiTabs-indicator { display: none; }
 .MuiTabs-root > .MuiTabs-scroller { align-content: center; }
 
@@ -3192,15 +3192,15 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 #viewPanel .ui-panel-inner { margin-top: 4em; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   VIDEO OSD  (bottom/top gradients â€” pure black)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ────────────────────────────────────────────────────────────
+   VIDEO OSD  (bottom/top gradients — pure black)
+   ──────────────────────────────────────────────────────────── */
 .videoOsdBottom.videoOsdBottom-maincontrols { background: var(--bottomOSDGradient); }
 .skinHeader-withBackground.osdHeader        { background: var(--topOSDGradient); }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    HEADER / HEADROOM  
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .headroom { transition: transform .5s; }
 
 /* Blurred / scrolled state */
@@ -3269,7 +3269,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 .layout-tv .sectionTabs .emby-tabs.smoothScrollX { overflow: visible !important; }
 
-/* Tab buttons â€” */
+/* Tab buttons — */
 .sectionTabs .emby-tab-button {
   display: inline-flex;
   margin: .25em .5em;
@@ -3342,7 +3342,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 .layout-tv .headerLeft { overflow: unset; margin: 0 .6em; }
 
-/* â”€â”€ Header blur container query (ElegantFin original) â”€â”€ */
+/* ── Header blur container query (ElegantFin original) ── */
 #reactRoot > div:nth-child(3) {
   container-name: skinHeader;
   container-type: size;
@@ -3372,9 +3372,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   .layout-mobile .sectionTabs { align-content: center; }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    NOW PLAYING PAGE / REMOTE CONTROL
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .nowPlayingPage {
   background: linear-gradient(var(--darkerGradientPointAlpha), transparent);
 }
@@ -3384,9 +3384,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   background: linear-gradient(transparent, var(--darkerGradientPointAlpha) 20em);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   TV LAYOUT â€” no animations / transforms
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ────────────────────────────────────────────────────────────
+   TV LAYOUT — no animations / transforms
+   ──────────────────────────────────────────────────────────── */
 .layout-tv .show-focus:focus,
 .layout-tv .show-animation:focus,
 .emby-select-focusscale:focus { transform: none !important; }
@@ -3401,9 +3401,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   transition: transform .05s ease-out, -webkit-transform .05s ease-out;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SLIDES / BACKDROP OVERLAY
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 #slides-container { top: calc(-.5 * var(--appBarHeight)); }
 
 .backdrop-overlay {
@@ -3415,9 +3415,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   text-shadow: 1px 1px var(--lighterGradientPointAlpha);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    DETAIL BUTTONS 
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .button-container { align-items: center; }
 
 .favorite-button {
@@ -3431,9 +3431,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   color: var(--activeColor);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    MDBLIST RATINGS PLUGIN
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 .mdblistRatings,
 .mdblist-ratings,
 [class*="mdblist"],
@@ -3457,9 +3457,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 .mdblistRatingItem:hover,
 .ratingItem:hover { color: #ff4444 !important; }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    NOW PLAYING / MEDIA BAR PLUGIN
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 #mediaBar,
 .mediaBar,
 .nowPlayingBar {
@@ -3481,9 +3481,9 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   text-shadow: 0 0 8px rgba(255,0,0,.5) !important;
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SCROLLBAR
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--darkerGradientPoint); }
 ::-webkit-scrollbar-thumb { background: #550000; border-radius: 99px; }
@@ -3494,14 +3494,14 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   scrollbar-color: #550000 var(--darkerGradientPoint);
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ────────────────────────────────────────────────────────────
    SELECTION
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ──────────────────────────────────────────────────────────── */
 ::selection      { background: rgba(204,0,0,.4); color: white; }
 ::-moz-selection { background: rgba(204,0,0,.4); color: white; }
 
 /* =========================================================
-   FIXES â€“ Card wave, text hover, play button, sidebar
+   FIXES – Card wave, text hover, play button, sidebar
    (added at the end to ensure they override any conflicts)
    ========================================================= */
 
@@ -3539,7 +3539,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
   background: rgba(220,0,0,.08) !important;
 }
 
-/* 2. TEXT HOVER (white â†’ red smooth animation) â€“ stronger */
+/* 2. TEXT HOVER (white → red smooth animation) – stronger */
 .card-hoverable .cardText,
 .card-hoverable .cardText-secondary,
 .card-hoverable .cardTextCentered,
@@ -3623,38 +3623,38 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
    first rule of the Jellyfin 12 layer appended below.) */
 
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PART A2 â€” MEDIA BAR PLUGIN SUPPORT
+/* ════════════════════════════════════════════════════════════════════════════
+   PART A2 — MEDIA BAR PLUGIN SUPPORT
    ElegantFin add-on "Media Bar Plugin Support" v26.09.05 by lscambo13, verbatim.
    Sits where elegantfin-jf12's install order puts it: after the base theme,
-   before the Jellyfin 12 layer (whose Â§12 is tuned against this add-on: the
+   before the Jellyfin 12 layer (whose §12 is tuned against this add-on: the
    inset 62% / 57% bar and the 96.7vw container-query split). It overrides
    NetFin's old `#slides-container { top }` and `.backdrop-overlay` on purpose.
    Colours come from NetFin tokens (--defaultBorder, --textColor, --dimTextColor);
    the few hard-coded non-NetFin values are re-set in PART C, C7.
    To update: replace the single line below with the new release.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ════════════════════════════════════════════════════════════════════════════ */
 
 /*! Add-on: Media Bar Plugin Support v26.09.05 for the ElegantFin Theme for Jellyfin by lscambo13 */.detail-button:before,.favorite-button.favorited:before,.favorite-button:before,.play-button:before{font-weight:400}.play-button{font-family:Inter;font-size:1em;font-weight:500;order:1}.detail-button,.favorite-button{order:2}.backdrop-container,.backdrop-overlay,.backdrop:not(.tmla-mask){background-color:transparent;mask-image:linear-gradient(180deg,rgba(0,0,0,.85),70%,transparent);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.85),70%,transparent)}.backdrop:not(.tmla-mask){transform-origin:center left}.rating-value{flex-wrap:wrap;justify-content:center}.age-rating{color:unset;font-family:Archivo Narrow,sans-serif;font-size:.8em}#slides-container{height:62%;left:var(--sidePadding);overflow:visible;position:absolute;top:calc(var(--appBarHeight)*2 + 1.25em);user-select:none;width:calc(100vw - var(--sidePadding)*2)}.slide{border:var(--defaultBorder);border-radius:var(--largerRadius);overflow:hidden;transition:border 0s}.logo-container{top:10vh}.backdrop-container,.backdrop-overlay,.backdrop:not(.tmla-mask){mask-image:none;-webkit-mask-image:none}.backdrop-overlay{background:linear-gradient(0deg,rgba(0,0,0,.85),40%,transparent)}.pause-button,.volume-toggle{top:1em!important}.separator-icon{color:var(--dimTextColor);font-size:5px}.dot{background-color:var(--textColor)!important;border-radius:.25em;height:.375em;opacity:.5;transition:width .5s;width:.375em}.dot.active{transform:none;width:2em}@media only screen and (orientation:landscape){.button-container,.dots-container,.genre,.info-container,.plot-container{top:unset}.button-container{bottom:3em}.dots-container{bottom:4.5em}.plot-container{bottom:7em;height:4em}.genre{bottom:12em}.info-container{bottom:14em}.logo-container{align-items:flex-end;max-width:35vw;top:3%}.gradient-overlay{background:linear-gradient(37deg,rgba(0,0,0,.2) 32%,rgb(29 29 29/7%) 47%,rgba(29,29,29,0));mask:none;-webkit-mask:none}}@media only screen and (max-width:767px) and (orientation:portrait){.button-container{bottom:3em}.genre,.tomato-rating{display:none}.dots-container{bottom:6em}.info-container{bottom:5em}.logo-container{top:calc(100% - 15em)}.backdrop:not(.tmla-mask){transform-origin:center}.left-arrow,.right-arrow{display:none!important}.play-button{order:2}}@media (min-width:75em){#slides-container{top:calc(var(--appBarHeight) + 1.25em)}.layout-tv #slides-container{top:calc(var(--appBarHeight)*2 + 1.25em)}}@media (min-width:100em){.layout-tv #slides-container{top:calc(var(--appBarHeight) + 1.25em)}}@media only screen and (max-height:767px) and (orientation:landscape){#slides-container{height:57%}.logo-container{top:3%}}
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PART B â€” JELLYFIN 12 "MODERN" LAYOUT
+/* ════════════════════════════════════════════════════════════════════════════
+   PART B — JELLYFIN 12 "MODERN" LAYOUT
    ElegantFin for Jellyfin 12 v26.10.13 by mihaif7, GPL-2.0, verbatim.
    https://github.com/mihaif7/elegantfin-jf12
    Every rule is scoped to MUI (.Mui*) chrome, body:has(.MuiAppBar-root), or a
    plugin's own selectors, so the Legacy and TV layouts keep plain NetFin
-   (except Â§16, which is TV-only by design).
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   (except §16, which is TV-only by design).
+   ════════════════════════════════════════════════════════════════════════════ */
 
 /*! ElegantFin for Jellyfin 12 "Modern" layout | v26.10.13 | GPL-2.0
  *  https://github.com/mihaif7/elegantfin-jf12
  *  Load AFTER upstream ElegantFin. See the README for install. */
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 1. Knobs
  * The sheet's own variables: the sizes, timings and toggles every section
  * below reads.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 :root {
     --ef12-appBarHeight: 4rem;
@@ -3687,11 +3687,11 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
     --ef12-userMenuFontSize: 1.15rem;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
- * 2. Token bridge: ElegantFin â†’ Jellyfin 12 palette
+/* ══════════════════════════════════════════════════════════════════════════
+ * 2. Token bridge: ElegantFin → Jellyfin 12 palette
  * ElegantFin's palette, re-declared where MUI's generated jf-* variables
  * would otherwise outrank it.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 :root,
 :root[data-theme] {
@@ -3749,22 +3749,22 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
     --jf-palette-dividerChannel: 0 0 0;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 3. Typography
  * The font on MUI components, which declare their own rather than
  * inheriting.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 [class*="Mui"]:not(.MuiIcon-root) {
     font-family: inherit;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 4. Modern layout fixes
  * Item and library page geometry: the page's top offset, the clear logo's
  * band, Next Up and the season list, and the space between an item page's
  * sections.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 body:has(.MuiAppBar-root) .libraryPage:not(.noSecondaryNavPage, .itemDetailPage) {
     padding-top: 0 !important;
@@ -3904,11 +3904,11 @@ body:has(.MuiAppBar-root) :is([role="button"], .MuiButtonBase-root, .MuiSelect-s
     cursor: default;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 5. App bar
  * The MUI header: its colour on scroll, its height, the two-row bars and the
  * masthead.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .MuiAppBar-root.MuiAppBar-colorTransparent,
 .MuiAppBar-root.MuiAppBar-colorDefault {
@@ -4035,10 +4035,10 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiIcon
     --ef12-detailsSectionGap: var(--ef12-detailsSectionGapDesktop);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 6. Library navigation buttons
  * The per-library buttons in the app bar, as ElegantFin's pills.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped) {
     background-color: var(--ef12-navPillBackground);
@@ -4120,10 +4120,10 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiButt
     filter: drop-shadow(0 0 2px hsla(0, 0%, 0%, 0.8)) drop-shadow(1px 1px 0 hsla(0, 0%, 0%, 0.5));
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 7. Library toolbar
  * The sort, filter and view button groups in a library page's second row.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .MuiAppBar-root .MuiButtonGroup-contained {
     background: var(--btnPlayColor);
@@ -4225,10 +4225,10 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiButt
     padding-inline: 0.7rem;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 8. Drawer
  * The navigation drawer, rendered only below the md breakpoint.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .MuiDrawer-root .MuiDrawer-paper {
     background-color: var(--drawerColor);
@@ -4283,11 +4283,11 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiButt
     line-height: 48px;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 9. Menus, popovers, dialogs, tooltips
  * Every floating surface (menus, popovers, dialogs and tooltips), plus the
  * avatar menu on a narrow viewport.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .MuiMenu-paper,
 .MuiPopover-paper,
@@ -4375,10 +4375,10 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiButt
     background-color: var(--multiSelectOverlayColor);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 10. Form controls
  * Filled inputs, switches and the focus ring.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .MuiFilledInput-root {
     background-color: var(--textareaBackgroundColor);
@@ -4402,10 +4402,10 @@ body:has(:is(.selfBackdropPage, #loginPage):not(.hide)) .MuiAppBar-root .MuiButt
     outline-offset: 2px;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 11. Video player
  * The video player's chrome and its OSD.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 body:has(.videoPlayerContainer-onTop) .MuiAppBar-root,
 body:has(.videoPlayerContainer-onTop) .MuiAppBar-root + div[aria-hidden="true"],
@@ -4453,11 +4453,11 @@ body:has(.videoOsd-appBar) .MuiAppBar-root + div[aria-hidden="true"] {
     }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 12. Media Bar plugin
  * The Media Bar plugin's slideshow and the home page beneath it. Inert
  * without the plugin.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 @container ef12mediabar (width < 96.7vw) {
     .backdrop-container.full-width-video,
@@ -4802,11 +4802,11 @@ body:has(#slides-container .slide-content) .homeSectionsContainer {
     }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 13. Icon buttons
  * Icon buttons in the app bar, the OSD and a card's overlay: hover circle,
  * box size, spacing and two glyph substitutions.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 @media (hover: hover) and (pointer: fine) {
     .MuiAppBar-root .MuiButtonBase-root.MuiIconButton-root:hover:not(:disabled),
@@ -4904,11 +4904,11 @@ body:has(#slides-container .slide-content) .homeSectionsContainer {
     transform: translate(-50%, -50%);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 14. Jellyfin Enhanced
  * The Jellyfin Enhanced plugin: its Seerr link, streaming bar and reviews on
  * an item page, and its active-streams panel.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .itemExternalLinks > .seerr-link,
 .itemExternalLinks > .arr-link {
@@ -5236,20 +5236,20 @@ body #je-active-streams-panel {
     color: #fff;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 15. Home section titles
  * The space under the home page's two kinds of section heading.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-cards) > .sectionTitle-cards {
     padding-bottom: calc(0.3em + 0.2rem);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 16. Legacy TV layout
  * The TV display mode, which never gets the MUI chrome. The one section not
  * about the Modern layout.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 :root.layout-tv .mainAnimatedPage {
     overflow-x: clip;
@@ -5260,10 +5260,10 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
     height: auto;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 17. In-player episode picker
  * The InPlayerEpisodePreview plugin's episode picker inside the player.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .cardScalable > .innerCardFooter.itemProgressBar {
     position: absolute;
@@ -5272,10 +5272,10 @@ body:has(.MuiAppBar-root) .homeSectionsContainer div:not(.sectionTitleContainer-
     padding: 0;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 18. Episodes Ratings Grid
  * The Episodes Ratings Grid userscript's card on a series page.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 body [data-jf-ieg-root="1"] {
     --axis: var(--selectorBackgroundColor);
@@ -5422,11 +5422,11 @@ body #jf-hover-tooltip {
     color: var(--textColor);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 19. Card progress bars
  * The resume bar on a partly-watched card in the Modern layout's library
  * views.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 .itemLinearProgress.MuiLinearProgress-root {
     -webkit-backdrop-filter: var(--blurLarge);
@@ -5445,11 +5445,11 @@ body #jf-hover-tooltip {
     opacity: 0.75;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════════════════════════════════
  * 20. Engines without :has()
  * Nothing in a current browser. Restatements of rules above for an engine
- * that cannot read them â€” Jellyfin Media Player 1.12.
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+ * that cannot read them — Jellyfin Media Player 1.12.
+ * ══════════════════════════════════════════════════════════════════════════ */
 
 @supports not selector(:has(*)) {
     .videoPlayerContainer-onTop ~ #reactRoot .MuiAppBar-root,
@@ -5891,14 +5891,14 @@ body #jf-hover-tooltip {
     }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PART C â€” NETFIN Ã— JELLYFIN 12 RECONCILIATION
+/* ════════════════════════════════════════════════════════════════════════════
+   PART C — NETFIN × JELLYFIN 12 RECONCILIATION
    Loaded after the Jellyfin 12 layer. Rule of thumb used throughout:
    layout and geometry come from the Jellyfin 12 layer; colour and type come
    from NetFin.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ════════════════════════════════════════════════════════════════════════════ */
 
-/* C1. MUI palette channels â†’ NetFin values.
+/* C1. MUI palette channels → NetFin values.
    The Jellyfin 12 layer hard-codes ElegantFin's RGB channels (grey-blue / indigo)
    and a light-theme set. NetFin is dark-only, so every theme gets NetFin's
    channels. Same specificity as the layer's rules and declared later, so these win. */
@@ -5960,16 +5960,16 @@ html body {
   font-family: "Rajdhani", "Segoe UI", sans-serif;
 }
 
-/* C5. Home section titles: the layer's Â§15 spacing (padding-bottom under
+/* C5. Home section titles: the layer's §15 spacing (padding-bottom under
    .sectionTitle-cards) is intentionally outranked by NetFin's
    `padding-bottom: 7px !important`. That 7px sets the gap above NetFin's red
    underline and is already the same on both heading types, which is the
-   mismatch Â§15 was written to fix. No override needed. */
+   mismatch §15 was written to fix. No override needed. */
 
-/* C7. Media Bar â€” NetFin type and accent over the add-on's ElegantFin values.
+/* C7. Media Bar — NetFin type and accent over the add-on's ElegantFin values.
    - Play button: the add-on asks for Inter, which NetFin never loads.
-   - Age rating: Archivo Narrow â†’ Share Tech Mono, as NetFin's rating badge.
-   - Active slide dot: white at 50% â†’ NetFin red, full opacity. */
+   - Age rating: Archivo Narrow → Share Tech Mono, as NetFin's rating badge.
+   - Active slide dot: white at 50% → NetFin red, full opacity. */
 #slides-container .play-button {
   font-family: "Rajdhani", "Segoe UI", sans-serif;
 }
@@ -6345,7 +6345,7 @@ html body {
 /* C21. Poster (2:3) cards: "New Episode" only, no white "Watch Now" half.
    Posters (Top 10 rows at 60%/75% scale, library grids) are too narrow for
    both halves, so the pair overflowed and C19's centring cut off
-   "Watch Nâ€¦". Netflix also uses the single red tab on posters. Targets
+   "Watch N…". Netflix also uses the single red tab on posters. Targets
    Jellyfin's portrait card classes directly, no container query. Wide
    (thumb / episode) cards keep the split badge. Specificity (0,6,0) beats
    C20's (0,3,0). No :has(). */
@@ -6359,7 +6359,7 @@ html body {
    The inset banner's height comes from two places that must agree:
    - PART A2 sets #slides-container { height: 62% } (57% on screens under
      768px tall), which is the banner itself;
-   - PART B Â§12 reads --ef12-mediaBarHeight (62vh / 57vh) to place the home
+   - PART B §12 reads --ef12-mediaBarHeight (62vh / 57vh) to place the home
      rows below it (v2 path) and to derive --ef12-mediaBarV3Height /
      --ef12-mediaBarV3SectionsTop (v3 .slide-content path).
    Both are set from one knob here so the rows move down with the banner.
@@ -6367,7 +6367,7 @@ html body {
    extra height opens up the picture between them, as on Netflix.
    Tune --netfin-mediaBarHeight (vh only: it is also used on other elements,
    so em/% would resolve differently there). Specificity (0,2,0) / (1,2,0)
-   beats A2's (1,0,0) and Â§12's (0,1,0) including their media-query
+   beats A2's (1,0,0) and §12's (0,1,0) including their media-query
    versions. Mobile and TV unchanged. No :has(). */
 :root.layout-desktop {
   --netfin-mediaBarHeight: 80vh;
