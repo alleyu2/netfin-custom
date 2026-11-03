@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r26"; }
+:root { --netfin-build: "2026-11-02 r27"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6466,4 +6466,73 @@ html body {
 }
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
   -webkit-text-stroke-width: 3px;
+}
+
+/* C27. Rank "10" as two layers, like Netflix (replaces C26's merge).
+   Owner's Netflix screenshot (r27): the "0" sits IN FRONT of the "1" and
+   hides the 1's right side, with the 0's full outline drawn over it. C26's
+   paint-order merge joined both digits into one outline, which reads as
+   two digits just touching, so no overlap was visible.
+   Now: ::before draws "1", ::after draws "0" shifted right by .48em (its
+   own font-size, so it scales with the number; not an em-based var, so the
+   r7 bug can't happen). ::after comes later in the DOM at the same
+   z-index, so it paints over ::before; its opaque #0a0a0a fill hides the
+   1's outline behind it. Stroke, spacing and paint-order go back to normal
+   so "10" matches 1-9. The card box (z-index 1) stays above both.
+   Nothing else in this file or Jellyfin styles .card::after.
+   Gutter: "10" is ~.05em wider than in C26, so desktop --netfin-rank10W
+   1.44 -> 1.52 and mobile 1.25 -> 1.32. Both estimated from screenshots.
+   Tune: .48em (lower = more overlap), and the two gutters.
+   Selectors match C16b/C17c/C25/C26 and come later; hover matches C15's
+   hover with nth-child added, so it wins. No :has(). TV excluded. */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10W: 1.52;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rankW: calc(var(--cardWidth) * 1.32);
+}
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  content: "1";
+  letter-spacing: 0;
+  paint-order: normal;
+  -webkit-text-stroke-width: 2px;
+}
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  content: "0";
+  position: absolute;
+  z-index: 0;
+  top: .375rem;
+  left: calc(.375rem + .48em);
+  right: auto;
+  width: max-content;
+  height: 150cqw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  white-space: nowrap;
+  overflow: visible;
+  font-family: "Arial Black", "Arial Bold", Gadget, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 168cqw;
+  line-height: .79;
+  letter-spacing: 0;
+  color: #0a0a0a;
+  -webkit-text-stroke: 2px var(--netfin-rankStroke, #b3b3b3);
+  transform: translateY(1.5cqw) scaleX(.95);
+  transform-origin: left bottom;
+  pointer-events: none;
+  transition: -webkit-text-stroke-color .2s ease, text-shadow .2s ease;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  -webkit-text-stroke-width: 1.5px;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  font-size: 150cqw;
+  -webkit-text-stroke-width: 1.5px;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10):hover::after {
+  -webkit-text-stroke-color: #ff4444;
+  text-shadow: 0 0 18px rgba(255,0,0,.35);
 }
