@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r25"; }
+:root { --netfin-build: "2026-11-02 r26"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6438,4 +6438,32 @@ html body {
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
   letter-spacing: -.05em;
+}
+
+/* C26. Rank "10": "1" and "0" overlap and merge into one outlined shape,
+   as on Netflix (owner request, r26). C25's -.05em gap existed only because
+   text-stroke outlines each glyph separately, so overlapping digits showed
+   crossing lines (r23). paint-order: stroke fill draws the outlines first
+   and the dark fill over them, so the fill hides every outline segment
+   inside the overlap. The fill also covers the inner half of each outline,
+   so the stroke is doubled (C24: 2px desktop / 1.5px mobile) to keep the
+   visible line the same weight as 1-9.
+   If a browser ignores paint-order on HTML text, the crossing lines come
+   back: then switch to the two-layer approach (::before "1" + ::after "0").
+   Tighter spacing moves the "0" ~11cqw left (box is left-anchored, C16b),
+   so the desktop gutter drops from C25's 1.55 to 1.44 to keep ~22cqw of the
+   "0" under the poster. Estimated, not measured. Mobile gutter (C17c 1.25)
+   left alone: not yet checked on a phone.
+   Same selectors as C25, later in the file, so these win. No :has(). */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10W: 1.44;
+}
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  letter-spacing: -.12em;
+  paint-order: stroke fill;
+  -webkit-text-stroke-width: 4px;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  -webkit-text-stroke-width: 3px;
 }
