@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r23"; }
+:root { --netfin-build: "2026-11-02 r24"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6406,7 +6406,7 @@ html body {
    but stays below C15's :hover rule (0,6,1), so the red hover outline still
    works. Mobile width uses C17b's own selector (0,6,1), later, so it wins;
    it sets width only, so hover colour is untouched. No :has(). TV excluded.
-   Tune: --netfin-rankStroke (colour), the two widths, and the "10" spacing. */
+   Tune: --netfin-rankStroke (colour), the two widths, (r24: "10" spacing moved to C25). */
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
   --netfin-rankStroke: #b3b3b3;
   -webkit-text-stroke-width: 2px;
@@ -6415,9 +6415,24 @@ html body {
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
   -webkit-text-stroke-width: 1.5px;
 }
-/* C24b. "10": the two digits overlap slightly, like the references.
-   Same selectors as C16b / C17c (desktop / mobile), later, so they win. */
+
+/* C25. Rank "10" (replaces r23's C24b). From the owner's r23 desktop
+   screenshot, two faults:
+   1. At -.16em the "1" overlapped the "0", and text-stroke outlines every
+      glyph separately, so the two outlines crossed inside the digits.
+      -.05em leaves a hairline gap: no crossing lines.
+   2. "10" stopped exactly at the poster edge, while 1-9 run ~22cqw under
+      their poster. C16b's 1.40 x cardWidth gutter was wider than the digits.
+      --netfin-rank10W (desktop) pulls the poster left over the "0".
+   Both values are estimated from a screenshot, not measured: raise
+   --netfin-rank10W if the poster covers too much of the "0", lower it to
+   cover more. Mobile gets the spacing fix only (gutter left as C17c).
+   Same selectors as C16b / C17c, later in the file, so these win. No :has(). */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10W: 1.28;
+  --netfin-rankW: calc(var(--cardWidth) * var(--netfin-rank10W));
+}
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
-  letter-spacing: -.16em;
+  letter-spacing: -.05em;
 }
