@@ -6558,12 +6558,12 @@ html body {
    the 0's ~80cqw width) to .72 on desktop and mobile. 1-9 unchanged.
    Same selectors as C27, later in the file, so these win. No :has(). */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10W: .92;   /* r31: .72 (r30) hid the whole 0, 1.12 (r29) none */
+  --netfin-rank10W: .95;   /* r31: .72 (r30) hid the whole 0, 1.12 (r29) none */
 }
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rankW: calc(var(--cardWidth) * .92);   /* r31: was .72 (r30), 1.10 (r29) */
+  --netfin-rankW: calc(var(--cardWidth) * .95);   /* r31: was .72 (r30), 1.10 (r29) */
 }
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after,
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
-  left: calc(.375rem + .31em);   /* r29: was .38em */
+  left: calc(.375rem + .33em);   /* r29: was .38em */
 }
