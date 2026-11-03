@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r28"; }
+:root { --netfin-build: "2026-11-02 r29"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6548,14 +6548,18 @@ html body {
    mobile 1.32 -> 1.18 (x cardWidth). All estimated from the screenshot.
    Tune: .38em (lower = more overlap), and the two gutters (lower = poster
    covers more of the "0").
+   r29 (owner screenshot "almost there"): the 0 still only clipped the
+   1's corner and the poster covered less of the "0" than Netflix's does.
+   0 offset .38em -> .31em; gutters desktop 1.26 -> 1.12, mobile
+   1.18 -> 1.10, values tuned in place below.
    Same selectors as C27, later in the file, so these win. No :has(). */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10W: 1.26;
+  --netfin-rank10W: 1.12;   /* r29: was 1.26 */
 }
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rankW: calc(var(--cardWidth) * 1.18);
+  --netfin-rankW: calc(var(--cardWidth) * 1.10);   /* r29: was 1.18 */
 }
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after,
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
-  left: calc(.375rem + .38em);
+  left: calc(.375rem + .31em);   /* r29: was .38em */
 }
