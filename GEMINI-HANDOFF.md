@@ -229,4 +229,3 @@ geometry (§12) and should be done in `netfin-jf12.css` PART C, not this add-on.
    Need class names from Inspect before styling.
 3. **Media Bar top gap:** add-on positions the banner using NetFin's `--appBarHeight` (5em); adjust if the gap
    under the app bar looks off.
-4. **Netfl
