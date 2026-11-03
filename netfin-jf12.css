@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r31"; }
+:root { --netfin-build: "2026-11-02 r33"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6407,8 +6407,13 @@ html body {
    works. Mobile width uses C17b's own selector (0,6,1), later, so it wins;
    it sets width only, so hover colour is untouched. No :has(). TV excluded.
    Tune: --netfin-rankStroke (colour), the two widths, (r24: "10" spacing moved to C25). */
-:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
+/* r33: knob moved from ::before to the card. On ::before it was not
+   inherited by C27's ::after (the "0" of 10), which only matched through
+   its #b3b3b3 fallback. Pseudo-elements inherit from the card. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card {
   --netfin-rankStroke: #b3b3b3;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: var(--netfin-rankStroke);
 }
@@ -6558,12 +6563,48 @@ html body {
    the 0's ~80cqw width) to .72 on desktop and mobile. 1-9 unchanged.
    Same selectors as C27, later in the file, so these win. No :has(). */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10W: .98;   /* r31: .72 (r30) hid the whole 0, 1.12 (r29) none */
+  --netfin-rank10W: .98;   /* r32 (owner-tested): .92 (r31), .72 (r30) hid the whole 0 */
 }
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rankW: calc(var(--cardWidth) * .98);   /* r31: was .72 (r30), 1.10 (r29) */
+  --netfin-rankW: calc(var(--cardWidth) * .98);   /* r32: matches desktop; was .92 (r31) */
 }
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after,
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
-  left: calc(.375rem + .35em);   /* r29: was .38em */
+  left: calc(.375rem + .35em);   /* r32 (owner-tested): less 1/0 overlap; was .31em (r29), .38em (r28) */
+}
+
+/* C29. Mobile Top 10 fixes (r33), from the owner's iPhone screenshots.
+   C29a. Numbers were ~74% of the poster height (C17b: 150cqw) against ~84%
+   on desktop (168cqw), which also left the wide empty gap between each
+   poster and the next number (~43cqw on mobile vs ~39cqw desktop).
+   Digits are right-aligned, so a bigger font grows them LEFT into that
+   gap; the poster overlap does not change. Same 168cqw as desktop.
+   Rank 10 is left-anchored, so it grows RIGHT: the poster then covers more
+   of the "0" (it showed more of the 0 than 1-9 showed of theirs), and the
+   .35em digit offset scales with it. Gutter .98 (C28) unchanged.
+   Same selectors as C17b / C17c / C27 (mobile), later, so these win. */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+  font-size: 168cqw;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  font-size: 168cqw;
+}
+/* C29b. The bigger "1" starts ~11cqw further left, so C23's first-card
+   pull-left is reduced to keep the "1" lined up with the other rows
+   (-.34 -> -.24 x cardWidth). Same selector as C23, later. */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:first-child {
+  --netfin-top10ShiftMobile: -.24;
+}
+/* C29c. Touch screens: no red "hover" number. On phones :hover sticks to
+   the last tapped card, so a number stayed red with a glow (the "9" in
+   the screenshots). hover: none = touch-only devices, any layout; desktop
+   mouse hover unchanged. Same selectors as the C15 and C27 hover rules,
+   later in the file, so these win. */
+@media (hover: none) {
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:hover::before,
+  :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10):hover::after {
+    -webkit-text-stroke-color: var(--netfin-rankStroke, #b3b3b3);
+    text-shadow: none;
+  }
 }
