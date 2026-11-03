@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r33"; }
+:root { --netfin-build: "2026-11-02 r35"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6573,7 +6573,7 @@ html body {
   left: calc(.375rem + .35em);   /* r32 (owner-tested): less 1/0 overlap; was .31em (r29), .38em (r28) */
 }
 
-/* C29. Mobile Top 10 fixes (r33), from the owner's iPhone screenshots.
+/* C29. Mobile Top 10 fixes (r33), from the owner's Pixel 9 (Android) screenshots.
    C29a. Numbers were ~74% of the poster height (C17b: 150cqw) against ~84%
    on desktop (168cqw), which also left the wide empty gap between each
    poster and the next number (~43cqw on mobile vs ~39cqw desktop).
@@ -6607,4 +6607,40 @@ html body {
     -webkit-text-stroke-color: var(--netfin-rankStroke, #b3b3b3);
     text-shadow: none;
   }
+}
+
+/* C30. Stray lines inside the 3, 4 and 8 on the owner's Pixel 9 (r34;
+   r35 corrected this comment, which first said iPhone).
+   Cause: Android has no Arial Black, so the number falls back to Android's
+   own bold font (Roboto). In that font the 3, 4 and 8 are drawn from overlapping pieces
+   (the 4's bar over its stem, the 8's two loops, the 3's two bowls).
+   -webkit-text-stroke outlines every piece, so the overlaps show as lines
+   inside the digit. Windows has Arial Black, whose digits are one shape,
+   so desktop looked fine.
+   Fix: paint-order: stroke fill (as tried in C26) draws the outline first
+   and the dark fill on top, so the fill hides every line inside the digit.
+   The fill also covers the inner half of the outline, so widths double
+   (2px -> 4px desktop, 1.5px -> 3px mobile) to keep the same visible line.
+   Applied on every layout (not TV), so iPhones and any other device
+   without Arial Black are covered too. On desktop the outline now sits
+   just outside the digit's edge instead of across it (~1px, barely
+   visible). Rank 10 keeps two separate layers (C27), so the 0 still sits
+   in front of the 1.
+   Selectors repeat C24 / C27, later in the file, so these win. No :has(). */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
+  paint-order: stroke fill;
+  -webkit-text-stroke-width: 4px;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+  -webkit-text-stroke-width: 3px;
+}
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  paint-order: stroke fill;
+  -webkit-text-stroke-width: 4px;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  paint-order: stroke fill;
+  -webkit-text-stroke-width: 3px;
 }
