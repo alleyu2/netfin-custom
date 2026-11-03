@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r29"; }
+:root { --netfin-build: "2026-11-02 r30"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6552,12 +6552,16 @@ html body {
    1's corner and the poster covered less of the "0" than Netflix's does.
    0 offset .38em -> .31em; gutters desktop 1.26 -> 1.12, mobile
    1.18 -> 1.10, values tuned in place below.
+   r30 (owner's Netflix vs NetFin screenshots): on Netflix the poster
+   hides about the right half of the "0"; ours stopped at the 0's edge, so
+   the whole "0" showed. Gutters cut by ~.4 x cardWidth (~40cqw, about half
+   the 0's ~80cqw width) to .72 on desktop and mobile. 1-9 unchanged.
    Same selectors as C27, later in the file, so these win. No :has(). */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10W: 1.12;   /* r29: was 1.26 */
+  --netfin-rank10W: .72;   /* r30: was 1.12 (r29), 1.26 (r28) */
 }
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rankW: calc(var(--cardWidth) * 1.10);   /* r29: was 1.18 */
+  --netfin-rankW: calc(var(--cardWidth) * .72);   /* r30: was 1.10 (r29), 1.18 (r28) */
 }
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after,
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
