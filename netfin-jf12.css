@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-10-29 r22"; }
+:root { --netfin-build: "2026-11-02 r23"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6395,4 +6395,29 @@ html body {
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:first-child {
   --netfin-top10ShiftMobile: -.34;
   margin-left: calc(var(--cardWidth) * var(--netfin-top10ShiftMobile));
+}
+
+/* C24. Top 10 rank numbers: thinner, lighter outline, as Netflix / AFinity.
+   Compared from the owner's phone screenshots (r23): Netflix's and AFinity's
+   digits use a thin light-grey/white stroke, and the "1" and "0" of "10"
+   touch. C15's 3px #595959 stroke read dark and heavy on black. Colour and
+   width only: size, gap, overlap and position (C15-C17, C23) are unchanged.
+   Specificity: base rule (0,5,1) is later than C15's (0,5,1), so it wins,
+   but stays below C15's :hover rule (0,6,1), so the red hover outline still
+   works. Mobile width uses C17b's own selector (0,6,1), later, so it wins;
+   it sets width only, so hover colour is untouched. No :has(). TV excluded.
+   Tune: --netfin-rankStroke (colour), the two widths, and the "10" spacing. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card::before {
+  --netfin-rankStroke: #b3b3b3;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--netfin-rankStroke);
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before {
+  -webkit-text-stroke-width: 1.5px;
+}
+/* C24b. "10": the two digits overlap slightly, like the references.
+   Same selectors as C16b / C17c (desktop / mobile), later, so they win. */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before {
+  letter-spacing: -.16em;
 }
