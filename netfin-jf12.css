@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r27"; }
+:root { --netfin-build: "2026-11-02 r28"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6535,4 +6535,27 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10):hover::after {
   -webkit-text-stroke-color: #ff4444;
   text-shadow: 0 0 18px rgba(255,0,0,.35);
+}
+
+/* C28. Rank "10": make the C27 overlap visible (r28).
+   Owner's r27 screenshot: the "0" only just touched the "1", and the
+   poster covered only a sliver of the "0". Cause: Arial Black's "1" ink
+   ends ~.5em from its left edge, so C27's .48em offset put the 0's ink
+   right at the 1's edge. .38em pushes the 0 ~.1em over the 1's right side,
+   like Netflix.
+   That makes "10" ~16cqw narrower, and the poster also needs ~15cqw more
+   overlap to match 1-9, so the gutters drop: desktop 1.52 -> 1.26,
+   mobile 1.32 -> 1.18 (x cardWidth). All estimated from the screenshot.
+   Tune: .38em (lower = more overlap), and the two gutters (lower = poster
+   covers more of the "0").
+   Same selectors as C27, later in the file, so these win. No :has(). */
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10W: 1.26;
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rankW: calc(var(--cardWidth) * 1.18);
+}
+:root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after,
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  left: calc(.375rem + .38em);
 }
