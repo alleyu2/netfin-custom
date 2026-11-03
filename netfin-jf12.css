@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r24"; }
+:root { --netfin-build: "2026-11-02 r25"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6429,7 +6429,10 @@ html body {
    cover more. Mobile gets the spacing fix only (gutter left as C17c).
    Same selectors as C16b / C17c, later in the file, so these win. No :has(). */
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10W: 1.28;
+  /* r25: 1.28 hid about half the "0" (screenshot): the wider -.05em
+     spacing made "10" ~37cqw wider while the gutter shrank 12cqw. 1.55
+     leaves ~22cqw of the "0" under the poster, like 1-9. */
+  --netfin-rank10W: 1.55;
   --netfin-rankW: calc(var(--cardWidth) * var(--netfin-rank10W));
 }
 :root.layout-desktop :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::before,
