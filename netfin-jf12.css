@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r43"; }
+:root { --netfin-build: "2026-11-04 r44"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6833,4 +6833,28 @@ html body {
     rgba(0,0,0,calc(var(--netfin-rank10ShadowMax) * .6)) 55%,
     rgba(0,0,0,var(--netfin-rank10ShadowMax)) 100%);
   pointer-events: none;
+}
+/* C38. Rank "10" shadow: stronger and fully black at the poster (r44,
+   owner's r43 desktop screenshot).
+   C37 works (the "0" now stays solid in front of the "1"), but at .85 the
+   shadow left the 0's outline, especially the inner curve, readable right
+   up to the poster edge, while 1-9 fade to nothing there (C35,
+   --netfin-rankFadeEnd: 0). So the "10" looked less shadowed than 1-9.
+   Fix: full black at the poster edge, held for the last ~15% of the
+   strip, and a slightly wider strip so the fade starts near the 0's left
+   side, as on 1-9. Same knobs as C37; the strip rule is repeated with a
+   new gradient. Same selectors as C37, later in the file, so these win.
+   Tune: lower --netfin-rank10Shadow if the shadow starts darkening the
+   "1"; lower --netfin-rank10ShadowMax (e.g. .9) if the edge looks too
+   hard. Estimated from the screenshot. Desktop and mobile; TV excluded. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10Shadow: 40cqw;
+  --netfin-rank10ShadowMax: 1;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) > .cardBox::before {
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(0,0,0,calc(var(--netfin-rank10ShadowMax) * .55)) 45%,
+    rgba(0,0,0,var(--netfin-rank10ShadowMax)) 85%,
+    rgba(0,0,0,var(--netfin-rank10ShadowMax)) 100%);
 }
