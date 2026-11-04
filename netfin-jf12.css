@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r44"; }
+:root { --netfin-build: "2026-11-04 r45"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6856,5 +6856,28 @@ html body {
     transparent 0%,
     rgba(0,0,0,calc(var(--netfin-rank10ShadowMax) * .55)) 45%,
     rgba(0,0,0,var(--netfin-rank10ShadowMax)) 85%,
+    rgba(0,0,0,var(--netfin-rank10ShadowMax)) 100%);
+}
+/* C39. Rank "10" shadow: keep the 0's inner circle visible (r45, owner:
+   "the circle within the 0 is not visible now").
+   C38 went full black for the last 15% of the strip. The 0's inner
+   counter sits right beside the poster, inside that black zone, so it
+   disappeared. On Netflix the whole 0 outline, inner curve included,
+   stays readable up to the poster; it is only dimmed.
+   Fix: no fully black zone. The shadow ramps smoothly to 65% at the poster
+   edge, so the inner curve is dimmed but still visible, and it is still
+   darker than r43 (.85 with a softer ramp). Same selectors as C37/C38,
+   later in the file, so these win.
+   Tune: --netfin-rank10ShadowMax up (e.g. .75) = darker edge, curve
+   fainter; down (e.g. .5) = curve brighter. --netfin-rank10Shadow =
+   width. Estimated from the screenshot. Desktop and mobile; TV excluded. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10Shadow: 35cqw;
+  --netfin-rank10ShadowMax: .65;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) > .cardBox::before {
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(0,0,0,calc(var(--netfin-rank10ShadowMax) * .4)) 50%,
     rgba(0,0,0,var(--netfin-rank10ShadowMax)) 100%);
 }
