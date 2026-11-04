@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r38"; }
+:root { --netfin-build: "2026-11-04 r39"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6710,4 +6710,18 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
   -webkit-mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeStart), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeStop));
   mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeStart), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeStop));
+}
+
+/* C33. Fix: C32's mask cut off the bottom of every rank number (r39).
+   A mask hides everything outside the element's box. The digits are meant
+   to spill past the bottom of their box (line-height .79 + translateY
+   1.5cqw + the outline), so that part disappeared once C32 added the mask.
+   Fix: make the box taller downwards with padding only. content-box keeps
+   the inner height at 150cqw, so the digits (aligned to the bottom of
+   that area) don't move; the mask just covers the overflow now.
+   Width unchanged, so C32's fade positions are unchanged. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard)::before,
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  box-sizing: content-box;
+  padding-bottom: 20cqw;
 }
