@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r40"; }
+:root { --netfin-build: "2026-11-04 r41"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6742,4 +6742,27 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
   --netfin-rank10FadeStart: 32%;
   --netfin-rank10FadeStop: 60%;
+}
+
+/* C35. Stronger fade, closer to Netflix (r41, owner's r40 screenshot vs
+   Netflix).
+   Netflix: each digit's outline is almost gone by the time it meets the
+   poster, and the fade starts further left. Ours (C32/C34) kept 15% of
+   the outline at the poster edge and faded over a short distance, so the
+   right side of every number still read clearly.
+   Fix (same knobs, later in the file so these win):
+   - --netfin-rankFadeEnd .15 -> 0 (outline gone at the poster edge)
+   - --netfin-rankFade 45cqw -> 65cqw (longer, softer fade on 1-9)
+   - rank "10": the "0" fades 25% -> 52% (gone right at the poster edge,
+     ~50% of the "0"); was 32% -> 60%.
+   Tune: raise --netfin-rankFadeEnd (e.g. .1) if it's too strong; lower
+   --netfin-rankFade for a shorter fade. Estimated, not measured.
+   Desktop and mobile; TV excluded. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  --netfin-rankFade: 65cqw;
+  --netfin-rankFadeEnd: 0;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10FadeStart: 25%;
+  --netfin-rank10FadeStop: 52%;
 }
