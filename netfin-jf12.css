@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r41"; }
+:root { --netfin-build: "2026-11-04 r42"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6765,4 +6765,31 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
   --netfin-rank10FadeStart: 25%;
   --netfin-rank10FadeStop: 52%;
+}
+
+/* C36. Rank "10": the "0" had no fade at all (r42, owner's r41 screenshot;
+   1-9 fade correctly).
+   Likely cause: C32/C34/C35 placed the fade in % of the 0's box. In the
+   screenshot the 0's outline is full strength right up to the poster,
+   which is what happens if that box is wider than the "0" itself: the
+   25%-52% fade then lands under the poster, out of sight. Not confirmed
+   in DevTools.
+   Fix: position the fade in em instead of %, measured from the 0's left
+   edge. em here is the 0's own font size, so it doesn't depend on how
+   wide the box is and scales with the number. Of the "0" (~.6-.67em
+   wide), about .45em shows before the poster in the screenshot.
+   Knobs (on the 10th card; em resolves in ::after, as in C31):
+     --netfin-rank10FadeFrom: .12em  higher = the "0" stays clear longer
+     --netfin-rank10FadeTo:   .45em  where it is gone (= the poster edge)
+   Uses C35's --netfin-rankFadeEnd (0). Replaces the mask from C32 on
+   ::after; the old % knobs (C34/C35) are now unused. If it still doesn't
+   fade, right-click the "0" > Inspect and send the Styles panel for
+   ::after. Desktop and mobile; TV excluded. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10FadeFrom: .12em;
+  --netfin-rank10FadeTo: .45em;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  -webkit-mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeFrom), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeTo));
+  mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeFrom), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeTo));
 }
