@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r42"; }
+:root { --netfin-build: "2026-11-04 r43"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6792,4 +6792,45 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
   -webkit-mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeFrom), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeTo));
   mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeFrom), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeTo));
+}
+/* C37. Rank "10": Netflix-style shadow instead of a see-through fade (r43,
+   owner's Netflix vs NetFin screenshots).
+   Cause: C36 fades the "0" with mask-image. A mask fades the whole layer,
+   including the opaque #0a0a0a fill that is meant to hide the "1" behind
+   it (C27), so where the "0" fades the 1's outline shows through and the
+   overlap looks muddy. On Netflix the "0" stays solid in front of the "1"
+   and only gets darker towards the poster, as if the poster casts a shadow.
+   Fix: drop the mask on the "0" and draw that shadow instead: a black
+   gradient strip just left of the poster, on the 10th card's .cardBox
+   (::before; nothing else in this file or Jellyfin styles it). .cardBox is
+   the poster column (left edge = poster edge, C15 padding sits outside it)
+   and is z-index 1 above both digits (C15), so the strip darkens whatever
+   part of the "0" is next to the poster without making it transparent.
+   cqw = poster width, as everywhere in C15. The page background is
+   near-black, so the strip only shows where it covers the digit.
+   Knobs (on the 10th card):
+     --netfin-rank10Shadow: 30cqw     wider = shadow reaches further left
+     --netfin-rank10ShadowMax: .85    darkness at the poster edge (0-1)
+   Estimated from the Netflix screenshot, not measured. Ranks 1-9 keep the
+   owner-approved C35 fade. Desktop and mobile; TV excluded. No :has(). */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10Shadow: 30cqw;
+  --netfin-rank10ShadowMax: .85;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) > .cardBox::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: var(--netfin-rank10Shadow);
+  height: 156cqw;                  /* poster (150cqw) + the digits' overflow below it */
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(0,0,0,calc(var(--netfin-rank10ShadowMax) * .6)) 55%,
+    rgba(0,0,0,var(--netfin-rank10ShadowMax)) 100%);
+  pointer-events: none;
 }
