@@ -20,11 +20,11 @@ deploys by pasting files into GitHub. Follow these rules on every change:
    the CSS. If you cannot tell the cause (for example, you don't know the plugin's HTML), say so and ask the
    owner to right-click → Inspect and send a screenshot of the Elements/Styles panel. Do not guess at
    selectors and present them as certain.
-3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C24**), each with a
+3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C32**), each with a
    comment explaining *why* it exists. Do not edit PART A2 or PART B (they are verbatim upstream copies).
    Edit PART A only to fix a genuine NetFin bug, and note it.
 4. **Bump the build tag** in C10 on every change to `netfin-jf12.css`:
-   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-10-29 r22"`, so next is `r23`).
+   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-04 r37"`, so next is `r38`).
 5. **Deliver the complete file**, not a fragment, unless the owner asks for a snippet. The owner replaces the
    whole file on GitHub. Partial pastes caused version confusion before.
 6. **Check syntax.** Braces must balance; no rule may be left open. A single stray `}` or `{` silently breaks
@@ -63,7 +63,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 
 | File | Status | Purpose |
 |---|---|---|
-| `netfin-jf12.css` | **Live**, build `2026-10-29 r22`, ~6,300 lines | The full theme |
+| `netfin-jf12.css` | **Live**, build `2026-11-04 r37`, ~6,680 lines | The full theme |
 | `netfin-classic-navbar.css` | **Live** | Optional: server name as a pill like the library links |
 | `README.md` | Live | Public documentation of all changes |
 | `LICENSE` | GPL-3.0 | See open issue #1 in section 7 |
@@ -79,7 +79,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 | **PART A** | Stock NetFin (header replaced; stray `}` at end removed) + a second `:root` block of 20 tokens the jf12 layer needs, inserted right after NetFin's `:root` | Bug fixes only |
 | **PART A2** | ElegantFin Media Bar add-on v26.09.05, single minified line, verbatim | No (replace whole line on upgrade) |
 | **PART B** | elegantfin-jf12 v26.10.13, verbatim, sections §1–§20 | No (replace whole part on upgrade) |
-| **PART C** | Reconciliation rules C1–C23 (in file order C1–C4, C6, C5, C7–C23) | **Yes — all new work goes here** |
+| **PART C** | Reconciliation rules C1–C31 (in file order C1–C4, C6, C5, C7–C31) | **Yes — all new work goes here** |
 
 ### Tokens added in PART A (NetFin never defined these)
 
@@ -123,8 +123,16 @@ Hover red used in rules: `#ff4444` / `#ff3333`. Fonts: Rajdhani (body), Orbitron
 | C19 | Netflix "Recently added" / "New Season" badges: styles `.cardScalable > .netfin-newBadge` (red tab, bottom-centre, hidden on desktop hover, `--netfin-newBadgeBottom` to lift it). Badge elements are created by JS Injector script **"NetFin New Badges"** (`netfin-new-badges.js`, kept in the repo for reference): script r22 rules: Added = DateCreated, Aired = PremiereDate (missing = counts as aired). Priority on show cards: **New Season** (season ≥2 added ≤14d AND season premiered ≤60d, or has an episode aired ≤14d; overrides Recently added so a just-downloaded currently-airing show reads "New Season") > **Recently added** (movie/series added ≤14d) > **New Episode** (unwatched non-special episode added ≤7d and aired ≤14d; also on episode cards with "Watch Now"). Air-date checks stop backfilled old seasons/episodes being called new. Cache resets on user switch; refresh every 15 min. Episodes/seasons: `IsMissing=false` + `LocationType !== "Virtual"` and air date must not be in the future (+1 day grace), so Coming Soon placeholders get no badge. Script ends with an `END OF NetFin New Badges` comment: JS Injector paste got truncated once and broke all injected scripts (KefinTweaks rows vanished) — check the last line after every paste, or load via Script URL from jsDelivr; matches `.card[data-id]` with `data-type` Movie/Series/Episode. Owner moved Jellyfin Enhanced rating tags to top-left so they don't collide with the badge |
 | C20 | Split "New Episode \| Watch Now" badge (Netflix style): script writes `.netfin-newBadge-main` (+ `.netfin-newBadge-cta` for New Episode, text set by `LABEL_WATCH`); badge is a flex row, red main half, white CTA half with #141414 text; Needs script r20+. (r21 removed C20's `@container (max-width: 9rem)` hide rule: it never matched, cause unknown) |
 | C21 | Poster cards (`.overflowPortraitCard`, `.portraitCard`): hide `.netfin-newBadge-cta`, red half gets full rounded top. Fixes "Watch N…" clipped on Top 10 posters |
-| C22 | Taller Media Bar, desktop only: one knob `--netfin-mediaBarHeight: 85vh` (vh only) sets both `#slides-container { height }` (overrides A2's 62%/57%) and `--ef12-mediaBarHeight` (§12 uses it to place home rows, v2 and v3 paths), so rows move down with the banner. Mobile/TV unchanged |
-| C23 | Mobile Top 10 rows: first card pulled left by `margin-left: calc(var(--cardWidth) * var(--netfin-top10ShiftMobile))`, `-.34`, so the "1" lines up with other rows (desktop equivalent is C16c). Value measured from a screenshot, not getBoundingClientRect: retune if it looks off. Mobile only |
+| C22 | Taller Media Bar, desktop only: one knob `--netfin-mediaBarHeight: 80vh` (vh only) sets both `#slides-container { height }` (overrides A2's 62%/57%) and `--ef12-mediaBarHeight` (§12 uses it to place home rows, v2 and v3 paths), so rows move down with the banner. Mobile/TV unchanged |
+| C23 | Mobile Top 10 rows: first card pulled left by `margin-left: calc(var(--cardWidth) * var(--netfin-top10ShiftMobile))`, originally `-.34`, now **`-.24`** (overridden in C29b), so the "1" lines up with other rows (desktop equivalent is C16c). Value measured from a screenshot, not getBoundingClientRect: retune if it looks off. Mobile only |
+| C24 | Rank numbers: thinner, lighter outline like Netflix. Knob `--netfin-rankStroke: #b3b3b3` is set **on the card** (r33, so both `::before` and C27's `::after` inherit it); stroke 2px desktop / 1.5px mobile (later doubled by C30) |
+| C25 | Rank "10" spacing `-.05em` (superseded) and desktop knob `--netfin-rank10W` = gutter multiplier for rank 10 |
+| C26 | Superseded: tried merging "1" and "0" with `paint-order`; read as two digits just touching. Values overridden by C27 |
+| C27 | Rank "10" as **two layers**, like Netflix: `::before` draws "1", `::after` draws "0" shifted right (em of its own font size), so the "0" sits in front of the "1". `::after` duplicates C15's number styling (font, line-height .79, translateY(1.5cqw) scaleX(.95), left-anchored). Hover rule for `::after` included |
+| C28 | Rank "10" tuning (owner-tested): desktop `--netfin-rank10W: .98`; mobile gutter `.98×cardWidth` (now overridden by C31); "0" offset `left: calc(.375rem + .35em)` (desktop; mobile overridden by C31) |
+| C29 | Mobile (Pixel 9) Top 10: C29a numbers 150cqw → **168cqw** (same as desktop) incl. rank 10's both layers; C29b first-card shift `-.34` → `-.24`; C29c `@media (hover: none)` cancels the sticky red hover number on touch screens |
+| C30 | Stray lines inside 3/4/8 on Android: no Arial Black there, fallback font builds digits from overlapping pieces and `-webkit-text-stroke` outlines each. Fix: `paint-order: stroke fill` on all rank numbers (not TV), stroke widths doubled to 4px desktop / 3px mobile to keep the same visible weight |
+| C31 | Mobile rank "10": "0" overlaps the "1" and the poster covers ~half the "0", like desktop. Cause: the fallback font's "1" is narrower than Arial Black's, so C28's .35em offset left the digits only touching. Knobs on the 10th card: `--netfin-rank10ShiftMobile: .30em` (**owner-tested r37**; r36 estimate .26em overlapped too much; lower = more overlap; the em resolves in `::after`) and `--netfin-rank10WMobile: .80` (gutter × cardWidth; lower = poster covers more of the "0"). If an iPhone renders Arial Black it may overlap more there; raise the offset towards .35em. Mobile only |
 
 ### `netfin-classic-navbar.css`
 
@@ -185,6 +193,11 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Top 10 rows showed A–Z instead of Trakt order | KefinTweaks **Items** endpoint re-sorts by name | Use the **Custom** endpoint (see 5b) |
 | Custom path `/Items?ParentId=…` gave HTTP 400 | KefinTweaks appends its own `?…` query string | Never put `?` in the Custom path; use the parent chip for the ID |
 | Handoff said r21 / next C22, but the file already had r22 with C22–C23 | Brief not updated after r22 | Same lesson: check C10 and the highest C-number first; update this brief in the same change |
+| Handoff said r22 / next C24, but the file was at r35 with C24–C30 | Brief not updated for r23–r35 | Same lesson again. This brief was brought up to date at r37 |
+| Mobile rank numbers looked different from desktop (stray lines in 3/4/8, "10" digits only touching) | Android has no Arial Black; the fallback font has different digit shapes and widths | Tune mobile rank values separately from desktop and confirm on the owner's phone (Pixel 9); don't copy desktop em offsets to mobile |
+| Rank "1"/"0" overlap: merging with `paint-order` (C26) didn't look like Netflix | Netflix's "0" sits in front of the "1" | Draw "10" as two layers (`::before` "1", `::after` "0"), C27 |
+| Red rank number stuck after tapping a card on phones | `:hover` sticks to the last tapped element on touch screens | Wrap hover cancel in `@media (hover: none)` (C29c) |
+| A CSS variable set on `::before` didn't reach `::after` | Pseudo-elements inherit from their element, not from each other | Put shared knobs on the card (C24 r33) |
 
 ---
 
@@ -196,7 +209,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Top 10 Shows Today (thumb cards) | **Collection** (SmartLists playlists only offer Episode, not Series), Series, External List = `https://trakt.tv/shows/trending`, same sort/limit | Endpoint **Custom**, path `/Items`, Sort By Default, Limit 10, Series, Collection parent chip |
 
 - Versions at setup: Jellyfin 12.2, SmartLists 12.0.3.0. Trakt API key set in SmartLists Settings → External Lists.
-- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update C15–C18, C23 and the Top 10 Carousel Fix script).
+- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update every Top 10 rule that names them: C15–C18, C23–C31, and the Top 10 Carousel Fix script).
 
 ---
 
