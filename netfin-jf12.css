@@ -6668,7 +6668,7 @@ html body {
    Same selectors as C28 (mobile), later in the file, so these win.
    Desktop and TV untouched. No :has(). */
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10ShiftMobile: .26em;
+  --netfin-rank10ShiftMobile: .46em;
   --netfin-rank10WMobile: .80;
   --netfin-rankW: calc(var(--cardWidth) * var(--netfin-rank10WMobile));
 }
