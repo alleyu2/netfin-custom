@@ -20,11 +20,11 @@ deploys by pasting files into GitHub. Follow these rules on every change:
    the CSS. If you cannot tell the cause (for example, you don't know the plugin's HTML), say so and ask the
    owner to right-click → Inspect and send a screenshot of the Elements/Styles panel. Do not guess at
    selectors and present them as certain.
-3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C37**), each with a
+3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C40**), each with a
    comment explaining *why* it exists. Do not edit PART A2 or PART B (they are verbatim upstream copies).
    Edit PART A only to fix a genuine NetFin bug, and note it.
 4. **Bump the build tag** in C10 on every change to `netfin-jf12.css`:
-   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-04 r42"`, so next is `r43`).
+   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-04 r45"`, so next is `r46`).
 5. **Deliver the complete file**, not a fragment, unless the owner asks for a snippet. The owner replaces the
    whole file on GitHub. Partial pastes caused version confusion before.
 6. **Check syntax.** Braces must balance; no rule may be left open. A single stray `}` or `{` silently breaks
@@ -63,7 +63,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 
 | File | Status | Purpose |
 |---|---|---|
-| `netfin-jf12.css` | **Live**, build `2026-11-04 r42`, ~6,800 lines | The full theme |
+| `netfin-jf12.css` | **Live**, build `2026-11-04 r45`, ~6,800 lines | The full theme |
 | `netfin-classic-navbar.css` | **Live** | Optional: server name as a pill like the library links |
 | `README.md` | Live | Public documentation of all changes |
 | `LICENSE` | GPL-3.0 | See open issue #1 in section 7 |
@@ -79,7 +79,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 | **PART A** | Stock NetFin (header replaced; stray `}` at end removed) + a second `:root` block of 20 tokens the jf12 layer needs, inserted right after NetFin's `:root` | Bug fixes only |
 | **PART A2** | ElegantFin Media Bar add-on v26.09.05, single minified line, verbatim | No (replace whole line on upgrade) |
 | **PART B** | elegantfin-jf12 v26.10.13, verbatim, sections §1–§20 | No (replace whole part on upgrade) |
-| **PART C** | Reconciliation rules C1–C36 (in file order C1–C4, C6, C5, C7–C36) | **Yes — all new work goes here** |
+| **PART C** | Reconciliation rules C1–C39 (in file order C1–C4, C6, C5, C7–C39) | **Yes — all new work goes here** |
 
 ### Tokens added in PART A (NetFin never defined these)
 
@@ -138,6 +138,9 @@ Hover red used in rules: `#ff4444` / `#ff3333`. Fonts: Rajdhani (body), Orbitron
 | C34 | Rank "10": the "0" faded too early (C32's 15%→55% faded nearly all of its visible half and let the "1" show through). Now `--netfin-rank10FadeStart: 32%`, `--netfin-rank10FadeStop: 60%` (poster edge ≈ 50% of the "0"). Estimated, not owner-tested yet |
 | C35 | Stronger, Netflix-like fade (overrides C32/C34 values): `--netfin-rankFade: 65cqw`, `--netfin-rankFadeEnd: 0` (outline gone at the poster edge); rank 10 "0" fades 25%→52%. Estimated, not owner-tested yet |
 | C36 | Rank "10": the "0" showed no fade with %-based stops (C32/C34/C35), likely because its box is wider than the glyph so the fade sat under the poster (not confirmed in DevTools). Mask on `::after` now uses em stops from the 0's left edge: `--netfin-rank10FadeFrom: .12em` → `--netfin-rank10FadeTo: .45em` (≈ poster edge). Old % knobs unused. Fade on 1–9 (C35) owner-approved r41; rank 10 fade (C36) owner-approved r42 |
+| C37 | Rank "10" shadow like Netflix (r43): C36's mask also faded the "0"'s opaque fill, so the "1" showed through the "0". Mask on `::after` removed (`mask-image: none`); instead a black gradient strip on the 10th card's `.cardBox::before` (`right: 100%`, height 156cqw, z-index via `.cardBox` above the digits) darkens the "0" towards the poster, so it stays solid in front of the "1". Knobs on the 10th card: `--netfin-rank10Shadow: 30cqw` (width), `--netfin-rank10ShadowMax: .85` (darkness at poster edge). Old C34–C36 fade knobs now unused. Owner-tested r43: "0" now solid in front of the "1"; strength tuned in C38. Ranks 1–9 keep the C35 mask fade. Desktop + mobile |
+| C38 | Rank "10" shadow stronger (r44): r43 screenshot showed the 0's outline (inner curve) still readable at the poster edge, while 1–9 fade to nothing (C35). `--netfin-rank10Shadow: 40cqw`, `--netfin-rank10ShadowMax: 1`, gradient transparent → 55% at 45% → full black from 85%. Superseded by C39: the full-black zone hid the 0's inner circle (owner report). Open question: in the r43 screenshot the 0's outline looked thinner than the 1's (both should be 4px desktop, C30); cause not confirmed, needs Inspect of `::after` |
+| C39 | Rank "10" shadow softened (r45): C38's full-black last 15% hid the 0's inner circle, which sits right beside the poster. No fully black zone now: `--netfin-rank10Shadow: 35cqw`, `--netfin-rank10ShadowMax: .65`, gradient transparent → 40% of max at 50% → max at the poster edge. Netflix keeps the whole 0 outline readable, only dimmed. Estimated, not owner-tested yet |
 
 ### `netfin-classic-navbar.css`
 
@@ -205,6 +208,8 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Rank "1"/"0" overlap: merging with `paint-order` (C26) didn't look like Netflix | Netflix's "0" sits in front of the "1" | Draw "10" as two layers (`::before` "1", `::after` "0"), C27 |
 | Red rank number stuck after tapping a card on phones | `:hover` sticks to the last tapped element on touch screens | Wrap hover cancel in `@media (hover: none)` (C29c) |
 | A CSS variable set on `::before` didn't reach `::after` | Pseudo-elements inherit from their element, not from each other | Put shared knobs on the card (C24 r33) |
+| Rank "1" visible through the faded "0" (r42) | `mask-image` fades the fill as well as the outline, so an opaque front layer becomes see-through | To dim a digit that sits in front of another, darken it with an overlay/shadow above it (C37), don't mask it |
+| Inner circle of the "0" vanished (r44) | The 0's inner counter sits right next to the poster, so any fully black end zone on the rank-10 shadow hides it | Keep the shadow below full black at the poster edge (C39) |
 
 ---
 
@@ -216,7 +221,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Top 10 Shows Today (thumb cards) | **Collection** (SmartLists playlists only offer Episode, not Series), Series, External List = `https://trakt.tv/shows/trending`, same sort/limit | Endpoint **Custom**, path `/Items`, Sort By Default, Limit 10, Series, Collection parent chip |
 
 - Versions at setup: Jellyfin 12.2, SmartLists 12.0.3.0. Trakt API key set in SmartLists Settings → External Lists.
-- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update every Top 10 rule that names them: C15–C18, C23–C36, and the Top 10 Carousel Fix script).
+- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update every Top 10 rule that names them: C15–C18, C23–C39, and the Top 10 Carousel Fix script).
 
 ---
 
