@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r39"; }
+:root { --netfin-build: "2026-11-04 r40"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6724,4 +6724,22 @@ html body {
 :root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
   box-sizing: content-box;
   padding-bottom: 20cqw;
+}
+
+/* C34. Rank "10": the "0" faded out too early (r40, owner's desktop
+   screenshot r39).
+   Cause: C32's 15% -> 55% fade started almost at the 0's left edge. The
+   poster covers about the right half of the "0", so nearly all of the
+   visible part was fading: the "0" looked washed out next to the bright
+   "1", and its fill faded too, letting the 1's outline show through it.
+   Fix: keep the "0" at full strength for its first ~third, then fade so
+   it reaches C32's end level just past the poster edge, matching how
+   1-9 look (clear first, dim at the poster).
+   Tune: --netfin-rank10FadeStart (higher = the 0 stays clear longer)
+   and --netfin-rank10FadeStop (around the poster edge, ~50% of the 0).
+   Estimated from the screenshot. Same selector as C32's card rule, later,
+   so it wins. Desktop and mobile. */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10FadeStart: 32%;
+  --netfin-rank10FadeStop: 60%;
 }
