@@ -6654,12 +6654,12 @@ html body {
    overlap; desktop overlaps ~half the 1's stem). The poster also showed
    more of the "0" than desktop (~62cqw vs ~44cqw).
    Fix, mobile only:
-   - "0" offset .35em -> .26em (moves it ~24px left on the Pixel, about
-     half the 1's stem, like desktop).
+   - "0" offset .35em -> .30em (r37, owner-tested on the Pixel; r36
+     estimated .26em, which overlapped too much).
    - Gutter .98 -> .80 x cardWidth: the "0" moved left, so the poster moves
      left with it and again covers about half the "0" (~44cqw visible).
    Both measured from the r35 screenshot, not getBoundingClientRect.
-   The .26em is meant to resolve in the ::after (the digit's own font
+   The .30em is meant to resolve in the ::after (the digit's own font
    size, same as C28's .35em); custom properties resolve where used.
    Tune: --netfin-rank10ShiftMobile (lower = more overlap) and
    --netfin-rank10WMobile (lower = poster covers more of the "0").
