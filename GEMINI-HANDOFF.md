@@ -20,11 +20,11 @@ deploys by pasting files into GitHub. Follow these rules on every change:
    the CSS. If you cannot tell the cause (for example, you don't know the plugin's HTML), say so and ask the
    owner to right-click → Inspect and send a screenshot of the Elements/Styles panel. Do not guess at
    selectors and present them as certain.
-3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C32**), each with a
+3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C37**), each with a
    comment explaining *why* it exists. Do not edit PART A2 or PART B (they are verbatim upstream copies).
    Edit PART A only to fix a genuine NetFin bug, and note it.
 4. **Bump the build tag** in C10 on every change to `netfin-jf12.css`:
-   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-04 r37"`, so next is `r38`).
+   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-04 r42"`, so next is `r43`).
 5. **Deliver the complete file**, not a fragment, unless the owner asks for a snippet. The owner replaces the
    whole file on GitHub. Partial pastes caused version confusion before.
 6. **Check syntax.** Braces must balance; no rule may be left open. A single stray `}` or `{` silently breaks
@@ -63,7 +63,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 
 | File | Status | Purpose |
 |---|---|---|
-| `netfin-jf12.css` | **Live**, build `2026-11-04 r37`, ~6,680 lines | The full theme |
+| `netfin-jf12.css` | **Live**, build `2026-11-04 r42`, ~6,800 lines | The full theme |
 | `netfin-classic-navbar.css` | **Live** | Optional: server name as a pill like the library links |
 | `README.md` | Live | Public documentation of all changes |
 | `LICENSE` | GPL-3.0 | See open issue #1 in section 7 |
@@ -79,7 +79,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 | **PART A** | Stock NetFin (header replaced; stray `}` at end removed) + a second `:root` block of 20 tokens the jf12 layer needs, inserted right after NetFin's `:root` | Bug fixes only |
 | **PART A2** | ElegantFin Media Bar add-on v26.09.05, single minified line, verbatim | No (replace whole line on upgrade) |
 | **PART B** | elegantfin-jf12 v26.10.13, verbatim, sections §1–§20 | No (replace whole part on upgrade) |
-| **PART C** | Reconciliation rules C1–C31 (in file order C1–C4, C6, C5, C7–C31) | **Yes — all new work goes here** |
+| **PART C** | Reconciliation rules C1–C36 (in file order C1–C4, C6, C5, C7–C36) | **Yes — all new work goes here** |
 
 ### Tokens added in PART A (NetFin never defined these)
 
@@ -133,6 +133,11 @@ Hover red used in rules: `#ff4444` / `#ff3333`. Fonts: Rajdhani (body), Orbitron
 | C29 | Mobile (Pixel 9) Top 10: C29a numbers 150cqw → **168cqw** (same as desktop) incl. rank 10's both layers; C29b first-card shift `-.34` → `-.24`; C29c `@media (hover: none)` cancels the sticky red hover number on touch screens |
 | C30 | Stray lines inside 3/4/8 on Android: no Arial Black there, fallback font builds digits from overlapping pieces and `-webkit-text-stroke` outlines each. Fix: `paint-order: stroke fill` on all rank numbers (not TV), stroke widths doubled to 4px desktop / 3px mobile to keep the same visible weight |
 | C31 | Mobile rank "10": "0" overlaps the "1" and the poster covers ~half the "0", like desktop. Cause: the fallback font's "1" is narrower than Arial Black's, so C28's .35em offset left the digits only touching. Knobs on the 10th card: `--netfin-rank10ShiftMobile: .30em` (**owner-tested r37**; r36 estimate .26em overlapped too much; lower = more overlap; the em resolves in `::after`) and `--netfin-rank10WMobile: .80` (gutter × cardWidth; lower = poster covers more of the "0"). If an iPhone renders Arial Black it may overlap more there; raise the offset towards .35em. Mobile only |
+| C32 | Netflix-style fade where the number meets the poster: `mask-image` gradient on the number (not an overlay, so any background works). Ranks 1–9 `::before`: full until `--netfin-rankFade` (45cqw) before the poster edge (box ends 22cqw under the poster, C15b), then down to `--netfin-rankFadeEnd` (.15) at the edge. Rank 10: fade on the "0" (`::after`) in % of its own box, `--netfin-rank10FadeStart` 15% → `--netfin-rank10FadeStop` 55%; the "1" is not masked. Knobs on the card. Estimated, not owner-tested yet. Desktop + mobile |
+| C33 | Fix for C32: the mask clipped the bottom of the numbers (digits overflow their box by design). Number boxes get `box-sizing: content-box; padding-bottom: 20cqw` so the mask covers the overflow; digits don't move. Any future mask/clip on rank numbers must allow for this overflow |
+| C34 | Rank "10": the "0" faded too early (C32's 15%→55% faded nearly all of its visible half and let the "1" show through). Now `--netfin-rank10FadeStart: 32%`, `--netfin-rank10FadeStop: 60%` (poster edge ≈ 50% of the "0"). Estimated, not owner-tested yet |
+| C35 | Stronger, Netflix-like fade (overrides C32/C34 values): `--netfin-rankFade: 65cqw`, `--netfin-rankFadeEnd: 0` (outline gone at the poster edge); rank 10 "0" fades 25%→52%. Estimated, not owner-tested yet |
+| C36 | Rank "10": the "0" showed no fade with %-based stops (C32/C34/C35), likely because its box is wider than the glyph so the fade sat under the poster (not confirmed in DevTools). Mask on `::after` now uses em stops from the 0's left edge: `--netfin-rank10FadeFrom: .12em` → `--netfin-rank10FadeTo: .45em` (≈ poster edge). Old % knobs unused. Fade on 1–9 (C35) owner-approved r41; rank 10 fade (C36) owner-approved r42 |
 
 ### `netfin-classic-navbar.css`
 
@@ -194,6 +199,8 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Custom path `/Items?ParentId=…` gave HTTP 400 | KefinTweaks appends its own `?…` query string | Never put `?` in the Custom path; use the parent chip for the ID |
 | Handoff said r21 / next C22, but the file already had r22 with C22–C23 | Brief not updated after r22 | Same lesson: check C10 and the highest C-number first; update this brief in the same change |
 | Handoff said r22 / next C24, but the file was at r35 with C24–C30 | Brief not updated for r23–r35 | Same lesson again. This brief was brought up to date at r37 |
+| Rank numbers cut off at the bottom after adding a fade (r38) | `mask-image` hides anything outside the element's box, and the digits overflow it | Extend the box with padding before masking (C33) |
+| Rank 10 "0" fade invisible (r38–r41) | Fade stops in % of a pseudo-element box whose width wasn't known | Position mask stops in em (glyph size) or check the box width in DevTools first |
 | Mobile rank numbers looked different from desktop (stray lines in 3/4/8, "10" digits only touching) | Android has no Arial Black; the fallback font has different digit shapes and widths | Tune mobile rank values separately from desktop and confirm on the owner's phone (Pixel 9); don't copy desktop em offsets to mobile |
 | Rank "1"/"0" overlap: merging with `paint-order` (C26) didn't look like Netflix | Netflix's "0" sits in front of the "1" | Draw "10" as two layers (`::before` "1", `::after` "0"), C27 |
 | Red rank number stuck after tapping a card on phones | `:hover` sticks to the last tapped element on touch screens | Wrap hover cancel in `@media (hover: none)` (C29c) |
@@ -209,7 +216,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Top 10 Shows Today (thumb cards) | **Collection** (SmartLists playlists only offer Episode, not Series), Series, External List = `https://trakt.tv/shows/trending`, same sort/limit | Endpoint **Custom**, path `/Items`, Sort By Default, Limit 10, Series, Collection parent chip |
 
 - Versions at setup: Jellyfin 12.2, SmartLists 12.0.3.0. Trakt API key set in SmartLists Settings → External Lists.
-- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update every Top 10 rule that names them: C15–C18, C23–C31, and the Top 10 Carousel Fix script).
+- Recreating the playlist changes its ID (update the path); recreating a KefinTweaks section changes its section ID (update every Top 10 rule that names them: C15–C18, C23–C36, and the Top 10 Carousel Fix script).
 
 ---
 
