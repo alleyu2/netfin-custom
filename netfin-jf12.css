@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-02 r35"; }
+:root { --netfin-build: "2026-11-04 r36"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6643,4 +6643,35 @@ html body {
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
   paint-order: stroke fill;
   -webkit-text-stroke-width: 3px;
+}
+/* C31. Mobile rank "10": the "0" now overlaps the "1" and the poster covers
+   about half the "0", as on desktop (r36, owner's Pixel 9 vs desktop
+   screenshots).
+   Cause: C27/C28 place the "0" .35em right of the "1". That was tuned for
+   Arial Black, whose "1" is wide. Android has no Arial Black (see C30), so
+   the fallback font's narrower "1" ends right where the "0" begins: the
+   digits only touched (measured: 0 starts at the 1's right edge, 0px
+   overlap; desktop overlaps ~half the 1's stem). The poster also showed
+   more of the "0" than desktop (~62cqw vs ~44cqw).
+   Fix, mobile only:
+   - "0" offset .35em -> .26em (moves it ~24px left on the Pixel, about
+     half the 1's stem, like desktop).
+   - Gutter .98 -> .80 x cardWidth: the "0" moved left, so the poster moves
+     left with it and again covers about half the "0" (~44cqw visible).
+   Both measured from the r35 screenshot, not getBoundingClientRect.
+   The .26em is meant to resolve in the ::after (the digit's own font
+   size, same as C28's .35em); custom properties resolve where used.
+   Tune: --netfin-rank10ShiftMobile (lower = more overlap) and
+   --netfin-rank10WMobile (lower = poster covers more of the "0").
+   iPhone: if it renders Arial Black, this may overlap too much there;
+   then raise the offset back towards .35em.
+   Same selectors as C28 (mobile), later in the file, so these win.
+   Desktop and TV untouched. No :has(). */
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
+  --netfin-rank10ShiftMobile: .26em;
+  --netfin-rank10WMobile: .80;
+  --netfin-rankW: calc(var(--cardWidth) * var(--netfin-rank10WMobile));
+}
+:root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  left: calc(.375rem + var(--netfin-rank10ShiftMobile));
 }
