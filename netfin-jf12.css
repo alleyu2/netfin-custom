@@ -6021,7 +6021,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r36"; }
+:root { --netfin-build: "2026-11-04 r38"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6668,10 +6668,46 @@ html body {
    Same selectors as C28 (mobile), later in the file, so these win.
    Desktop and TV untouched. No :has(). */
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10) {
-  --netfin-rank10ShiftMobile: .30em;
+  --netfin-rank10ShiftMobile: .30em;   /* r37 (owner-tested); r36 estimate was .26em */
   --netfin-rank10WMobile: .80;
   --netfin-rankW: calc(var(--cardWidth) * var(--netfin-rank10WMobile));
 }
 :root.layout-mobile :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
   left: calc(.375rem + var(--netfin-rank10ShiftMobile));
+}
+
+/* C32. Netflix-style fade where the rank number meets the poster (r38).
+   Owner's Netflix screenshot: each digit's outline dims as it runs into
+   the poster, instead of staying full strength right up to the edge.
+   How: a mask on the number (not an overlay), so it works on any page
+   background and the poster itself is never touched.
+   - Ranks 1-9 (::before): the box ends ~22cqw under the poster (C15b
+     right: 78cqw), so the poster's left edge is at (100% - 22cqw) of the
+     box. Full strength until --netfin-rankFade before that edge, then
+     fades to --netfin-rankFadeEnd at the edge.
+   - Rank 10: the "0" (::after) is in front and runs under the poster, so
+     the fade goes on it. Its box is just the "0", about half hidden by the
+     poster (C28/C31), so the fade is in % of the "0": full until
+     --netfin-rank10FadeStart, faded by --netfin-rank10FadeStop. The "1"
+     (::before) is left alone: its right side is behind the "0" anyway.
+   Knobs (set on the card, so both pseudo-elements inherit them):
+     --netfin-rankFade: 45cqw   wider = longer, softer fade
+     --netfin-rankFadeEnd: .15  0 = fully gone at the poster, 1 = no fade
+     --netfin-rank10FadeStart: 15% / --netfin-rank10FadeStop: 55%
+   cqw resolves against the card (same as C15). Estimated from the
+   screenshot, not measured: tune if it looks off. The red hover outline
+   fades the same way. Desktop and mobile; TV excluded. No :has(). */
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard) {
+  --netfin-rankFade: 45cqw;
+  --netfin-rankFadeEnd: .15;
+  --netfin-rank10FadeStart: 15%;
+  --netfin-rank10FadeStop: 55%;
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):not(:nth-child(10))::before {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 22cqw - var(--netfin-rankFade)), rgba(0,0,0,var(--netfin-rankFadeEnd)) calc(100% - 22cqw));
+  mask-image: linear-gradient(to right, #000 calc(100% - 22cqw - var(--netfin-rankFade)), rgba(0,0,0,var(--netfin-rankFadeEnd)) calc(100% - 22cqw));
+}
+:root:not(.layout-tv) :is([data-section-id="custom-1792455350614"], [data-section-id="custom-1792463008640"]) .itemsContainer > .card:is(.overflowPortraitCard, .portraitCard):nth-child(10)::after {
+  -webkit-mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeStart), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeStop));
+  mask-image: linear-gradient(to right, #000 var(--netfin-rank10FadeStart), rgba(0,0,0,var(--netfin-rankFadeEnd)) var(--netfin-rank10FadeStop));
 }
