@@ -136,7 +136,7 @@
   --headerBlurLayerVisibility:  "";
   --headerBackground:           var(--headerColorGradient);
   --loginPageBgUrl:             url("");
-  --loginPageText:              "Sign in to continue";
+  /* --loginPageText:              "Sign in to continue"; */
   --overlayPlayButtonPosition:  2.8em;
 
   /* ── Icon pack ── */
