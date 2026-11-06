@@ -136,7 +136,8 @@
   --headerBlurLayerVisibility:  "";
   --headerBackground:           var(--headerColorGradient);
   --loginPageBgUrl:             url("");
-  --loginPageText:              "Welcome to JellyFlix";
+  --loginWelcomeText:           "Welcome to";   /* small line */
+  --loginPageText:              "JellyFlix";    /* big wordmark */
   --overlayPlayButtonPosition:  2.8em;
 
   /* ── Icon pack ── */
@@ -6022,7 +6023,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-06 r50"; }
+:root { --netfin-build: "2026-11-06 r51"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6923,32 +6924,52 @@ html body {
    Edit the text in :root (--loginPageText). All layouts. */
 .manualLoginForm::before,
 .visualLoginForm::before { content: none !important; }
-/* C42b (r50). Welcome line styled as the NetFin brand title: Orbitron,
-   uppercase, wide tracking, white with a soft red glow, and a centred red
-   hairline that fades at both ends (same red as the section-title
-   underlines, --activeColor). Drawn as a background strip on ::before so
-   the card's ::after stays free. */
+/* C42c (r51). Login wordmark lockup. r50 squeezed one long title into
+   the card: it wrapped onto two lines and its red underline stacked on top
+   of the "PLEASE SIGN IN" underline. Now a two-tier lockup:
+     ::before = small, wide-tracked grey "WELCOME TO" (--loginWelcomeText)
+                + a reserved gap underneath
+     ::after  = big glowing "JELLYFLIX" (--loginPageText), placed in that gap
+   No underline of its own, so "PLEASE SIGN IN" keeps the only red line.
+   All sizes in px so the gap and the wordmark always line up. */
+#loginPage .padded-left.padded-right.padded-bottom-page { position: relative; }
 #loginPage .padded-left.padded-right.padded-bottom-page::before {
-  content: var(--loginPageText, "");
+  content: var(--loginWelcomeText, "");
   display: block;
-  margin: 0 auto 1.1em;
-  padding-bottom: .55em;
-  font-family: "Orbitron", "Rajdhani", sans-serif;
-  font-size: 1.5em;
-  font-weight: 800;
+  font: 600 11px/14px "Orbitron", "Rajdhani", sans-serif;
   text-transform: uppercase;
-  letter-spacing: .12em;
-  line-height: 1.25;
+  letter-spacing: .45em;
+  text-indent: .45em;               /* re-centres the trailing tracking */
+  color: rgba(255, 255, 255, .55);
+  text-align: center;
+  margin: 0 0 54px;                 /* room for the wordmark */
+}
+#loginPage .padded-left.padded-right.padded-bottom-page::after {
+  content: var(--loginPageText, "");
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(2em + 20px);            /* card padding-top + eyebrow + 6px */
+  font: 900 34px/40px "Orbitron", "Rajdhani", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  text-indent: .14em;
+  white-space: nowrap;
   color: #fff;
   text-align: center;
-  text-shadow: 0 0 .5em rgba(204, 0, 0, .55), 0 .08em .15em rgba(0, 0, 0, .8);
-  background: linear-gradient(90deg,
-      transparent 0%, var(--activeColor, rgb(204,0,0)) 35%,
-      var(--activeColor, rgb(204,0,0)) 65%, transparent 100%)
-    center bottom / 60% 2px no-repeat;
+  text-shadow:
+    0 0 18px rgba(204, 0, 0, .65),
+    0 0 4px  rgba(255, 40, 40, .35),
+    0 2px 4px rgba(0, 0, 0, .85);
+  pointer-events: none;
 }
 .layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page::before {
-  font-size: 1.15em;
-  letter-spacing: .08em;
-  background-size: 70% 2px;
+  font-size: 10px;
+  margin-bottom: 46px;
+}
+.layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page::after {
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: .1em;
+  text-indent: .1em;
 }
