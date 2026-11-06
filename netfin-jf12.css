@@ -6023,7 +6023,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-07 r53"; }
+:root { --netfin-build: "2026-11-07 r54"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -7137,3 +7137,21 @@ body:has(#loginPage:not(.hide)) .MuiAppBar-root .MuiButton-text:not(.MuiButtonGr
 /* 5. Mobile sizing */
 html:root.layout-mobile body .sso-instructions :is(p, li) { font-size: 15px !important; }
 html:root.layout-mobile body #loginPage .padded-left.padded-right.padded-bottom-page::before { margin-bottom: 14px; }
+/* C44. Login: Authentik first, readable steps (r54). Owner's Inspect
+   screenshot: .readOnlyContent (flex column, line ~2201) holds, as
+   siblings: .btnManual (hidden), .btnQuick, #__twofactor_oidc_buttons
+   (inline style margin-top:14px), .btnForgotPassword, .btnSelectServer,
+   .loginDisclaimerContainer. Reorder with `order` only; DOM untouched,
+   so keyboard/TV focus order is unchanged (Quick Connect still first). */
+html:root body #loginPage .readOnlyContent > * { order: 3; }
+html:root body #loginPage .readOnlyContent > #__twofactor_oidc_buttons {
+  order: 1;
+  margin-top: 0 !important;         /* beats the inline 14px */
+}
+html:root body #loginPage .readOnlyContent > .btnQuick { order: 2; }
+
+/* Steps a step larger, with more air (C43 had 14px / 9px). */
+html:root body .sso-instructions :is(p, li) { font-size: 15px !important; }
+html:root body .sso-instructions li { margin-bottom: 12px !important; line-height: 1.5 !important; }
+html:root body .sso-instructions li::before { top: 1px !important; }
+html:root.layout-mobile body .sso-instructions :is(p, li) { font-size: 16px !important; }
