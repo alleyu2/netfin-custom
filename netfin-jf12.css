@@ -136,7 +136,7 @@
   --headerBlurLayerVisibility:  "";
   --headerBackground:           var(--headerColorGradient);
   --loginPageBgUrl:             url("");
-  /* --loginPageText:              "Sign in to continue"; */
+  --loginPageText:              "Welcome to JellyFlix";
   --overlayPlayButtonPosition:  2.8em;
 
   /* ── Icon pack ── */
@@ -6022,7 +6022,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-06 r47"; }
+:root { --netfin-build: "2026-11-06 r50"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6913,4 +6913,42 @@ html body {
 :root.layout-mobile body:has(#loginPage:not(.hide)) .backgroundContainer.withBackdrop {
   opacity: .9;
   background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(0,0,0,.18));
+}
+/* C42. Login welcome message (r48). --loginPageText was commented out
+   (line 139), and the PART A ::before sits on .manualLoginForm /
+   .visualLoginForm, which are hidden on this server (Quick Connect +
+   Authentik only), so it could never show. Move the message to the card
+   itself, which is always visible; switch off the old form ::before to
+   avoid a duplicate if password login is ever re-enabled.
+   Edit the text in :root (--loginPageText). All layouts. */
+.manualLoginForm::before,
+.visualLoginForm::before { content: none !important; }
+/* C42b (r50). Welcome line styled as the NetFin brand title: Orbitron,
+   uppercase, wide tracking, white with a soft red glow, and a centred red
+   hairline that fades at both ends (same red as the section-title
+   underlines, --activeColor). Drawn as a background strip on ::before so
+   the card's ::after stays free. */
+#loginPage .padded-left.padded-right.padded-bottom-page::before {
+  content: var(--loginPageText, "");
+  display: block;
+  margin: 0 auto 1.1em;
+  padding-bottom: .55em;
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 1.5em;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  line-height: 1.25;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 .5em rgba(204, 0, 0, .55), 0 .08em .15em rgba(0, 0, 0, .8);
+  background: linear-gradient(90deg,
+      transparent 0%, var(--activeColor, rgb(204,0,0)) 35%,
+      var(--activeColor, rgb(204,0,0)) 65%, transparent 100%)
+    center bottom / 60% 2px no-repeat;
+}
+.layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page::before {
+  font-size: 1.15em;
+  letter-spacing: .08em;
+  background-size: 70% 2px;
 }
