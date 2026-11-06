@@ -6022,7 +6022,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-04 r45"; }
+:root { --netfin-build: "2026-11-06 r47"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6881,4 +6881,36 @@ html body {
     transparent 0%,
     rgba(0,0,0,calc(var(--netfin-rank10ShadowMax) * .4)) 50%,
     rgba(0,0,0,var(--netfin-rank10ShadowMax)) 100%);
+}
+/* C40. Login card transparency on every layout, incl. phones (r46).
+   The owner lowered the login card's background in PART A (#loginPage
+   .padded-left.padded-right.padded-bottom-page, .82 -> .45). Nothing in
+   this file styles that card differently on mobile, so the phone's more
+   opaque card most likely comes from the owner's Custom CSS ("glass login
+   card; mobile spacing"), which loads after this file and therefore wins
+   at the same specificity. Not confirmed: the Custom CSS was not attached.
+   Fix: one knob, applied to desktop and mobile with higher specificity
+   (1,5,0) than PART A (1,3,0) and !important, so a later Custom CSS rule
+   can only beat it with !important AND higher specificity.
+   Tune: --netfin-loginCardBg (last number = opacity; lower = more see-through).
+   TV unchanged. No :has(). */
+:root:is(.layout-desktop, .layout-mobile) {
+  --netfin-loginCardBg: rgba(0, 0, 0, .45);
+}
+:root:is(.layout-desktop, .layout-mobile) #loginPage .padded-left.padded-right.padded-bottom-page {
+  background: var(--netfin-loginCardBg) !important;
+  background-color: var(--netfin-loginCardBg) !important;
+}
+/* C41. Mobile login page: show the poster backdrop (r47, owner's phone
+   screenshot). The card was already see-through (C40); there was just
+   nothing behind it. PART A sets
+   .layout-mobile .backgroundContainer.withBackdrop { opacity: 1;
+   background: #000 } (meant for item pages), which paints solid black
+   over the login backdrop. On the login page only, use the same gradient
+   as desktop (PART A .backgroundContainer.withBackdrop): clear at the top,
+   black towards the bottom. Specificity (1,5,1) beats (0,3,0).
+   Own block because of :has() (see section 1). Mobile only. */
+:root.layout-mobile body:has(#loginPage:not(.hide)) .backgroundContainer.withBackdrop {
+  opacity: .9;
+  background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(0,0,0,.18));
 }
