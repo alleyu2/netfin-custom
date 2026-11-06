@@ -6023,7 +6023,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-06 r52"; }
+:root { --netfin-build: "2026-11-07 r53"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -6977,3 +6977,163 @@ html body {
 .layout-mobile #loginPage .padded-left.padded-right.padded-bottom-page::after {
   font-size: 10px;
 }
+/* C43. Login page polish (r53). Owner asked for "the best" login page.
+   Desktop + mobile. Selectors come from the owner's Custom CSS
+   (#__twofactor_oidc_buttons a:first-of-type = Authentik, .btnQuick =
+   Quick Connect) and the owner's disclaimer HTML (.sso-instructions).
+   Prefixed with html:root body + !important so these win over the
+   Custom CSS, which loads later. Pairs with the new disclaimer HTML
+   (no emojis, .sso-steps list). */
+
+/* 1. One title. JELLYFLIX gets the red hairline; "PLEASE SIGN IN" becomes
+      a quiet subtitle without its own underline. */
+html:root body #loginPage .padded-left.padded-right.padded-bottom-page::before {
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  background: linear-gradient(90deg, transparent, var(--activeColor, rgb(204,0,0)) 30%,
+      var(--activeColor, rgb(204,0,0)) 70%, transparent) center bottom / 46% 2px no-repeat;
+}
+html:root body #loginPage :is(h1, h2, .sectionTitle):not(.sso-instructions *) {
+  font-family: "Rajdhani", "Orbitron", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: .3em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,.55) !important;
+  text-align: center !important;
+  border: 0 !important;
+  margin: 0 0 18px !important;
+  padding: 0 !important;
+  text-shadow: none !important;
+}
+html:root body #loginPage :is(h1, h2, .sectionTitle):not(.sso-instructions *)::after,
+html:root body #loginPage :is(h1, h2, .sectionTitle):not(.sso-instructions *)::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 2. Buttons: Authentik = solid red primary, Quick Connect = outline
+      secondary. Same size, clear focus ring for TV remotes. */
+html:root body #__twofactor_oidc_buttons a:first-of-type,
+html:root body #loginPage .btnQuick {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .5em !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 0 0 12px !important;
+  padding: 0 1.2em !important;
+  border-radius: 8px !important;
+  font-family: "Rajdhani", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+  transition: background .15s, border-color .15s, box-shadow .15s, transform .15s !important;
+}
+html:root body #__twofactor_oidc_buttons a:first-of-type {
+  background: var(--activeColor, rgb(204,0,0)) !important;
+  border: 1px solid var(--activeColor, rgb(204,0,0)) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 18px rgba(204,0,0,.35) !important;
+}
+html:root body #__twofactor_oidc_buttons a:first-of-type:is(:hover, :focus-visible) {
+  background: var(--accentHoverColor, rgb(255,26,26)) !important;
+  border-color: var(--accentHoverColor, rgb(255,26,26)) !important;
+  box-shadow: 0 8px 24px rgba(255,26,26,.45) !important;
+  transform: translateY(-1px) !important;
+}
+/* icon goes white so it shows on the red button */
+html:root body #__twofactor_oidc_buttons a:first-of-type :is(img, svg) {
+  filter: brightness(0) invert(1) !important;
+}
+html:root body #loginPage .btnQuick {
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  color: rgba(255,255,255,.9) !important;
+  box-shadow: none !important;
+}
+html:root body #loginPage .btnQuick:is(:hover, :focus-visible) {
+  background: rgba(255,255,255,.1) !important;
+  border-color: rgba(255,255,255,.5) !important;
+}
+html:root body :is(#__twofactor_oidc_buttons a:first-of-type, #loginPage .btnQuick):focus-visible {
+  outline: 2px solid #fff !important;
+  outline-offset: 2px !important;
+}
+
+/* 3. Instructions (disclaimer): even spacing, readable text, dark-red
+      divider, red step numbers. */
+html:root body .sso-instructions {
+  margin: 22px 0 6px !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+html:root body .sso-instructions .instruction-block { margin: 0 !important; padding: 0 !important; }
+html:root body .sso-instructions h3 {
+  margin: 0 0 6px !important;
+  font-family: "Orbitron", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  color: #fff !important;
+}
+html:root body .sso-instructions p {
+  margin: 0 0 10px !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: rgba(255,255,255,.72) !important;
+}
+html:root body .sso-instructions strong { color: #fff !important; font-weight: 700 !important; }
+html:root body .sso-instructions hr,
+html:root body .sso-instructions .sso-divider {
+  height: 1px !important;
+  margin: 18px 0 !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, rgba(204,0,0,.6), transparent) !important;
+}
+html:root body .sso-instructions ol {
+  counter-reset: sso !important;
+  list-style: none !important;
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+html:root body .sso-instructions li {
+  counter-increment: sso !important;
+  position: relative !important;
+  margin: 0 0 9px !important;
+  padding: 0 0 0 32px !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: rgba(255,255,255,.78) !important;
+}
+html:root body .sso-instructions li::before {
+  content: counter(sso) !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 21px !important;
+  height: 21px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(204,0,0,.8) !important;
+  color: #fff !important;
+  font: 700 11px/21px "Orbitron", sans-serif !important;
+  text-align: center !important;
+}
+
+/* 4. Hide the app-bar logo/home button on the login page only (it just
+      bounces back to login before sign-in). Own block: :has(). */
+body:has(#loginPage:not(.hide)) .MuiAppBar-root .MuiButton-text:not(.MuiButtonGroup-grouped):has(.MuiButton-startIcon > img) {
+  visibility: hidden !important;
+}
+
+/* 5. Mobile sizing */
+html:root.layout-mobile body .sso-instructions :is(p, li) { font-size: 15px !important; }
+html:root.layout-mobile body #loginPage .padded-left.padded-right.padded-bottom-page::before { margin-bottom: 14px; }
