@@ -24,7 +24,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
    comment explaining *why* it exists. Do not edit PART A2 or PART B (they are verbatim upstream copies).
    Edit PART A only to fix a genuine NetFin bug, and note it.
 4. **Bump the build tag** in C10 on every change to `netfin-jf12.css`:
-   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-07 r54"`, so next is `r55`).
+   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-07 r55"`, so next is `r56`).
 5. **Deliver the complete file**, not a fragment, unless the owner asks for a snippet. The owner replaces the
    whole file on GitHub. Partial pastes caused version confusion before.
 6. **Check syntax.** Braces must balance; no rule may be left open. A single stray `}` or `{` silently breaks
@@ -63,7 +63,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 
 | File | Status | Purpose |
 |---|---|---|
-| `netfin-jf12.css` | **Live**, build `2026-11-07 r54`, ~7,150 lines | The full theme |
+| `netfin-jf12.css` | **Live**, build `2026-11-07 r55`, ~7,150 lines | The full theme |
 | `netfin-classic-navbar.css` | **Live** | Optional: server name as a pill like the library links |
 | `README.md` | Live | Public documentation of all changes |
 | `LICENSE` | GPL-3.0 | See open issue #1 in section 7 |
@@ -145,7 +145,7 @@ Hover red used in rules: `#ff4444` / `#ff3333`. Fonts: Rajdhani (body), Orbitron
 | C41 | Mobile login backdrop (r47): PART A `.layout-mobile .backgroundContainer.withBackdrop { background: #000 }` (meant for item pages) covered the poster backdrop on the phone login page, so the card sat on solid black. On `body:has(#loginPage:not(.hide))` only: desktop-style gradient (black at bottom → `rgba(0,0,0,.18)`), opacity .9. Own block (`:has()`). Owner-tested: works |
 | C42 | Login welcome lockup (r48–r52). Old PART A `::before` on `.manualLoginForm`/`.visualLoginForm` could never show (forms hidden on this SSO server, `--loginPageText` commented out); now `content: none`. Current version (C42d, r52) on the card `#loginPage .padded-left.padded-right.padded-bottom-page`: `::before` = big "JELLYFLIX" (`--loginPageText`, Orbitron 900 34px, red glow, no underline) **in normal flow**; `::after` = small grey "WELCOME TO" (`--loginWelcomeText`, 11px, .45em tracking) absolutely at `top: 22px` inside an enlarged `padding-top: 52px`. Mobile 28px / 10px. Knobs: gap to "PLEASE SIGN IN" = `::before` margin-bottom (22px / 18px mobile); eyebrow gap = padding-top. Card gets `position: relative`. r52 not owner-tested yet |
 | C43 | Login polish (r53): JELLYFLIX gets the red hairline, "PLEASE SIGN IN" (`#loginPage :is(h1,h2,.sectionTitle)` outside `.sso-instructions`) becomes a small grey subtitle; Authentik (`#__twofactor_oidc_buttons a:first-of-type`) = solid red primary, `.btnQuick` = outline secondary, both 48px; `.sso-instructions` restyled (dark-red divider, red numbered circles via counter); app-bar logo hidden on login. All `html:root body` + `!important` to beat the Custom CSS. Pairs with new disclaimer HTML (no emojis, 4 steps) in Dashboard → Branding. Not owner-tested |
-| C44 | Login button order + step size (r54). Inspect: `.readOnlyContent` (flex column) children are siblings `.btnManual`(hidden), `.btnQuick`, `#__twofactor_oidc_buttons` (inline `margin-top:14px`), `.btnForgotPassword`, `.btnSelectServer`, `.loginDisclaimerContainer`. `order`: OIDC div 1, `.btnQuick` 2, rest 3; OIDC `margin-top: 0 !important`. Visual order only, TV/keyboard focus still hits Quick Connect first. Steps 15px (mobile 16px), 12px apart. Not owner-tested |
+| C44 | Login button order + step size (r54). Inspect: `.readOnlyContent` (flex column) children are siblings `.btnManual`(hidden), `.btnQuick`, `#__twofactor_oidc_buttons` (inline `margin-top:14px`), `.btnForgotPassword`, `.btnSelectServer`, `.loginDisclaimerContainer`. `order`: OIDC div 1, `.btnQuick` 2, rest 3; OIDC `margin-top: 0 !important`. Visual order only, TV/keyboard focus still hits Quick Connect first. Steps 15px (mobile 16px), 12px apart. r54 reorder failed: `.readOnlyContent` is `display: block` (only `flex-direction` set at ~2201), so `order` was ignored; r55 adds `display: flex; flex-direction: column; align-items: stretch` (and keeps `.hide` children hidden). r55 not owner-tested |
 
 ### `netfin-classic-navbar.css`
 
@@ -216,6 +216,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | Rank "1" visible through the faded "0" (r42) | `mask-image` fades the fill as well as the outline, so an opaque front layer becomes see-through | To dim a digit that sits in front of another, darken it with an overlay/shadow above it (C37), don't mask it |
 | Inner circle of the "0" vanished (r44) | The 0's inner counter sits right next to the poster, so any fully black end zone on the rank-10 shadow hides it | Keep the shadow below full black at the poster edge (C39) |
 | Mobile login card looked solid although its transparency was lowered (r46) | Nothing behind it: PART A paints `.backgroundContainer` solid black on mobile, hiding the poster backdrop | Check what is *behind* a see-through element before changing its own opacity (C41) |
+| Button reorder had no effect (r54) | `order` needs a flex/grid parent; `.readOnlyContent` only had `flex-direction`, no `display: flex` | Check DevTools for the `flex` badge on the parent before using `order` |
 | Login welcome text never appeared (r48) | It hung off `.manualLoginForm`/`.visualLoginForm`, which this SSO server hides | Attach login decorations to the always-visible card, not the forms |
 | "JELLYFLIX" overlapped "PLEASE SIGN IN" (r51) | Big text was absolutely positioned with a guessed offset/space reserved by margin; real metrics differed | Keep the large element in normal flow; only absolutely position small fixed-px items (C42d) |
 
