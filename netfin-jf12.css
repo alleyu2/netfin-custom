@@ -6023,7 +6023,7 @@ html body {
 /* C10. Build marker. In the browser console run
    getComputedStyle(document.documentElement).getPropertyValue('--netfin-build')
    to see which copy of this file the browser is actually using. */
-:root { --netfin-build: "2026-11-07 r54"; }
+:root { --netfin-build: "2026-11-07 r55"; }
 
 /* C11. Episode / backdrop-card item pages: bigger thumbnail.
    NetFin (from ElegantFin) shows a backdrop-shaped card on episode pages at
@@ -7143,6 +7143,15 @@ html:root.layout-mobile body #loginPage .padded-left.padded-right.padded-bottom-
    (inline style margin-top:14px), .btnForgotPassword, .btnSelectServer,
    .loginDisclaimerContainer. Reorder with `order` only; DOM untouched,
    so keyboard/TV focus order is unchanged (Quick Connect still first). */
+/* r55: .readOnlyContent is display:block (Inspect shows no flex badge;
+   line ~2201 only sets flex-direction), so `order` did nothing in r54.
+   Make it a real flex column; children stretch to full width as before. */
+html:root body #loginPage .readOnlyContent {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+html:root body #loginPage .readOnlyContent > .hide { display: none !important; }
 html:root body #loginPage .readOnlyContent > * { order: 3; }
 html:root body #loginPage .readOnlyContent > #__twofactor_oidc_buttons {
   order: 1;
