@@ -20,11 +20,11 @@ deploys by pasting files into GitHub. Follow these rules on every change:
    the CSS. If you cannot tell the cause (for example, you don't know the plugin's HTML), say so and ask the
    owner to right-click → Inspect and send a screenshot of the Elements/Styles panel. Do not guess at
    selectors and present them as certain.
-3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C40**), each with a
+3. **Put new rules in PART C** of `netfin-jf12.css`, numbered sequentially (next is **C43**), each with a
    comment explaining *why* it exists. Do not edit PART A2 or PART B (they are verbatim upstream copies).
    Edit PART A only to fix a genuine NetFin bug, and note it.
 4. **Bump the build tag** in C10 on every change to `netfin-jf12.css`:
-   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-04 r45"`, so next is `r46`).
+   `:root { --netfin-build: "YYYY-MM-DD rN"; }` (current: `"2026-11-06 r52"`, so next is `r53`).
 5. **Deliver the complete file**, not a fragment, unless the owner asks for a snippet. The owner replaces the
    whole file on GitHub. Partial pastes caused version confusion before.
 6. **Check syntax.** Braces must balance; no rule may be left open. A single stray `}` or `{` silently breaks
@@ -63,7 +63,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 
 | File | Status | Purpose |
 |---|---|---|
-| `netfin-jf12.css` | **Live**, build `2026-11-04 r45`, ~6,800 lines | The full theme |
+| `netfin-jf12.css` | **Live**, build `2026-11-06 r52`, ~6,980 lines | The full theme |
 | `netfin-classic-navbar.css` | **Live** | Optional: server name as a pill like the library links |
 | `README.md` | Live | Public documentation of all changes |
 | `LICENSE` | GPL-3.0 | See open issue #1 in section 7 |
@@ -79,7 +79,7 @@ deploys by pasting files into GitHub. Follow these rules on every change:
 | **PART A** | Stock NetFin (header replaced; stray `}` at end removed) + a second `:root` block of 20 tokens the jf12 layer needs, inserted right after NetFin's `:root` | Bug fixes only |
 | **PART A2** | ElegantFin Media Bar add-on v26.09.05, single minified line, verbatim | No (replace whole line on upgrade) |
 | **PART B** | elegantfin-jf12 v26.10.13, verbatim, sections §1–§20 | No (replace whole part on upgrade) |
-| **PART C** | Reconciliation rules C1–C39 (in file order C1–C4, C6, C5, C7–C39) | **Yes — all new work goes here** |
+| **PART C** | Reconciliation rules C1–C42 (in file order C1–C4, C6, C5, C7–C42) | **Yes — all new work goes here** |
 
 ### Tokens added in PART A (NetFin never defined these)
 
@@ -141,6 +141,9 @@ Hover red used in rules: `#ff4444` / `#ff3333`. Fonts: Rajdhani (body), Orbitron
 | C37 | Rank "10" shadow like Netflix (r43): C36's mask also faded the "0"'s opaque fill, so the "1" showed through the "0". Mask on `::after` removed (`mask-image: none`); instead a black gradient strip on the 10th card's `.cardBox::before` (`right: 100%`, height 156cqw, z-index via `.cardBox` above the digits) darkens the "0" towards the poster, so it stays solid in front of the "1". Knobs on the 10th card: `--netfin-rank10Shadow: 30cqw` (width), `--netfin-rank10ShadowMax: .85` (darkness at poster edge). Old C34–C36 fade knobs now unused. Owner-tested r43: "0" now solid in front of the "1"; strength tuned in C38. Ranks 1–9 keep the C35 mask fade. Desktop + mobile |
 | C38 | Rank "10" shadow stronger (r44): r43 screenshot showed the 0's outline (inner curve) still readable at the poster edge, while 1–9 fade to nothing (C35). `--netfin-rank10Shadow: 40cqw`, `--netfin-rank10ShadowMax: 1`, gradient transparent → 55% at 45% → full black from 85%. Superseded by C39: the full-black zone hid the 0's inner circle (owner report). Open question: in the r43 screenshot the 0's outline looked thinner than the 1's (both should be 4px desktop, C30); cause not confirmed, needs Inspect of `::after` |
 | C39 | Rank "10" shadow softened (r45): C38's full-black last 15% hid the 0's inner circle, which sits right beside the poster. No fully black zone now: `--netfin-rank10Shadow: 35cqw`, `--netfin-rank10ShadowMax: .65`, gradient transparent → 40% of max at 50% → max at the poster edge. Netflix keeps the whole 0 outline readable, only dimmed. Estimated, not owner-tested yet |
+| C40 | Login card transparency, one knob (r46): `--netfin-loginCardBg: rgba(0,0,0,.45)` on `:root:is(.layout-desktop,.layout-mobile)`, applied with `!important` at (1,5,0) so the owner's Custom CSS can't override it by accident. Owner had lowered the PART A card background .82 → .45. Desktop + mobile, TV unchanged |
+| C41 | Mobile login backdrop (r47): PART A `.layout-mobile .backgroundContainer.withBackdrop { background: #000 }` (meant for item pages) covered the poster backdrop on the phone login page, so the card sat on solid black. On `body:has(#loginPage:not(.hide))` only: desktop-style gradient (black at bottom → `rgba(0,0,0,.18)`), opacity .9. Own block (`:has()`). Owner-tested: works |
+| C42 | Login welcome lockup (r48–r52). Old PART A `::before` on `.manualLoginForm`/`.visualLoginForm` could never show (forms hidden on this SSO server, `--loginPageText` commented out); now `content: none`. Current version (C42d, r52) on the card `#loginPage .padded-left.padded-right.padded-bottom-page`: `::before` = big "JELLYFLIX" (`--loginPageText`, Orbitron 900 34px, red glow, no underline) **in normal flow**; `::after` = small grey "WELCOME TO" (`--loginWelcomeText`, 11px, .45em tracking) absolutely at `top: 22px` inside an enlarged `padding-top: 52px`. Mobile 28px / 10px. Knobs: gap to "PLEASE SIGN IN" = `::before` margin-bottom (22px / 18px mobile); eyebrow gap = padding-top. Card gets `position: relative`. r52 not owner-tested yet |
 
 ### `netfin-classic-navbar.css`
 
@@ -178,7 +181,7 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
   - `:root` "palette bridge" defining `--ef-*` variables from NetFin tokens (fallback red #E50914)
   - Login page customisation for an **SSO / Authentik (OIDC) + Quick Connect** flow: hides username/password
     fields, 2FA/passkey buttons; styles `#__twofactor_oidc_buttons a:first-of-type` and `.btnQuick`;
-    `.sso-instructions` box; glass login card; mobile spacing
+    `.sso-instructions` box; glass login card; mobile spacing. **Login card/backdrop/welcome text are now controlled by C40–C42**; if a login change "doesn't apply", check these rules for duplicates first.
   - Section "11) MEDIA BAR" play-button size fix — now redundant (moved to C8), harmless.
   Don't add rules that would break the login page styling.
 
@@ -210,6 +213,9 @@ Upstream classic-navbar v26.10.13 verbatim, plus:
 | A CSS variable set on `::before` didn't reach `::after` | Pseudo-elements inherit from their element, not from each other | Put shared knobs on the card (C24 r33) |
 | Rank "1" visible through the faded "0" (r42) | `mask-image` fades the fill as well as the outline, so an opaque front layer becomes see-through | To dim a digit that sits in front of another, darken it with an overlay/shadow above it (C37), don't mask it |
 | Inner circle of the "0" vanished (r44) | The 0's inner counter sits right next to the poster, so any fully black end zone on the rank-10 shadow hides it | Keep the shadow below full black at the poster edge (C39) |
+| Mobile login card looked solid although its transparency was lowered (r46) | Nothing behind it: PART A paints `.backgroundContainer` solid black on mobile, hiding the poster backdrop | Check what is *behind* a see-through element before changing its own opacity (C41) |
+| Login welcome text never appeared (r48) | It hung off `.manualLoginForm`/`.visualLoginForm`, which this SSO server hides | Attach login decorations to the always-visible card, not the forms |
+| "JELLYFLIX" overlapped "PLEASE SIGN IN" (r51) | Big text was absolutely positioned with a guessed offset/space reserved by margin; real metrics differed | Keep the large element in normal flow; only absolutely position small fixed-px items (C42d) |
 
 ---
 
@@ -254,3 +260,9 @@ geometry (§12) and should be done in `netfin-jf12.css` PART C, not this add-on.
    Need class names from Inspect before styling.
 3. **Media Bar top gap:** add-on positions the banner using NetFin's `--appBarHeight` (5em); adjust if the gap
    under the app bar looks off.
+4. **Login page (r52) needs owner confirmation** on desktop and Pixel 9: "WELCOME TO" / "JELLYFLIX" spacing (C42d)
+   is estimated. Not confirmed: whether the owner's Custom CSS login rules still set a card background.
+5. **Login card `backdrop-filter` set twice** in PART A (`blur(12px)` then `var(--blurDefault)`); the second wins,
+   so the 12px line is dead. Remove one if the owner wants a specific blur.
+6. **Brand/home button on the login page** (app bar top-left logo, `href="#/"`) does nothing useful before
+   sign-in. Owner was offered a rule to hide it on the login page only; not requested yet.
