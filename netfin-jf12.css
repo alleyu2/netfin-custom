@@ -2978,7 +2978,8 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child { gap: .5rem; }
 
 #loginPage .padded-left.padded-right.padded-bottom-page {
   width: 28em;
-  background: rgba(0,0,0,.55);
+  background: rgba(0, 0, 0, 0.45); /* lowered from .82 */
+  backdrop-filter: blur(12px);     /* keeps the text sharp & readable */
   padding: 2em 2em 1em 2em !important;
   border-radius: var(--largerRadius);
   backdrop-filter: var(--blurDefault);
